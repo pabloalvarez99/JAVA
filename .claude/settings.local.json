@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del:*)",
+      "Bash(dir \"c:\\Users\\Pablo\\Documents\\Build\\1\\Ejercicios\")",
+      "Bash(dir:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
