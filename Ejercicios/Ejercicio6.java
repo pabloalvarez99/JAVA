@@ -39,9 +39,8 @@ public class Ejercicio6 {
         System.out.println("Tabla de multiplicar del " + numero + ":");
 
         // TODO: Escribe el loop for para la tabla de multiplicar
-
-
-
-
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(numero + " x " + i + " = " + (numero * i));
+        }
     }
 }

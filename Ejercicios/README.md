@@ -1,6 +1,6 @@
 # 📚 Ejercicios de Java - Progresivos
 
-Esta carpeta contiene **12 ejercicios** de Java organizados por dificultad creciente, diseñados para aprender desde lo más básico hasta Programación Orientada a Objetos.
+Esta carpeta contiene **17 ejercicios** de Java organizados por dificultad creciente, diseñados para aprender desde lo más básico hasta conceptos avanzados de Programación Orientada a Objetos, colecciones y manejo de excepciones.
 
 ---
 
@@ -39,7 +39,7 @@ Esta carpeta contiene **12 ejercicios** de Java organizados por dificultad creci
 
 ---
 
-### 🔴 NIVEL POO (Ejercicios 10-12)
+### 🔴 NIVEL POO - FUNDAMENTOS (Ejercicios 10-12)
 **Conceptos**: Clases, objetos, encapsulación, listas enlazadas
 
 | Ejercicio | Tema | Dificultad | Conceptos |
@@ -47,6 +47,27 @@ Esta carpeta contiene **12 ejercicios** de Java organizados por dificultad creci
 | **Ejercicio 10** | Primera Clase | ⭐⭐⭐⭐ | class, atributos, constructor, métodos |
 | **Ejercicio 11** | Getters/Setters | ⭐⭐⭐⭐ | Encapsulación, validación |
 | **Ejercicio 12** | Lista Enlazada | ⭐⭐⭐⭐⭐ | Nodos, referencias, estructura de datos |
+
+---
+
+### 🟣 NIVEL POO - AVANZADO (Ejercicios 13-15)
+**Conceptos**: Herencia, polimorfismo, interfaces
+
+| Ejercicio | Tema | Dificultad | Conceptos |
+|-----------|------|------------|-----------|
+| **Ejercicio 13** | Herencia | ⭐⭐⭐⭐⭐ | extends, super(), @Override, protected |
+| **Ejercicio 14** | Polimorfismo | ⭐⭐⭐⭐⭐ | abstract class, abstract methods, arrays polimórficos |
+| **Ejercicio 15** | Interfaces | ⭐⭐⭐⭐⭐ | interface, implements, múltiples interfaces |
+
+---
+
+### 🔵 NIVEL PROFESIONAL (Ejercicios 16-17)
+**Conceptos**: Colecciones de Java, manejo de excepciones
+
+| Ejercicio | Tema | Dificultad | Conceptos |
+|-----------|------|------------|-----------|
+| **Ejercicio 16** | ArrayList - Biblioteca | ⭐⭐⭐⭐⭐⭐ | ArrayList, Collections Framework, CRUD |
+| **Ejercicio 17** | Manejo de Excepciones | ⭐⭐⭐⭐⭐⭐ | try-catch-finally, throw, throws, custom exceptions |
 
 ---
 
@@ -114,30 +135,44 @@ Ejercicio 4 → Ejercicio 5 → Ejercicio 6
 Ejercicio 7 → Ejercicio 8 → Ejercicio 9
         ↓
 Ejercicio 10 → Ejercicio 11 → Ejercicio 12
+        ↓
+Ejercicio 13 → Ejercicio 14 → Ejercicio 15
+        ↓
+Ejercicio 16 → Ejercicio 17
 ```
 
 **No te saltes ejercicios.** Cada uno construye sobre los anteriores.
+
+### Hitos de Aprendizaje:
+- **Ejercicios 1-9**: Fundamentos de programación
+- **Ejercicios 10-12**: Introducción a POO
+- **Ejercicios 13-15**: POO Avanzado (Herencia, Polimorfismo, Interfaces)
+- **Ejercicios 16-17**: Java Profesional (Collections, Exceptions)
 
 ---
 
 ## 🎓 Después de Completar Todos los Ejercicios
 
-Una vez que domines estos 12 ejercicios, estarás listo para:
+Una vez que domines estos 17 ejercicios, estarás listo para:
 
-1. **Revisar el código del Metro** (`MetroSystem.java`)
-   - Ahora entenderás listas doblemente enlazadas
-   - Verás POO aplicado a un problema real
+1. **Revisar el código del Sistema de Chat** (`Chat.java`, `Usuario.java`, `Mensaje.java`)
+   - Verás POO aplicado a un proyecto real
+   - Entenderás cómo interactúan múltiples clases
+   - Comprenderás el uso de ArrayList en contexto real
 
 2. **Crear tus propios proyectos**
-   - Sistema de biblioteca
-   - Juego simple (piedra, papel, tijera)
-   - Calculadora avanzada
+   - Sistema de gestión universitaria (Estudiantes, Profesores, Cursos)
+   - Sistema de inventario para tienda
+   - Simulador de banco (Cuentas, Transacciones)
+   - Juego de rol simple (Personajes, Inventario, Combate)
 
-3. **Aprender conceptos avanzados**
-   - Herencia
-   - Polimorfismo
-   - Interfaces
-   - Excepciones personalizadas
+3. **Aprender conceptos más avanzados**
+   - HashMap y otras colecciones
+   - File I/O (lectura y escritura de archivos)
+   - Serialización de objetos
+   - Multithreading
+   - Programación funcional (Lambdas, Streams)
+   - Spring Boot y desarrollo de APIs
 
 ---
 
@@ -145,6 +180,7 @@ Una vez que domines estos 12 ejercicios, estarás listo para:
 
 Marca tu progreso:
 
+**Fundamentos:**
 - [ ] ✅ Ejercicio 1 - Hola Mundo y Variables
 - [ ] ✅ Ejercicio 2 - Operaciones Matemáticas
 - [ ] ✅ Ejercicio 3 - Intercambiar Variables
@@ -154,9 +190,20 @@ Marca tu progreso:
 - [ ] ✅ Ejercicio 7 - Arrays Básicos
 - [ ] ✅ Ejercicio 8 - Métodos (Funciones)
 - [ ] ✅ Ejercicio 9 - Arrays + Métodos
+
+**POO Básico:**
 - [ ] ✅ Ejercicio 10 - Primera Clase
 - [ ] ✅ Ejercicio 11 - Getters/Setters
 - [ ] ✅ Ejercicio 12 - Lista Enlazada
+
+**POO Avanzado:**
+- [ ] ✅ Ejercicio 13 - Herencia (extends, super)
+- [ ] ✅ Ejercicio 14 - Polimorfismo (abstract class)
+- [ ] ✅ Ejercicio 15 - Interfaces (implements)
+
+**Java Profesional:**
+- [ ] ✅ Ejercicio 16 - ArrayList (Collections)
+- [ ] ✅ Ejercicio 17 - Excepciones (try-catch)
 
 ---
 

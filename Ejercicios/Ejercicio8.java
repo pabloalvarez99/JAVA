@@ -28,12 +28,18 @@
 public class Ejercicio8 {
     // TODO: Crea el método sumar
     public static int sumar(int a, int b) {
-        // Completa aquí
-
+        return a + b;
     }
-
-    // TODO: Crea el método esPar
-
+    public static boolean esPar(int a) {
+        if (a % 2 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static void saludar(String nombre) {
+        System.out.println("Hola " + nombre + ", bienvenido!");
+    }
 
 
     // TODO: Crea el método saludar
@@ -46,6 +52,9 @@ public class Ejercicio8 {
         System.out.println("La suma de 15 y 8 es: " + resultado);
 
         // TODO: Llama al método esPar
+        int num1 = 10;
+        int num2 = 7;
+        System.out.println("")
 
 
 

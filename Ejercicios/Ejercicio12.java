@@ -42,26 +42,38 @@
 // TODO: Crea la clase Nodo
 class Nodo {
     // Atributos privados
-
-
+    private int valor;
+    private Nodo siguiente;
 
     // Constructor
-
-
+    public Nodo(int valor) {
+        this.valor = valor;
+        this.siguiente = null;
+    }
 
     // Getters y setters
+    public int getValor() {
+        return valor;
+    }
 
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
 
-
-
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
+    }
 }
 
 // TODO: Crea la clase ListaEnlazada
 class ListaEnlazada {
     // Atributo privado
-
+    private Nodo cabeza;
 
     // Constructor
+    public ListaEnlazada() {
+        this.cabeza = null;
+    }
 
 
     // Método agregar

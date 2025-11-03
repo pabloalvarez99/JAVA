@@ -29,26 +29,19 @@
 
 public class Ejercicio7 {
     public static void main(String[] args) {
-        // TODO: Crea el array de números
         int[] numeros = {5, 12, 8, 3, 20, 15};
-
-        // TODO: Imprime todos los elementos
-        System.out.println("Elementos del array:");
-
-
-
-
-        // TODO: Calcula la suma
         int suma = 0;
-
-
-
-
-        // TODO: Encuentra el número más grande
-        int maximo = numeros[0];  // Empieza con el primer elemento
-
-
-
+        int mayor = 0;
+        System.out.println("Elementos del array:");
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.print(numeros[i] + " ");
+            suma += numeros[i];
+            if (numeros[i] > mayor) {
+                mayor = numeros[i];
+            }
+        }
+        System.out.println("\nSuma total: " + suma);
+        System.out.println("Numero mas grande: " + mayor);
 
     }
 }

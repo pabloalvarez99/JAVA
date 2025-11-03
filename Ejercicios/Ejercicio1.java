@@ -30,7 +30,7 @@ public class Ejercicio1 {
         String nombre = "Pablo";
         int edad = 20;
         double altura = 1.75;
-        System.out.println("Hola me llamo " + nombre);
+        System.out.println("Hola, me llamo " + nombre);
         System.out.println("Tengo " + edad + " años");
         System.out.println("Mido " + altura + " metros");
     }

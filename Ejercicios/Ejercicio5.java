@@ -44,9 +44,7 @@ public class Ejercicio5 {
         System.out.println("\nCuenta regresiva:");
         for (int i = 5; i > 0; i--) {
             System.out.print(i + " ");
-            if (i == 1) {
-                System.out.print("Despegue!");
-            }
         }
+        System.out.print("¡Despegue!");
     }
 }
