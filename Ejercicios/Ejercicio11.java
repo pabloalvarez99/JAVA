@@ -40,10 +40,10 @@
 // TODO: Crea la clase Estudiante
 class Estudiante {
     // Atributos privados
-
-
-
-
+    private String nombre;
+    private double nota1;
+    private double nota2;
+    ñriva
     // Constructor
 
 
