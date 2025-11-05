@@ -38,13 +38,11 @@
 // TODO: Crea la clase Persona aquí (ANTES de la clase Ejercicio10)
 class Persona {
     // Atributos privados
-
-
-
-
+    private String nombre;
+    private int edad;
+    private double altura;
     // Constructor
-
-
+    
 
 
     // Método presentarse

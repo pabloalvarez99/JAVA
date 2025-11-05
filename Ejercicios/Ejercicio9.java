@@ -34,22 +34,27 @@ public class Ejercicio9 {
     // TODO: Crea el método imprimirNombres
     public static void imprimirNombres(String[] nombres) {
         System.out.println("Lista de nombres:");
-        // Completa aquí
-
-
+        for (int i = 0; i < nombres.length; i++) {
+            System.out.println((i+1) + ". " + nombres[i]);
+        }
     }
 
     // TODO: Crea el método contarLetras
-
+    public static int contarLetras(String nombre) {
+        return nombre.length();
+    }
 
 
     // TODO: Crea el método nombreMasLargo
     public static String nombreMasLargo(String[] nombres) {
         String masLargo = nombres[0];
         // Completa aquí
-
-
-
+        for (int i = 0; i < nombres.length;i++) {
+            int cantLetras = contarLetras(nombres[i]);
+            if (cantLetras > contarLetras(masLargo)) {
+                masLargo = nombres[i];
+            }
+        }
         return masLargo;
     }
 
@@ -58,12 +63,15 @@ public class Ejercicio9 {
         String[] nombres = {"Ana", "Luis", "María", "Carlos", "Elena"};
 
         // TODO: Llama a imprimirNombres
-
+        imprimirNombres(nombres);
 
         // TODO: Llama a contarLetras para "María"
 
+        System.out.println("El nombre \"Maria\" tiene " + contarLetras("Maria") + " letras");
 
         // TODO: Llama a nombreMasLargo
+
+        System.out.println("El nombre mas largo es: " + nombreMasLargo(nombres) + " (" + nombreMasLargo(nombres).length() + " letras)");
 
 
     }
