@@ -18,6 +18,8 @@
  *
  * 2. En el main:
  *    - Crea un estudiante
+ * 
+ * 
  *    - Asigna las 3 notas usando setters
  *    - Muestra el promedio y si aprobó
  *

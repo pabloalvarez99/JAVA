@@ -34,22 +34,25 @@ public class Ejercicio9 {
     // TODO: Crea el método imprimirNombres
     public static void imprimirNombres(String[] nombres) {
         System.out.println("Lista de nombres:");
-        // Completa aquí
-
-
+        for (int i = 0; i < nombres.length; i++) {
+            System.out.println((i+1) + ". " + nombres[i]);
+        }
     }
 
     // TODO: Crea el método contarLetras
-
+    public int contarLetras(String nombre) {
+        int contador = 0;
+        for (int i = 0; i < nombre.length(); i++) {
+            contador += 1;
+        }
+        return contador;
+    }
 
 
     // TODO: Crea el método nombreMasLargo
     public static String nombreMasLargo(String[] nombres) {
         String masLargo = nombres[0];
-        // Completa aquí
-
-
-
+        
         return masLargo;
     }
 
@@ -58,9 +61,10 @@ public class Ejercicio9 {
         String[] nombres = {"Ana", "Luis", "María", "Carlos", "Elena"};
 
         // TODO: Llama a imprimirNombres
-
+        imprimirNombres((nombres));
 
         // TODO: Llama a contarLetras para "María"
+        contarLetras("Maria");
 
 
         // TODO: Llama a nombreMasLargo
