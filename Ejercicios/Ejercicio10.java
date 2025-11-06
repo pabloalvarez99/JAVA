@@ -42,11 +42,14 @@ class Persona {
     private int edad;
     private double altura;
     // Constructor
-    
-
-
+    public Persona(String nombre, int edad, double altura) {
+        this.nombre = nombre;       
+        this.edad = edad:
+        this.double = double;
+    }
     // Método presentarse
-
+    public static void String presentarse(Persona p) {
+        System.out.println(
 
 
     // Método esMayorDeEdad
