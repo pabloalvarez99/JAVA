@@ -1,0 +1,188 @@
+═══════════════════════════════════════════════════════════════════════════════
+                     RESUMEN DE LA SOLUCION
+                 Sistema Rent a Car - Prueba 2 POO
+═══════════════════════════════════════════════════════════════════════════════
+
+UBICACION: C:\Users\Pablo\Documents\Build\1\Prueba2\
+
+═══════════════════════════════════════════════════════════════════════════════
+ARCHIVOS CREADOS (11 CLASES JAVA)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Sistema.java              - Main + Singleton (coordina todo el sistema)
+2. Vehiculo.java             - Clase abstracta base con herencia
+3. Camioneta.java            - Subclase concreta (tipo P)
+4. SUV.java                  - Subclase concreta (tipo S)
+5. Auto.java                 - Subclase concreta (tipo C)
+6. ModoManejo.java           - Interface Strategy
+7. ModoEco.java              - Strategy: eficiencia 0.9x
+8. ModoNormal.java           - Strategy: eficiencia 1.0x
+9. ModoSport.java            - Strategy: eficiencia 1.25x
+10. VehicleVisitor.java      - Interface Visitor
+11. ConsumoCalculator.java   - Visitor concreto para calcular maximos
+
+═══════════════════════════════════════════════════════════════════════════════
+PATRONES DE DISENO IMPLEMENTADOS
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ STRATEGY (OBLIGATORIO)
+  ┌────────────────────────────────────────────────────────────────────┐
+  │ - Proposito: Modelar modos de manejo intercambiables              │
+  │ - Interface: ModoManejo                                            │
+  │ - Concretas: ModoEco, ModoNormal, ModoSport                        │
+  │ - Uso: Calculo dinamico de eficiencia ajustada                    │
+  │ - Beneficio: Facil agregar nuevos modos sin modificar Vehiculo    │
+  └────────────────────────────────────────────────────────────────────┘
+
+✓ VISITOR (OBLIGATORIO)
+  ┌────────────────────────────────────────────────────────────────────┐
+  │ - Proposito: Calcular consumo maximo sin instanceof                │
+  │ - Interface: VehicleVisitor                                        │
+  │ - Concreto: ConsumoCalculator                                      │
+  │ - Uso: Encontrar vehiculo con mayor consumo por categoria         │
+  │ - Beneficio: Agregar operaciones sin modificar jerarquia          │
+  └────────────────────────────────────────────────────────────────────┘
+
+✓ SINGLETON (ELEGIDO)
+  ┌────────────────────────────────────────────────────────────────────┐
+  │ - Proposito: Unica instancia del sistema                           │
+  │ - Clase: Sistema                                                   │
+  │ - Uso: Coordinacion centralizada de la flota                      │
+  │ - Beneficio: Punto de acceso global y control centralizado        │
+  └────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+PRINCIPIOS Y BUENAS PRACTICAS
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ HERENCIA
+  - Clase abstracta Vehiculo con metodos abstractos y concretos
+  - 3 subclases: Camioneta, SUV, Auto
+  - Polimorfismo: List<Vehiculo> almacena todos los tipos
+
+✓ ENCAPSULACION
+  - Atributos protected en clase base
+  - Atributos private en clases concretas
+  - Acceso mediante getters
+
+✓ ABSTRACCION
+  - Interfaces para contratos (ModoManejo, VehicleVisitor)
+  - Clase abstracta Vehiculo define comportamiento comun
+  - Metodos abstractos delegan responsabilidad a subclases
+
+✓ SEPARACION DE RESPONSABILIDADES
+  - Vehiculo: Maneja datos y viajes
+  - ModoManejo: Calcula eficiencia
+  - VehicleVisitor: Realiza operaciones
+  - Sistema: Coordina y gestiona
+
+✓ SIN CICLOS ANIDADOS
+  - leerVehiculos() - Un solo ciclo
+  - leerViajes() - Un solo ciclo
+  - agregarDistancias() - Un solo ciclo
+  - aplicarVisitor() - Un solo ciclo
+
+═══════════════════════════════════════════════════════════════════════════════
+FORMULAS Y CALCULOS
+═══════════════════════════════════════════════════════════════════════════════
+
+ODOMETRO (kilometraje total):
+  odometro = Σ distancias_de_todos_los_viajes
+
+EFICIENCIA AJUSTADA:
+  - Modo Eco:    eficiencia_ajustada = eficiencia_nominal * 0.9
+  - Modo Normal: eficiencia_ajustada = eficiencia_nominal * 1.0
+  - Modo Sport:  eficiencia_ajustada = eficiencia_nominal * 1.25
+
+CONSUMO POR VIAJE:
+  consumo_viaje = distancia / eficiencia_ajustada
+
+CONSUMO TOTAL:
+  consumo_total = Σ (distancia_i / eficiencia_ajustada_i)
+
+EJEMPLO:
+  Vehiculo: eficiencia nominal = 10 km/l
+  Viaje 1: 100 km en modo Eco
+    - eficiencia_ajustada = 10 * 0.9 = 9 km/l
+    - consumo = 100 / 9 = 11.11 litros
+
+  Viaje 2: 100 km en modo Sport
+    - eficiencia_ajustada = 10 * 1.25 = 12.5 km/l
+    - consumo = 100 / 12.5 = 8.0 litros
+
+  Consumo total = 11.11 + 8.0 = 19.11 litros
+  Odometro = 100 + 100 = 200 km
+
+═══════════════════════════════════════════════════════════════════════════════
+FLUJO DE EJECUCION
+═══════════════════════════════════════════════════════════════════════════════
+
+1. main()
+   ↓
+2. Sistema.getInstance() [SINGLETON]
+   ↓
+3. cargarFlota("fleet.txt")
+   ├─> leerVehiculos()
+   │   └─> crearVehiculo() para cada linea
+   │       └─> new Camioneta/SUV/Auto [HERENCIA]
+   └─> leerViajes()
+       └─> agregarViaje(modo, distancia) [STRATEGY]
+   ↓
+4. mostrarInformacion()
+   ├─> mostrarDetalleVehiculos()
+   │   └─> calcularConsumo() + calcularOdometro()
+   │       └─> modo.calcularEficienciaAjustada() [STRATEGY]
+   └─> mostrarMayoresConsumos()
+       ├─> aplicarVisitor(ConsumoCalculator) [VISITOR]
+       │   └─> vehiculo.accept(visitor)
+       │       └─> visitor.visitXXX(this)
+       └─> imprimirMaximoConsumo()
+
+═══════════════════════════════════════════════════════════════════════════════
+SALIDA DEL PROGRAMA
+═══════════════════════════════════════════════════════════════════════════════
+
+Dodge Ram 2500 CONSUMO: 604.11 l ODOMETRO: 5020 km
+Ford F250 CONSUMO: 685.90 l ODOMETRO: 4865 km
+... (todos los vehiculos)
+
+Mayor consumo:
+Camioneta: WAUHF68P16A397756 (685.90 litros)
+SUV: 1C4RDJEG9DC098442 (478.57 litros)
+Auto: WBAEB53578C709570 (594.84 litros)
+
+═══════════════════════════════════════════════════════════════════════════════
+COMPILACION Y EJECUCION
+═══════════════════════════════════════════════════════════════════════════════
+
+cd C:\Users\Pablo\Documents\Build\1\Prueba2
+javac *.java
+java Sistema
+
+═══════════════════════════════════════════════════════════════════════════════
+PUNTOS CLAVE PARA LA REVISION
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ Usa 3 patrones obligatorios correctamente
+✓ Herencia con clase abstracta Vehiculo
+✓ Una sola lista polimorfic List<Vehiculo>
+✓ Sin ciclos anidados (metodos separados)
+✓ Arquitectura Sistema como coordinador
+✓ Codigo limpio con buenos nombres
+✓ Comentarios JavaDoc explicativos
+✓ Formula de consumo correcta
+✓ Calculo de odometro correcto
+✓ Mayor consumo por categoria usando Visitor
+
+═══════════════════════════════════════════════════════════════════════════════
+ARCHIVOS DE DOCUMENTACION
+═══════════════════════════════════════════════════════════════════════════════
+
+README.md            - Documentacion completa del proyecto
+DIAGRAMA_UML.txt     - Diagrama de clases UML detallado
+INSTRUCCIONES.txt    - Guia de compilacion y ejecucion
+RESUMEN_SOLUCION.txt - Este archivo
+
+═══════════════════════════════════════════════════════════════════════════════
+FIN DEL RESUMEN
+═══════════════════════════════════════════════════════════════════════════════

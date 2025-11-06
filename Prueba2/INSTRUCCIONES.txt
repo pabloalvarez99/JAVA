@@ -1,0 +1,190 @@
+═══════════════════════════════════════════════════════════════════════════════
+                INSTRUCCIONES - SISTEMA RENT A CAR
+                      Prueba 2 - POO
+═══════════════════════════════════════════════════════════════════════════════
+
+UBICACION DE LOS ARCHIVOS
+═══════════════════════════════════════════════════════════════════════════════
+Directorio: C:\Users\Pablo\Documents\Build\1\Prueba2\
+
+Archivos fuente (.java):
+  ✓ Sistema.java              - Main + Singleton
+  ✓ Vehiculo.java             - Clase abstracta base
+  ✓ Camioneta.java            - Subclase concreta
+  ✓ SUV.java                  - Subclase concreta
+  ✓ Auto.java                 - Subclase concreta
+  ✓ ModoManejo.java           - Interface Strategy
+  ✓ ModoEco.java              - Strategy concreta
+  ✓ ModoNormal.java           - Strategy concreta
+  ✓ ModoSport.java            - Strategy concreta
+  ✓ VehicleVisitor.java       - Interface Visitor
+  ✓ ConsumoCalculator.java    - Visitor concreto
+
+Archivos de documentacion:
+  ✓ README.md                 - Documentacion completa
+  ✓ DIAGRAMA_UML.txt          - Diagrama de clases UML
+  ✓ INSTRUCCIONES.txt         - Este archivo
+
+═══════════════════════════════════════════════════════════════════════════════
+COMPILACION Y EJECUCION
+═══════════════════════════════════════════════════════════════════════════════
+
+OPCION 1: Desde la linea de comandos
+────────────────────────────────────────────────────────────────────────────
+
+1. Abrir terminal/CMD
+2. Navegar al directorio:
+   cd C:\Users\Pablo\Documents\Build\1\Prueba2
+
+3. Compilar todos los archivos:
+   javac *.java
+
+4. Ejecutar el programa:
+   java Sistema
+
+OPCION 2: Desde Eclipse/IDE
+────────────────────────────────────────────────────────────────────────────
+
+1. Importar proyecto desde el directorio Prueba2
+2. Click derecho en Sistema.java
+3. Run As > Java Application
+
+═══════════════════════════════════════════════════════════════════════════════
+SALIDA ESPERADA
+═══════════════════════════════════════════════════════════════════════════════
+
+El programa debe mostrar:
+
+1. Lista de todos los vehiculos con su consumo y odometro:
+   Marca Modelo CONSUMO: XXX.XX l ODOMETRO: XXXX km
+
+2. Vehiculos con mayor consumo por categoria:
+   Mayor consumo:
+   Camioneta: VIN (XXX litros)
+   SUV: VIN (XXX litros)
+   Auto: VIN (XXX litros)
+
+═══════════════════════════════════════════════════════════════════════════════
+VERIFICACION DE REQUISITOS
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ HERENCIA
+  - Clase abstracta Vehiculo con 3 subclases (Camioneta, SUV, Auto)
+
+✓ UNA SOLA LISTA
+  - List<Vehiculo> flota almacena todos los vehiculos polimorficamente
+
+✓ PATRON STRATEGY (OBLIGATORIO)
+  - ModoManejo interface
+  - 3 implementaciones: ModoEco, ModoNormal, ModoSport
+  - Calculo dinamico de eficiencia ajustada
+
+✓ PATRON VISITOR (OBLIGATORIO)
+  - VehicleVisitor interface
+  - ConsumoCalculator implementacion concreta
+  - Metodo accept() en Vehiculo para double dispatch
+
+✓ PATRON SINGLETON (ELEGIDO)
+  - Sistema usa patron Singleton
+  - Constructor privado
+  - Metodo getInstance() estatico
+
+✓ ARQUITECTURA "SISTEMA"
+  - Clase Sistema coordina toda la aplicacion
+  - Separa logica de negocio del procesamiento de datos
+
+✓ SIN CICLOS ANIDADOS
+  - Metodos separados: leerVehiculos(), leerViajes(), agregarDistancias()
+  - Cada metodo tiene un unico nivel de ciclo
+
+✓ CALCULOS REQUERIDOS
+  - Odometro: Suma de todas las distancias
+  - Consumo: Σ(distancia / eficiencia_ajustada)
+  - Mayor consumo por categoria usando Visitor
+
+═══════════════════════════════════════════════════════════════════════════════
+ARCHIVO DE ENTRADA
+═══════════════════════════════════════════════════════════════════════════════
+
+Ubicacion: C:\Users\Pablo\Documents\Build\1\fleet.txt
+
+Formato:
+  Linea 1: N (numero de vehiculos)
+  Lineas 2 a N+1: VIN,Marca,Modelo,Tipo,Eficiencia
+  Resto: VIN,Modo,Distancia1,...,DistanciaN
+
+Tipos de vehiculo:
+  P = Camioneta (Pickup)
+  S = SUV
+  C = Auto (Car)
+
+Modos de manejo:
+  E = Eco (eficiencia 0.9x)
+  N = Normal (eficiencia 1.0x)
+  S = Sport (eficiencia 1.25x)
+
+═══════════════════════════════════════════════════════════════════════════════
+MODIFICAR RUTA DEL ARCHIVO
+═══════════════════════════════════════════════════════════════════════════════
+
+Si necesitas cambiar la ruta del archivo fleet.txt:
+
+1. Abrir Sistema.java
+2. Buscar la linea en el metodo main():
+   String rutaArchivo = "C:\\Users\\Pablo\\Documents\\Build\\1\\fleet.txt";
+3. Modificar la ruta segun sea necesario
+4. Recompilar: javac Sistema.java
+
+═══════════════════════════════════════════════════════════════════════════════
+EXPORTAR COMO ZIP (PARA SUBIR A CAMPUS VIRTUAL)
+═══════════════════════════════════════════════════════════════════════════════
+
+OPCION 1: Windows Explorer
+────────────────────────────────────────────────────────────────────────────
+1. Ir a C:\Users\Pablo\Documents\Build\1\
+2. Click derecho en la carpeta "Prueba2"
+3. Enviar a > Carpeta comprimida
+4. Se creara Prueba2.zip listo para subir
+
+OPCION 2: Eclipse
+────────────────────────────────────────────────────────────────────────────
+1. Click derecho en el proyecto
+2. Export > Archive File
+3. Seleccionar destino y nombre
+4. Finish
+
+OPCION 3: Linea de comandos
+────────────────────────────────────────────────────────────────────────────
+cd C:\Users\Pablo\Documents\Build\1
+jar -cvf Prueba2.zip Prueba2/*.java
+
+═══════════════════════════════════════════════════════════════════════════════
+RESOLUCION DE PROBLEMAS
+═══════════════════════════════════════════════════════════════════════════════
+
+PROBLEMA: "Error: Could not find or load main class Sistema"
+SOLUCION: Asegurate de estar en el directorio Prueba2 al ejecutar
+          cd C:\Users\Pablo\Documents\Build\1\Prueba2
+
+PROBLEMA: "FileNotFoundException: fleet.txt"
+SOLUCION: Verifica que el archivo fleet.txt este en:
+          C:\Users\Pablo\Documents\Build\1\fleet.txt
+          O modifica la ruta en Sistema.java
+
+PROBLEMA: "javac no se reconoce como comando"
+SOLUCION: Instala JDK y configura PATH, o usa Eclipse/IntelliJ
+
+PROBLEMA: Valores de consumo ligeramente diferentes
+SOLUCION: Esto es normal por redondeos de punto flotante
+          Lo importante es que los VIN con mayor consumo coincidan
+
+═══════════════════════════════════════════════════════════════════════════════
+CONTACTO Y AYUDA
+═══════════════════════════════════════════════════════════════════════════════
+
+Para mas informacion, revisar:
+  - README.md: Documentacion completa del proyecto
+  - DIAGRAMA_UML.txt: Arquitectura visual del sistema
+  - Codigo fuente: Comentarios JavaDoc en cada clase
+
+═══════════════════════════════════════════════════════════════════════════════

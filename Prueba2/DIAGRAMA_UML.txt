@@ -1,0 +1,156 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    DIAGRAMA UML - SISTEMA RENT A CAR
+═══════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         PATTERN 1: STRATEGY                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+         ┌──────────────────────────────────────┐
+         │     <<interface>>                    │
+         │      ModoManejo                      │
+         ├──────────────────────────────────────┤
+         │ + calcularEficienciaAjustada(double) │
+         │ + getNombre(): String                │
+         └──────────────────────────────────────┘
+                       △
+                       │ implements
+          ┌────────────┼────────────┐
+          │            │            │
+  ┌───────▽──────┐ ┌──▽────────┐ ┌─▽──────────┐
+  │   ModoEco    │ │ ModoNormal│ │ ModoSport  │
+  ├──────────────┤ ├───────────┤ ├────────────┤
+  │ factor: 0.9x │ │factor: 1x │ │factor: 1.25x│
+  └──────────────┘ └───────────┘ └────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    PATTERN 2: VISITOR                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    ┌────────────────────────────────┐
+    │   <<interface>>                │
+    │   VehicleVisitor               │
+    ├────────────────────────────────┤
+    │ + visitCamioneta(Camioneta)    │
+    │ + visitSUV(SUV)                │
+    │ + visitAuto(Auto)              │
+    └────────────────────────────────┘
+                  △
+                  │ implements
+                  │
+    ┌─────────────▽──────────────────┐
+    │   ConsumoCalculator            │
+    ├────────────────────────────────┤
+    │ - maxConsumoPorCategoria       │
+    │ - maxConsumoValores            │
+    ├────────────────────────────────┤
+    │ + getMaxConsumoPorCategoria()  │
+    │ - procesarVehiculo()           │
+    └────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    JERARQUIA DE HERENCIA                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+           ┌──────────────────────────────────────┐
+           │   <<abstract>>                       │
+           │   Vehiculo                           │
+           ├──────────────────────────────────────┤
+           │ # vin: String                        │
+           │ # marca: String                      │
+           │ # modelo: String                     │
+           │ # eficienciaNominal: double          │
+           │ # viajes: List<Viaje>                │
+           ├──────────────────────────────────────┤
+           │ + agregarViaje(modo, distancia)      │
+           │ + calcularOdometro(): int            │
+           │ + calcularConsumo(): double          │
+           │ + accept(VehicleVisitor): void       │
+           │ + getCategoria(): String {abstract}  │
+           └──────────────────────────────────────┘
+                         △
+                         │ extends
+            ┌────────────┼─────────────┐
+            │            │             │
+   ┌────────▽───────┐ ┌─▽────────┐ ┌──▽──────┐
+   │  Camioneta     │ │   SUV    │ │  Auto   │
+   │  (tipo: P)     │ │(tipo: S) │ │(tipo: C)│
+   ├────────────────┤ ├──────────┤ ├─────────┤
+   │+ accept()      │ │+ accept()│ │+ accept()│
+   │+ getCategoria()│ │+ get...()│ │+ get...()│
+   └────────────────┘ └──────────┘ └─────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    PATTERN 3: SINGLETON                                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+              ┌────────────────────────────────┐
+              │   Sistema  <<Singleton>>       │
+              ├────────────────────────────────┤
+              │ - instance: Sistema {static}   │
+              │ - flota: List<Vehiculo>        │
+              │ - modos: Map<String, ModoManejo>│
+              ├────────────────────────────────┤
+              │ - Sistema()  {private}         │
+              │ + getInstance(): Sistema       │
+              │ + cargarFlota(String)          │
+              │ + mostrarInformacion()         │
+              │ - leerVehiculos()              │
+              │ - leerViajes()                 │
+              │ - crearVehiculo()              │
+              │ - buscarVehiculo()             │
+              │ + main(String[])               │
+              └────────────────────────────────┘
+                          │
+                          │ manages
+                          ▼
+                    List<Vehiculo>
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    INNER CLASS: Viaje                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+              ┌────────────────────────────┐
+              │  Vehiculo.Viaje  {static}  │
+              ├────────────────────────────┤
+              │ - modo: ModoManejo         │
+              │ - distancia: double        │
+              ├────────────────────────────┤
+              │ + getModo()                │
+              │ + getDistancia()           │
+              └────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+                            RELACIONES CLAVE
+═══════════════════════════════════════════════════════════════════════════════
+
+Sistema ────────(1)──────> (0..*) Vehiculo         [Agregacion]
+Vehiculo ───────(1)──────> (0..*) Viaje            [Composicion]
+Viaje ──────────(*)──────> (1)    ModoManejo       [Asociacion]
+ConsumoCalculator ────────────> Vehiculo          [Visitor]
+Vehiculo ─────────────────────> VehicleVisitor    [Accept]
+
+═══════════════════════════════════════════════════════════════════════════════
+                        FLUJO DE EJECUCION
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Sistema.main()
+   └─> Sistema.getInstance()  [Singleton]
+       └─> cargarFlota("fleet.txt")
+           ├─> leerVehiculos()
+           │   └─> crearVehiculo()  [Factory Method]
+           └─> leerViajes()
+               └─> buscarVehiculo()
+                   └─> agregarViaje(modo, distancia)  [Strategy]
+
+2. mostrarInformacion()
+   ├─> mostrarDetalleVehiculos()
+   │   └─> vehiculo.calcularConsumo()
+   │       └─> modo.calcularEficienciaAjustada()  [Strategy]
+   └─> mostrarMayoresConsumos()
+       ├─> aplicarVisitor(ConsumoCalculator)
+       │   └─> vehiculo.accept(visitor)  [Visitor - Double Dispatch]
+       │       └─> visitor.visitXXX(this)
+       └─> imprimirMaximoConsumo()
+
+═══════════════════════════════════════════════════════════════════════════════
