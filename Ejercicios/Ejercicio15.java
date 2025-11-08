@@ -1,242 +1,334 @@
 /*
  * ========================================
- * EJERCICIO 15: Interfaces - Dispositivos Electrónicos
- * DIFICULTAD: ⭐⭐⭐⭐⭐ (Difícil)
+ * EJERCICIO 15: Navegación entre Objetos (Referencias Bidireccionales)
+ * DIFICULTAD: ⭐⭐⭐⭐⭐ (Avanzado)
  * ========================================
  *
  * OBJETIVO:
- * Aprender sobre INTERFACES - contratos que las clases deben cumplir
+ * Practicar la navegación compleja entre objetos donde múltiples objetos
+ * se referencian entre sí, creando una red de relaciones.
  *
  * CONCEPTO CLAVE:
- * Una interface define QUÉ debe hacer una clase, pero no CÓMO lo hace.
- * Es como un contrato: "Si implementas esta interface, debes tener estos métodos"
+ * REFERENCIAS BIDIRECCIONALES:
+ * Hasta ahora has visto relaciones unidireccionales:
+ *   Libro → Autor (el libro conoce a su autor)
  *
- * DIFERENCIA entre Interface y Clase Abstracta:
- * - Interface: Solo define métodos (qué hacer) - "puede hacer esto"
- * - Clase Abstracta: Puede tener atributos y métodos implementados - "es un tipo de esto"
- * - Una clase puede implementar MÚLTIPLES interfaces pero solo extender UNA clase
+ * Pero en el mundo real, las relaciones suelen ser bidireccionales:
+ *   Empleado ↔ Departamento
+ *   - Un Empleado conoce su Departamento
+ *   - Un Departamento conoce sus Empleados
+ *
+ * Esto permite navegar en ambas direcciones:
+ *   empleado.getDepartamento().getNombre()
+ *   departamento.getEmpleados().get(0).getNombre()
  *
  * INSTRUCCIONES:
- * 1. Crea una interface "Encendible" con:
- *    - Método "encender()"
- *    - Método "apagar()"
- *    - Método "estaEncendido()" que retorne boolean
+ * 1. Crea una clase "Departamento" con:
+ *    - Atributos privados: nombre (String), empleados (ArrayList<Empleado>)
+ *    - Constructor que reciba el nombre
+ *    - Método "agregarEmpleado(Empleado emp)" - agrega y establece la relación bidireccional
+ *    - Método "calcularNominaTotal()" - suma los salarios de todos los empleados
+ *    - Método "getEmpleados()" - retorna la lista de empleados
+ *    - Método "getNombre()" - retorna el nombre del departamento
+ *    - Método "mostrarEmpleados()" - muestra todos los empleados del departamento
  *
- * 2. Crea una interface "Conectable" con:
- *    - Método "conectarWifi(String red)"
- *    - Método "desconectarWifi()"
+ * 2. Crea una clase "Empleado" con:
+ *    - Atributos privados: nombre (String), salario (double), departamento (Departamento)
+ *    - Constructor que reciba nombre y salario (departamento empieza en null)
+ *    - Getters para todos los atributos
+ *    - Método "setDepartamento(Departamento dept)" - establece el departamento
+ *    - Método "cambiarDepartamento(Departamento nuevoDept)" - cambia de departamento
+ *    - Método "aumentarSalario(double porcentaje)" - aumenta el salario (ej: 10 = 10%)
+ *    - Método "mostrarInfo()" - muestra nombre, salario y departamento
  *
- * 3. Crea una clase "Television" que implemente Encendible:
- *    - Atributos privados: marca (String), pulgadas (int), encendida (boolean)
- *    - Constructor que reciba marca y pulgadas
- *    - Implementa los 3 métodos de Encendible
- *    - Método propio "cambiarCanal(int canal)"
+ * 3. Crea una clase "Empresa" con:
+ *    - Atributo privado: departamentos (ArrayList<Departamento>)
+ *    - Constructor sin parámetros
+ *    - Método "agregarDepartamento(Departamento dept)"
+ *    - Método "buscarEmpleado(String nombre)" - busca en todos los departamentos
+ *    - Método "calcularNominaTotal()" - suma la nómina de todos los departamentos
+ *    - Método "departamentoConMasEmpleados()" - retorna el departamento más grande
+ *    - Método "mostrarEstructura()" - muestra todos los departamentos y sus empleados
  *
- * 4. Crea una clase "Laptop" que implemente Encendible Y Conectable:
- *    - Atributos privados: marca, ram (int), encendida (boolean), wifiConectado (boolean)
- *    - Constructor que reciba marca y ram
- *    - Implementa los métodos de AMBAS interfaces
- *    - Método propio "instalarPrograma(String programa)"
- *
- * 5. En el main:
- *    - Crea una TV y una Laptop
- *    - Enciende ambos dispositivos
- *    - Conecta la laptop al WiFi
- *    - Usa sus métodos propios
+ * 4. En el main:
+ *    - Crea una empresa
+ *    - Crea 3 departamentos (IT, Ventas, RRHH)
+ *    - Crea 7 empleados y asígnalos a diferentes departamentos
+ *    - Muestra la estructura de la empresa
+ *    - Realiza cambios de departamento
+ *    - Aumenta salarios
+ *    - Muestra estadísticas
  *
  * SALIDA ESPERADA:
- * === TELEVISIÓN ===
- * Encendiendo TV Samsung de 55 pulgadas...
- * ¿Está encendida? true
- * Cambiando a canal 5
- * Apagando TV...
+ * ====== Empresa TechCorp ======
  *
- * === LAPTOP ===
- * Encendiendo laptop HP con 16GB RAM...
- * ¿Está encendida? true
- * Conectando al WiFi: MiCasa123
- * Instalando programa: Visual Studio Code
- * Desconectando WiFi...
- * Apagando laptop...
+ * Departamento: IT
+ *   - Juan Pérez ($3500.00)
+ *   - María González ($3800.00)
+ *   - Pedro López ($3200.00)
+ *   Nómina Departamental: $10500.00
+ *
+ * Departamento: Ventas
+ *   - Ana Martínez ($2800.00)
+ *   - Luis Rodríguez ($2600.00)
+ *   Nómina Departamental: $5400.00
+ *
+ * Departamento: RRHH
+ *   - Carmen Silva ($3000.00)
+ *   - Roberto Díaz ($2900.00)
+ *   Nómina Departamental: $5900.00
+ *
+ * ====== Estadísticas ======
+ * Nómina Total Empresa: $21800.00
+ * Departamento más grande: IT (3 empleados)
+ *
+ * ====== Realizando cambios... ======
+ * María González se traslada de IT a Ventas
+ * Aumentando salarios del departamento Ventas en 15%
+ *
+ * ====== Estructura Actualizada ======
+ * [Muestra la nueva estructura]
+ *
+ * PISTAS:
+ * - En agregarEmpleado():
+ *   empleados.add(emp);
+ *   emp.setDepartamento(this); // "this" es el departamento actual
+ *
+ * - En cambiarDepartamento():
+ *   1. Remover del departamento actual
+ *   2. Agregar al nuevo departamento
+ *
+ * - Para buscar en toda la empresa, recorre cada departamento y sus empleados (nested loops)
  *
  * CONCEPTOS NUEVOS:
- * - interface: Define un contrato (qué debe hacer)
- * - implements: Indica que una clase cumple con el contrato
- * - Una clase puede: implements Interface1, Interface2 (múltiples interfaces)
- * - Todos los métodos de una interface son públicos y abstractos por defecto
- *
- * PISTA:
- * - Interface: interface Encendible { void encender(); }
- * - Implementar: class Television implements Encendible { ... }
- * - Múltiples: class Laptop implements Encendible, Conectable { ... }
+ * - Referencias bidireccionales (A conoce a B, B conoce a A)
+ * - Uso de "this" para referirse al objeto actual
+ * - Navegación compleja entre múltiples niveles
+ * - Sincronización de relaciones (mantener consistencia)
+ * - Búsqueda en estructuras anidadas
  */
 
-// TODO: Crea la interface Encendible
-interface Encendible {
-    // Métodos (sin implementación, sin cuerpo)
-    void encender();
-    void apagar();
-    boolean estaEncendido();
+import java.util.ArrayList;
+
+// TODO: Crea la clase Departamento
+class Departamento {
+    // TODO: Atributos privados
+
+
+    // TODO: Constructor
+
+
+    // TODO: Método agregarEmpleado (establece relación bidireccional)
+
+
+    // TODO: Método calcularNominaTotal
+
+
+    // TODO: Getters
+
+
+    // TODO: Método mostrarEmpleados
+
 }
 
-// TODO: Crea la interface Conectable
-interface Conectable {
-    // Métodos
-    void conectarWifi(String red);
-    void desconectarWifi();
+// TODO: Crea la clase Empleado
+class Empleado {
+    // TODO: Atributos privados
+
+
+    // TODO: Constructor
+
+
+    // TODO: Getters
+
+
+    // TODO: Método setDepartamento
+
+
+    // TODO: Método cambiarDepartamento
+
+
+    // TODO: Método aumentarSalario
+
+
+    // TODO: Método mostrarInfo
+
 }
 
-// TODO: Crea la clase Television que implemente Encendible
-class Television implements Encendible {
-    // Atributos privados
-    private String marca;
-    private int pulgadas;
-    private boolean encendida;
-
-    // Constructor
-    public Television(String marca, int pulgadas) {
-        // TODO: Inicializa atributos
+// TODO: Crea la clase Empresa
+class Empresa {
+    // TODO: Atributo privado
 
 
-
-    }
-
-    // Implementa encender
-    @Override
-    public void encender() {
-        // TODO: Cambia encendida a true e imprime mensaje
+    // TODO: Constructor
 
 
-    }
-
-    // Implementa apagar
-    @Override
-    public void apagar() {
-        // TODO: Cambia encendida a false e imprime mensaje
+    // TODO: Método agregarDepartamento
 
 
-    }
-
-    // Implementa estaEncendido
-    @Override
-    public boolean estaEncendido() {
-        // TODO: Retorna el estado
-        return false; // TEMPORAL: reemplaza esto con 'return encendida;'
-    }
-
-    // Método propio
-    public void cambiarCanal(int canal) {
-        if (encendida) {
-            System.out.println("Cambiando a canal " + canal);
-        } else {
-            System.out.println("La TV está apagada");
-        }
-    }
-}
-
-// TODO: Crea la clase Laptop que implemente Encendible Y Conectable
-class Laptop implements Encendible, Conectable {
-    // Atributos privados
-    private String marca;
-    private int ram;
-    private boolean encendida;
-    private boolean wifiConectado;
-
-    // Constructor
-    public Laptop(String marca, int ram) {
-        // TODO: Inicializa los atributos
+    // TODO: Método buscarEmpleado
 
 
+    // TODO: Método calcularNominaTotal
 
-    }
 
-    // Implementa métodos de Encendible
-    @Override
-    public void encender() {
-        // TODO: Implementa
+    // TODO: Método departamentoConMasEmpleados
 
-    }
 
-    @Override
-    public void apagar() {
-        // TODO: Implementa
+    // TODO: Método mostrarEstructura
 
-    }
-
-    @Override
-    public boolean estaEncendido() {
-        // TODO: Implementa
-        return false; // TEMPORAL
-    }
-
-    // Implementa métodos de Conectable
-    @Override
-    public void conectarWifi(String red) {
-        // TODO: Implementa
-
-    }
-
-    @Override
-    public void desconectarWifi() {
-        // TODO: Implementa
-
-    }
-
-    // Método propio
-    public void instalarPrograma(String programa) {
-        // TODO: Implementa
-
-    }
 }
 
 public class Ejercicio15 {
     public static void main(String[] args) {
-        System.out.println("=== INTERFACES EN JAVA ===\n");
-
-        // TODO: Crea una televisión
-        System.out.println("=== TELEVISIÓN ===");
-        // Television tv = new Television("Samsung", 55);
+        // TODO: Crea empresa
 
 
-        // TODO: Enciende la TV
+        // TODO: Crea 3 departamentos
 
 
-        // TODO: Verifica si está encendida
 
 
-        // TODO: Cambia de canal
+        // TODO: Crea 7 empleados
 
 
-        // TODO: Apaga la TV
 
 
-        System.out.println();
-
-        // TODO: Crea una laptop
-        System.out.println("=== LAPTOP ===");
-        // Laptop laptop = new Laptop("HP", 16);
+        // TODO: Asigna empleados a departamentos
+        // deptIT.agregarEmpleado(emp1);
 
 
-        // TODO: Enciende la laptop
 
 
-        // TODO: Conecta al WiFi
+        // TODO: Agrega departamentos a la empresa
 
 
-        // TODO: Instala un programa
 
 
-        // TODO: Desconecta WiFi
+        // TODO: Muestra estructura
 
 
-        // TODO: Apaga la laptop
+        // TODO: Muestra estadísticas
 
 
-        // REFLEXIÓN:
-        // ¿Por qué usar interfaces?
-        // - Permiten que clases no relacionadas compartan comportamiento
-        // - Una clase puede implementar múltiples interfaces
-        // - Facilitan el testing y el diseño flexible
-        // - TV y Laptop no están relacionadas, pero ambas son "Encendibles"
+        // TODO: Realiza cambios (traslados, aumentos)
+
+
+        // TODO: Muestra estructura actualizada
+
     }
 }
+
+/*
+ * ========================================
+ * REFLEXIÓN Y PROFUNDIZACIÓN
+ * ========================================
+ *
+ * ¿QUÉ ES LO COMPLEJO DE ESTE EJERCICIO?
+ *
+ * 1. RELACIONES BIDIRECCIONALES:
+ *    Empleado → Departamento (empleado.getDepartamento())
+ *    Departamento → Empleado (departamento.getEmpleados())
+ *
+ *    El RETO: mantener la CONSISTENCIA de ambos lados.
+ *    Si agregas un empleado a un departamento, debes:
+ *      a) Agregar el empleado a la lista del departamento
+ *      b) Actualizar el departamento del empleado
+ *
+ *    Si olvidas uno de los dos, la relación queda INCONSISTENTE.
+ *
+ * 2. KEYWORD "this":
+ *    En agregarEmpleado():
+ *      empleados.add(emp);
+ *      emp.setDepartamento(this); // "this" = el departamento actual
+ *
+ *    "this" es una referencia al objeto actual. Permite que un objeto
+ *    se pase a sí mismo como parámetro.
+ *
+ * 3. CAMBIAR RELACIONES:
+ *    cambiarDepartamento() es complejo porque debe:
+ *      1. Eliminar el empleado del departamento antiguo
+ *      2. Agregar el empleado al nuevo departamento
+ *      3. Actualizar la referencia en el empleado
+ *
+ *    CUIDADO: ¿Qué pasa si el empleado no tiene departamento actual?
+ *    Debes validar: if (departamento != null) { ... }
+ *
+ * 4. NAVEGACIÓN PROFUNDA:
+ *    empresa.getDepartamentos().get(0).getEmpleados().get(0).getNombre()
+ *         ↓              ↓                ↓             ↓          ↓
+ *      Empresa → List<Dept> → Dept → List<Emp> → Emp → String
+ *
+ *    Cada paso puede retornar null. En producción, siempre valida:
+ *    if (dept != null && dept.getEmpleados() != null && !dept.getEmpleados().isEmpty())
+ *
+ * CASOS DE USO EN EL MUNDO REAL:
+ *
+ * 1. RED SOCIAL:
+ *    Usuario ↔ Usuario (amigos)
+ *    - usuario.getAmigos() retorna lista de amigos
+ *    - amigo.getAmigos() incluye al usuario original
+ *    - Debe ser bidireccional: si A es amigo de B, B es amigo de A
+ *
+ * 2. SISTEMA DE CURSOS:
+ *    Estudiante ↔ Curso
+ *    - estudiante.getCursos() retorna cursos inscritos
+ *    - curso.getEstudiantes() retorna estudiantes inscritos
+ *    - Inscribir: agregar en ambas direcciones
+ *
+ * 3. E-COMMERCE:
+ *    Producto ↔ Categoría
+ *    - producto.getCategoria()
+ *    - categoria.getProductos()
+ *
+ * 4. PROYECTOS DE SOFTWARE:
+ *    Desarrollador ↔ Proyecto
+ *    - desarrollador.getProyectos()
+ *    - proyecto.getDesarrolladores()
+ *
+ * PATRONES DE DISEÑO RELACIONADOS:
+ *
+ * 1. OBSERVER PATTERN:
+ *    Cuando A cambia, B debe ser notificado automáticamente.
+ *    Relaciones bidireccionales son la base de este patrón.
+ *
+ * 2. MEDIATOR PATTERN:
+ *    Cuando las relaciones bidireccionales se vuelven muy complejas,
+ *    un "mediador" coordina todas las interacciones.
+ *
+ * ERRORES COMUNES:
+ *
+ * 1. CICLOS INFINITOS EN toString():
+ *    Si Empleado.toString() llama a Departamento.toString()
+ *    Y Departamento.toString() llama a Empleado.toString()
+ *    → Stack Overflow!
+ *
+ *    SOLUCIÓN: No incluir la referencia circular completa en toString()
+ *
+ * 2. MEMORY LEAKS:
+ *    Si eliminas un empleado pero no lo quitas de su departamento,
+ *    el empleado sigue en memoria (el departamento lo referencia).
+ *
+ * 3. INCONSISTENCIA:
+ *    emp.setDepartamento(dept) pero NO dept.agregarEmpleado(emp)
+ *    → El empleado cree que está en el departamento
+ *    → El departamento no sabe que el empleado existe
+ *
+ * MEJORES PRÁCTICAS:
+ *
+ * 1. Encapsular la lógica de relaciones en métodos específicos
+ *    (agregarEmpleado, cambiarDepartamento) en lugar de setters simples.
+ *
+ * 2. Validar siempre null antes de navegar.
+ *
+ * 3. Documentar claramente qué lado de la relación es "dueño".
+ *
+ * 4. Considerar usar Collections.unmodifiableList() para getters
+ *    que retornan listas internas (evita modificaciones externas).
+ *
+ * SIGUIENTE NIVEL:
+ * Ahora estás listo para estructuras más complejas como:
+ * - Árboles (padre ↔ hijos)
+ * - Grafos (nodo ↔ nodos conectados)
+ * - Listas enlazadas (nodo ↔ siguiente nodo)
+ */

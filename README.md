@@ -6,7 +6,7 @@ Este repositorio contiene una colección completa de ejercicios de Java diseñad
 
 ```
 Ejercicios/
-├── Ejercicio1.java - Ejercicio23.java (Ejercicios progresivos)
+├── Ejercicio1.java - Ejercicio29.java (Ejercicios progresivos)
 └── CheatSheet.java (Referencia rápida de sintaxis)
 ```
 
@@ -118,8 +118,8 @@ Herencia, polimorfismo, clases abstractas e interfaces.
 
 ---
 
-### 📓 Nivel Profesional (16-23)
-Collections Framework, excepciones, algoritmos, recursividad y genéricos.
+### 📓 Nivel Profesional (16-29)
+Collections Framework, excepciones, algoritmos, recursividad, genéricos, estructuras avanzadas, programación funcional y patrones de diseño.
 
 **Ejercicio 16: ArrayList - Sistema de Biblioteca** - Dificultad: ⭐⭐⭐⭐⭐⭐
 - ArrayList y colecciones dinámicas
@@ -170,6 +170,115 @@ Collections Framework, excepciones, algoritmos, recursividad y genéricos.
 - Type safety (seguridad de tipos)
 - Bounded types <T extends Comparable>
 - Métodos genéricos
+
+**Ejercicio 24: Stack (Pila) - Estructura LIFO** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐
+- Stack y principio LIFO
+- Operaciones push, pop, peek
+- Validación de paréntesis balanceados
+- Inversión de strings
+- Evaluación de expresiones postfijas
+- Aplicaciones de Stack en algoritmos
+
+**Ejercicio 25: Búsqueda Binaria (Binary Search)** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐
+- Algoritmo de búsqueda binaria
+- Complejidad O(log n)
+- Implementación iterativa y recursiva
+- Búsqueda de primera ocurrencia
+- Comparación con búsqueda lineal
+- Divide y conquista
+
+**Ejercicio 26: MergeSort - Ordenamiento Eficiente** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Algoritmo MergeSort
+- Complejidad O(n log n)
+- Estrategia divide y conquista
+- Operación merge (combinación)
+- Comparación con Bubble Sort
+- Stable sort
+
+**Ejercicio 27: Enum y Optional - Java Moderno** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Enums (tipos enumerados)
+- Optional para manejo de null
+- Type safety con enums
+- Operaciones de Optional (map, flatMap, filter)
+- Evitar NullPointerException
+- Programación segura
+
+**Ejercicio 28: Streams y Lambdas - Programación Funcional** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Lambda expressions
+- Stream API
+- Operaciones filter, map, reduce
+- Collectors y agrupaciones
+- Method references (::)
+- Programación declarativa vs imperativa
+
+**Ejercicio 29: Patrones de Diseño - Singleton y Factory** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Design Patterns
+- Patrón Singleton (instancia única)
+- Patrón Factory (creación de objetos)
+- Thread-safe Singleton
+- Creational patterns
+- Mejores prácticas de diseño
+
+---
+
+### 📚 Nivel Experto (30-36)
+Conceptos expertos: algoritmos avanzados, estructuras jerárquicas, I/O, patrones avanzados, concurrencia.
+
+**Ejercicio 30: Comparator y Comparable - Ordenamiento Personalizado** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Comparable<T> para orden natural
+- Comparator<T> para órdenes personalizados
+- compareTo() y compare()
+- Lambdas para Comparators
+- Comparator.comparing() y thenComparing()
+- Ordenamiento con múltiples criterios
+
+**Ejercicio 31: QuickSort - Algoritmo de Ordenamiento Eficiente** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Algoritmo QuickSort
+- Partición Lomuto
+- Divide y conquista
+- Complejidad O(n log n)
+- In-place sorting
+- Comparación con otros algoritmos
+
+**Ejercicio 32: Binary Search Tree (BST) - Árbol Binario de Búsqueda** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Estructura de árbol binario
+- Inserción y búsqueda en BST
+- Recorridos: In-Order, Pre-Order, Post-Order
+- Altura y tamaño del árbol
+- Valores mínimo y máximo
+- Árboles balanceados vs desbalanceados
+
+**Ejercicio 33: File I/O y Serialización - Lectura/Escritura de Archivos** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- FileReader/FileWriter
+- BufferedReader/BufferedWriter
+- Serialización de objetos
+- ObjectOutputStream/ObjectInputStream
+- try-with-resources
+- Manejo de excepciones I/O
+
+**Ejercicio 34: Patrones Builder y Observer - Patrones de Diseño Avanzados** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Patrón Builder (construcción fluida)
+- Patrón Observer (sistema de eventos)
+- Fluent API
+- Subject y Observer
+- Notificaciones y suscripciones
+- Event-driven programming
+
+**Ejercicio 35: Threads Básicos - Programación Concurrente** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- Thread y Runnable
+- Ciclo de vida de threads
+- sleep(), join(), interrupt()
+- Race conditions
+- synchronized (sincronización)
+- Thread-safe programming
+
+**Ejercicio 36: Collections Avanzadas - TreeMap, PriorityQueue, Deque** - Dificultad: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+- TreeMap (mapa ordenado)
+- PriorityQueue (cola de prioridad)
+- Deque (cola de doble extremo)
+- ArrayDeque vs LinkedList
+- Heap (min-heap/max-heap)
+- Range queries en TreeMap
 
 ---
 
@@ -255,6 +364,19 @@ Al final de cada ejercicio hay explicaciones profundas y casos de uso reales.
 | 21 | Bubble Sort, Selection Sort, O(n²) |
 | 22 | Recursividad, caso base, factorial, fibonacci |
 | 23 | Genéricos, <T>, type safety, bounded types |
+| 24 | Stack, LIFO, push/pop/peek, validación paréntesis |
+| 25 | Binary Search, O(log n), divide y conquista |
+| 26 | MergeSort, O(n log n), merge, stable sort |
+| 27 | Enum, Optional, null safety, type safety |
+| 28 | Streams, Lambdas, filter/map/reduce, programación funcional |
+| 29 | Design Patterns, Singleton, Factory, creational patterns |
+| 30 | Comparator, Comparable, compareTo, ordenamiento personalizado |
+| 31 | QuickSort, partición, divide y conquista, O(n log n) |
+| 32 | BST, árbol binario, recorridos (in/pre/post-order) |
+| 33 | File I/O, serialización, BufferedReader/Writer, try-with-resources |
+| 34 | Builder pattern, Observer pattern, fluent API, event-driven |
+| 35 | Threads, Runnable, concurrencia, synchronized, race conditions |
+| 36 | TreeMap, PriorityQueue, Deque, heap, collections avanzadas |
 
 ---
 
@@ -286,7 +408,9 @@ javac Ejercicios/*.java
 - ⭐⭐⭐⭐⭐ = Avanzado (POO básico)
 - ⭐⭐⭐⭐⭐⭐ = Muy Difícil (POO avanzado, Collections)
 - ⭐⭐⭐⭐⭐⭐⭐ = Muy Difícil+ (Algoritmos, estructuras avanzadas)
-- ⭐⭐⭐⭐⭐⭐⭐⭐ = Extremadamente Difícil (Recursividad, genéricos)
+- ⭐⭐⭐⭐⭐⭐⭐⭐ = Extremadamente Difícil (Recursividad, genéricos, búsqueda binaria)
+- ⭐⭐⭐⭐⭐⭐⭐⭐⭐ = Maestro (MergeSort, Streams/Lambdas, Patrones de Diseño)
+- ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ = Experto (QuickSort, BST, Threads, Collections Avanzadas)
 
 ---
 
@@ -296,17 +420,17 @@ javac Ejercicios/*.java
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java API Documentation](https://docs.oracle.com/en/java/javase/17/docs/api/)
 
-### Próximos Temas (Avanzados)
-Los siguientes ejercicios podrían cubrir:
-- Streams y Lambda Expressions (Java 8+)
-- Programación Funcional
-- Algoritmos de búsqueda (Binary Search)
-- Algoritmos de ordenamiento avanzados (MergeSort, QuickSort)
-- Estructuras de datos (Stack, Queue, Árbol Binario)
-- Patrones de diseño (Singleton, Factory, Observer)
-- File I/O (lectura/escritura de archivos)
-- Threads y concurrencia
-- Optional y manejo moderno de null
+### Próximos Temas Avanzados (Futuros)
+Los siguientes ejercicios avanzados podrían cubrir:
+- Grafos y algoritmos (DFS, BFS, Dijkstra)
+- Regex (expresiones regulares)
+- Patrones adicionales (Strategy, Decorator, Adapter)
+- JUnit y Mockito (testing unitario)
+- JDBC (conexión a bases de datos)
+- REST APIs con Spring Boot
+- Docker y contenedores
+- Microservicios
+- CI/CD pipelines
 
 ---
 
@@ -346,9 +470,13 @@ POO Básico (10-12)
     ↓
 POO Avanzado (13-15)
     ↓
-Profesional (16-23)
+Profesional (16-23): Collections, Algoritmos Básicos, Recursividad, Genéricos
     ↓
-[Temas Futuros: Streams, Lambda, File I/O, Threads, Design Patterns]
+Maestro (24-29): Estructuras Avanzadas, Algoritmos Eficientes, Programación Funcional, Patrones
+    ↓
+Experto (30-36): QuickSort, BST, File I/O, Patrones Avanzados, Threads, Collections Avanzadas
+    ↓
+[Temas Futuros: Grafos, Regex, Testing, JDBC, Spring Boot, Microservicios]
 ```
 
 ---
@@ -360,9 +488,11 @@ Profesional (16-23)
 - **Nivel Avanzado**: 6-8 horas
 - **POO Básico**: 8-10 horas
 - **POO Avanzado**: 10-12 horas
-- **Profesional**: 15-20 horas
+- **Nivel Profesional**: 15-20 horas
+- **Nivel Maestro**: 10-15 horas
+- **Nivel Experto**: 12-18 horas
 
-**Total estimado**: 50-60 horas de práctica intensa
+**Total estimado**: 80-100 horas de práctica intensa
 
 ---
 

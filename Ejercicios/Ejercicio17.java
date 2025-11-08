@@ -1,237 +1,359 @@
 /*
  * ========================================
- * EJERCICIO 17: Manejo de Excepciones - Calculadora Segura
- * DIFICULTAD: ⭐⭐⭐⭐⭐⭐ (Muy Difícil)
+ * EJERCICIO 17: Introducción al Concepto de Nodo
+ * DIFICULTAD: ⭐⭐⭐⭐⭐ (Avanzado)
  * ========================================
  *
  * OBJETIVO:
- * Aprender a manejar EXCEPCIONES para crear programas robustos
+ * Entender el concepto fundamental de NODO: un objeto que contiene datos
+ * y una referencia a otro objeto del mismo tipo. Esta es la base para
+ * estructuras de datos como listas enlazadas, árboles y grafos.
  *
  * CONCEPTO CLAVE:
- * Las excepciones son eventos que interrumpen el flujo normal del programa.
- * El manejo de excepciones permite que el programa responda a errores sin "romperse".
+ * ¿QUÉ ES UN NODO?
  *
- * TIPOS DE EXCEPCIONES:
- * - Checked Exceptions: El compilador te obliga a manejarlas (ej: IOException)
- * - Unchecked Exceptions: No es obligatorio manejarlas (ej: NullPointerException)
- * - Custom Exceptions: Excepciones que tú defines
+ * Un NODO es un objeto que tiene:
+ * 1. DATOS: información que almacena (int, String, Object, etc.)
+ * 2. REFERENCIA: un "puntero" a otro Nodo del mismo tipo
+ *
+ * Ejemplo visual:
+ *   [Dato: 5 | Siguiente: →] → [Dato: 10 | Siguiente: →] → [Dato: 15 | Siguiente: null]
+ *
+ * Esto permite crear CADENAS de objetos conectados, donde cada objeto
+ * "conoce" al siguiente. Es como un tren: cada vagón está conectado al siguiente.
+ *
+ * ¿POR QUÉ ES IMPORTANTE?
+ * - ArrayList internamente usa un array que se redimensiona
+ * - LinkedList usa nodos conectados (más eficiente para insertar/eliminar)
+ * - Árboles binarios usan nodos con 2 referencias (izquierda/derecha)
+ * - Grafos usan nodos con múltiples referencias
  *
  * INSTRUCCIONES:
- * 1. Crea una excepción personalizada "OperacionInvalidaException":
- *    - Extiende de Exception
- *    - Constructor que reciba un mensaje
- *    - Usa super(mensaje) para pasar el mensaje al padre
+ * 1. Crea una clase "NodoSimple" con:
+ *    - Atributo privado: dato (int)
+ *    - Atributo privado: siguiente (NodoSimple) - referencia al siguiente nodo
+ *    - Constructor que reciba el dato (siguiente empieza en null)
+ *    - Getters y setters para ambos atributos
  *
- * 2. Crea una clase "CalculadoraSegura" con:
- *    - Método "dividir(int a, int b)" que lance OperacionInvalidaException si b es 0
- *    - Método "raizCuadrada(double numero)" que lance OperacionInvalidaException si numero < 0
- *    - Método "calcularPromedio(int[] numeros)" que lance OperacionInvalidaException si el array está vacío
- *    - Método "obtenerElemento(int[] array, int indice)" que maneje ArrayIndexOutOfBoundsException
+ * 2. Crea una clase "CadenaDeNodos" con:
+ *    - Atributo privado: primero (NodoSimple) - el primer nodo de la cadena
+ *    - Constructor sin parámetros (primero empieza en null)
+ *    - Método "agregarAlInicio(int dato)" - crea un nodo y lo pone al principio
+ *    - Método "agregarAlFinal(int dato)" - crea un nodo y lo pone al final
+ *    - Método "imprimir()" - imprime todos los nodos en orden
+ *    - Método "contar()" - cuenta cuántos nodos hay
+ *    - Método "buscar(int dato)" - retorna true si el dato existe
+ *    - Método "obtener(int indice)" - retorna el dato en esa posición (0-indexed)
+ *    - Método "eliminarPrimero()" - elimina el primer nodo
+ *    - Método "imprimirConFlechas()" - imprime visualmente: 5 → 10 → 15 → null
  *
  * 3. En el main:
- *    - Crea varios bloques try-catch para probar cada método
- *    - Intenta operaciones válidas e inválidas
- *    - Captura y maneja las excepciones apropiadamente
- *    - Usa finally para mostrar mensajes de limpieza
+ *    - Crea una cadena de nodos
+ *    - Agrega varios nodos al inicio y al final
+ *    - Imprime la cadena
+ *    - Cuenta los nodos
+ *    - Busca valores específicos
+ *    - Obtiene valores por índice
+ *    - Elimina el primer nodo
+ *    - Muestra la cadena visualmente con flechas
  *
  * SALIDA ESPERADA:
- * === CALCULADORA SEGURA CON EXCEPCIONES ===
+ * ====== Cadena de Nodos ======
  *
- * --- Prueba 1: División válida ---
- * 10 / 2 = 5.0
+ * Agregando al inicio: 30
+ * Agregando al inicio: 20
+ * Agregando al inicio: 10
  *
- * --- Prueba 2: División por cero ---
- * Error: No se puede dividir por cero
- * Operación completada
+ * Cadena actual: 10 20 30
  *
- * --- Prueba 3: Raíz cuadrada válida ---
- * Raíz cuadrada de 25.0 = 5.0
+ * Agregando al final: 40
+ * Agregando al final: 50
  *
- * --- Prueba 4: Raíz cuadrada de número negativo ---
- * Error: No se puede calcular la raíz cuadrada de un número negativo
+ * Cadena actual: 10 20 30 40 50
+ * Visualización: 10 → 20 → 30 → 40 → 50 → null
  *
- * --- Prueba 5: Promedio válido ---
- * Promedio: 35.0
+ * Total de nodos: 5
  *
- * --- Prueba 6: Promedio de array vacío ---
- * Error: El array está vacío
+ * ¿Está el 30? true
+ * ¿Está el 100? false
  *
- * --- Prueba 7: Acceso a índice válido ---
- * Elemento en índice 2: 30
+ * Dato en índice 0: 10
+ * Dato en índice 2: 30
+ * Dato en índice 4: 50
  *
- * --- Prueba 8: Acceso a índice inválido ---
- * Error: Índice fuera de rango
+ * Eliminando el primer nodo...
+ * Cadena después de eliminar: 20 30 40 50
+ * Visualización: 20 → 30 → 40 → 50 → null
+ *
+ * PISTAS:
+ * - Para agregarAlInicio():
+ *   NodoSimple nuevoNodo = new NodoSimple(dato);
+ *   nuevoNodo.setSiguiente(primero);  // El nuevo apunta al antiguo primero
+ *   primero = nuevoNodo;              // El nuevo es ahora el primero
+ *
+ * - Para agregarAlFinal():
+ *   Si la cadena está vacía (primero == null), es igual que agregarAlInicio
+ *   Si no, recorre hasta encontrar el último (siguiente == null) y agrégalo ahí
+ *
+ * - Para recorrer:
+ *   NodoSimple actual = primero;
+ *   while (actual != null) {
+ *       // Procesa actual.getDato()
+ *       actual = actual.getSiguiente(); // Avanza al siguiente
+ *   }
+ *
+ * - Para obtener(indice):
+ *   Recorre contando hasta llegar al índice deseado
  *
  * CONCEPTOS NUEVOS:
- * - try-catch-finally: Estructura para manejar excepciones
- * - throw: Lanza una excepción
- * - throws: Declara que un método puede lanzar una excepción
- * - Custom Exception: Crear tus propias excepciones
- * - Multiple catch: Capturar diferentes tipos de excepciones
- *
- * ESTRUCTURA:
- * try {
- *     // Código que puede fallar
- * } catch (TipoExcepcion e) {
- *     // Qué hacer si falla
- * } finally {
- *     // Siempre se ejecuta (opcional)
- * }
- *
- * PISTA:
- * - Lanzar: throw new OperacionInvalidaException("Mensaje");
- * - Declarar: public void metodo() throws OperacionInvalidaException { ... }
- * - Capturar: catch (OperacionInvalidaException e) { System.out.println(e.getMessage()); }
+ * - Nodo: objeto con referencia a otro del mismo tipo
+ * - Auto-referencia: NodoSimple contiene NodoSimple
+ * - Recorrido de nodos con puntero "actual"
+ * - Inserción al inicio (O(1) - muy rápida)
+ * - Inserción al final (O(n) - requiere recorrer)
+ * - Concepto de "cabeza" o "primero" de la lista
  */
 
-// TODO: Crea la excepción personalizada OperacionInvalidaException
-class OperacionInvalidaException extends Exception {
-    // Constructor que recibe un mensaje
-    public OperacionInvalidaException(String mensaje) {
-        // TODO: Llama al constructor del padre (Exception)
+// TODO: Crea la clase NodoSimple
+class NodoSimple {
+    // TODO: Atributos privados (dato y siguiente)
 
-    }
+
+    // TODO: Constructor
+
+
+    // TODO: Getters y setters
+
 }
 
-// TODO: Crea la clase CalculadoraSegura
-class CalculadoraSegura {
-
-    // Método dividir - lanza excepción si b es 0
-    public double dividir(int a, int b) throws OperacionInvalidaException {
-        // TODO: Si b es 0, lanza la excepción
-        if (b == 0) {
-            throw new OperacionInvalidaException("No se puede dividir por cero");
-        }
-
-        // TODO: Retorna la división
-        return 0.0; // TEMPORAL: reemplaza esto con (double) a / b
-    }
-
-    // Método raizCuadrada - lanza excepción si numero es negativo
-    public double raizCuadrada(double numero) throws OperacionInvalidaException {
-        // TODO: Si numero < 0, lanza la excepción
+// TODO: Crea la clase CadenaDeNodos
+class CadenaDeNodos {
+    // TODO: Atributo privado (primero)
 
 
-        // TODO: Retorna la raíz cuadrada (Math.sqrt)
-        return 0.0; // TEMPORAL: reemplaza esto con Math.sqrt(numero)
-    }
-
-    // Método calcularPromedio - lanza excepción si el array está vacío
-    public double calcularPromedio(int[] numeros) throws OperacionInvalidaException {
-        // TODO: Si el array está vacío o es null, lanza la excepción
+    // TODO: Constructor
 
 
-        // TODO: Calcula y retorna el promedio
-        return 0.0; // TEMPORAL: reemplaza esto
+    // TODO: Método agregarAlInicio
+    // PISTA: El nuevo nodo apunta al antiguo primero, luego se convierte en el nuevo primero
 
-    }
 
-    // Método obtenerElemento - maneja ArrayIndexOutOfBoundsException internamente
-    public int obtenerElemento(int[] array, int indice) {
-        try {
-            // TODO: Intenta obtener el elemento
-            return 0; // TEMPORAL: reemplaza esto con array[indice]
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // TODO: Captura la excepción y retorna un valor por defecto
-            System.out.println("Error: Índice fuera de rango");
-            return -1;
-        }
-    }
+    // TODO: Método agregarAlFinal
+    // PISTA: Si está vacía, usa agregarAlInicio. Si no, recorre hasta el final
+
+
+    // TODO: Método imprimir
+
+
+    // TODO: Método contar
+
+
+    // TODO: Método buscar
+
+
+    // TODO: Método obtener (por índice)
+
+
+    // TODO: Método eliminarPrimero
+
+
+    // TODO: Método imprimirConFlechas
+    // PISTA: Imprime "dato → " para cada nodo, y "null" al final
+
 }
 
 public class Ejercicio17 {
     public static void main(String[] args) {
-        System.out.println("=== CALCULADORA SEGURA CON EXCEPCIONES ===\n");
-
-        CalculadoraSegura calc = new CalculadoraSegura();
-
-        // --- PRUEBA 1: División válida ---
-        System.out.println("--- Prueba 1: División válida ---");
-        try {
-            double resultado = calc.dividir(10, 2);
-            System.out.println("10 / 2 = " + resultado);
-        } catch (OperacionInvalidaException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        System.out.println();
-
-        // --- PRUEBA 2: División por cero ---
-        System.out.println("--- Prueba 2: División por cero ---");
-        // TODO: Descomenta el try-catch de abajo
-        /*
-        try {
-            double resultado = calc.dividir(10, 0);
-            System.out.println(resultado);
-        } catch (OperacionInvalidaException e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            System.out.println("Operación completada");
-        }
-        */
-        System.out.println();
-
-        // --- PRUEBA 3: Raíz cuadrada válida ---
-        System.out.println("--- Prueba 3: Raíz cuadrada válida ---");
-        // TODO: Descomenta el try-catch de abajo
-        /*
-        try {
-            double raiz = calc.raizCuadrada(25);
-            System.out.println("Raíz cuadrada de 25.0 = " + raiz);
-        } catch (OperacionInvalidaException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        */
-        System.out.println();
-
-        // --- PRUEBA 4: Raíz cuadrada de número negativo ---
-        System.out.println("--- Prueba 4: Raíz cuadrada de número negativo ---");
-        // TODO: Intenta calcular la raíz de -16
+        // TODO: Crea una cadena de nodos
 
 
-        System.out.println();
-
-        // --- PRUEBA 5: Promedio válido ---
-        System.out.println("--- Prueba 5: Promedio válido ---");
-        int[] numeros = {10, 20, 30, 40, 50};
-        // TODO: Calcula el promedio
+        // TODO: Agrega varios nodos al inicio
+        System.out.println("====== Cadena de Nodos ======\n");
 
 
-        System.out.println();
-
-        // --- PRUEBA 6: Promedio de array vacío ---
-        System.out.println("--- Prueba 6: Promedio de array vacío ---");
-        int[] numerosVacio = {};
-        // TODO: Intenta calcular el promedio de un array vacío
 
 
-        System.out.println();
-
-        // --- PRUEBA 7: Acceso a índice válido ---
-        System.out.println("--- Prueba 7: Acceso a índice válido ---");
-        int elemento = calc.obtenerElemento(numeros, 2);
-        if (elemento != -1) {
-            System.out.println("Elemento en índice 2: " + elemento);
-        }
-        System.out.println();
-
-        // --- PRUEBA 8: Acceso a índice inválido ---
-        System.out.println("--- Prueba 8: Acceso a índice inválido ---");
-        // TODO: Intenta acceder a un índice que no existe
+        // TODO: Imprime la cadena
 
 
-        // REFLEXIÓN:
-        // ¿Por qué manejar excepciones?
-        // - Evita que el programa se "rompa" inesperadamente
-        // - Permite responder de manera controlada a errores
-        // - Mejora la experiencia del usuario
-        // - Facilita el debugging al tener mensajes claros
-        // - Hace el código más robusto y profesional
-        //
-        // EXCEPCIONES COMUNES EN JAVA:
-        // - NullPointerException: Intentar usar un objeto null
-        // - ArrayIndexOutOfBoundsException: Índice fuera del rango del array
-        // - NumberFormatException: Error al convertir String a número
-        // - ArithmeticException: Error aritmético (ej: división por cero)
-        // - FileNotFoundException: Archivo no encontrado
+        // TODO: Agrega nodos al final
+
+
+
+        // TODO: Imprime la cadena y visualización
+
+
+        // TODO: Cuenta los nodos
+
+
+        // TODO: Busca valores
+
+
+        // TODO: Obtén valores por índice
+
+
+        // TODO: Elimina el primero y muestra
+
+
     }
 }
+
+/*
+ * ========================================
+ * REFLEXIÓN Y PROFUNDIZACIÓN
+ * ========================================
+ *
+ * ¿QUÉ ACABAS DE APRENDER?
+ *
+ * 1. AUTO-REFERENCIA:
+ *    class NodoSimple {
+ *        private NodoSimple siguiente; // ¡Un NodoSimple contiene un NodoSimple!
+ *    }
+ *
+ *    Esto parece recursivo, ¿verdad? Es la base de estructuras recursivas.
+ *    No hay problema porque cada nodo es un objeto SEPARADO en memoria.
+ *
+ * 2. DIFERENCIA CON ARRAYS:
+ *
+ *    ARRAY:
+ *    [10][20][30][40][50] ← Bloque continuo en memoria
+ *     ↑   ↑   ↑   ↑   ↑
+ *     0   1   2   3   4   ← Índices directos
+ *
+ *    NODOS ENLAZADOS:
+ *    [10|→] → [20|→] → [30|→] → [40|→] → [50|null]
+ *    ↑
+ *    primero
+ *
+ *    Los nodos pueden estar DISPERSOS en memoria.
+ *    No hay índices directos - debes RECORRER para llegar a una posición.
+ *
+ * 3. VENTAJAS DE NODOS:
+ *    ✓ Insertar al inicio es O(1) - instantáneo
+ *    ✓ No necesitas definir tamaño máximo
+ *    ✓ No hay desperdicio de memoria (solo usas lo que necesitas)
+ *    ✓ Fácil eliminar elementos (solo cambias referencias)
+ *
+ * 4. DESVENTAJAS DE NODOS:
+ *    ✗ Acceso por índice es O(n) - debes recorrer
+ *    ✗ Más memoria por elemento (guardas dato + referencia)
+ *    ✗ Más complejo de implementar
+ *    ✗ No aprovechas cache locality (los datos están dispersos)
+ *
+ * COMPLEJIDAD TEMPORAL:
+ *
+ * Operación           | Array | Nodos Enlazados
+ * --------------------|-------|----------------
+ * Acceso por índice   | O(1)  | O(n)
+ * Insertar al inicio  | O(n)  | O(1) ← ¡Mucho mejor!
+ * Insertar al final   | O(1)  | O(n)
+ * Buscar elemento     | O(n)  | O(n)
+ * Eliminar primero    | O(n)  | O(1) ← ¡Mucho mejor!
+ *
+ * VISUALIZACIÓN DETALLADA:
+ *
+ * agregarAlInicio(10):
+ *   primero = null
+ *   ↓
+ *   primero → [10|null]
+ *
+ * agregarAlInicio(20):
+ *   primero → [10|null]
+ *   ↓
+ *   primero → [20|→] → [10|null]
+ *
+ * agregarAlFinal(30):
+ *   primero → [20|→] → [10|null]
+ *   ↓
+ *   primero → [20|→] → [10|→] → [30|null]
+ *
+ * eliminarPrimero():
+ *   primero → [20|→] → [10|→] → [30|null]
+ *   ↓
+ *   primero → [10|→] → [30|null]  (el 20 queda sin referencias → garbage collected)
+ *
+ * CASOS DE USO EN EL MUNDO REAL:
+ *
+ * 1. HISTORIAL DE NAVEGADOR:
+ *    Cada página visitada es un nodo que apunta a la anterior.
+ *    El botón "Atrás" simplemente sigue las referencias.
+ *
+ * 2. UNDO/REDO EN EDITORES:
+ *    Cada acción es un nodo. Undo retrocede, Redo avanza.
+ *
+ * 3. PLAYLIST DE MÚSICA:
+ *    Cada canción es un nodo que apunta a la siguiente.
+ *    "Siguiente canción" = siguiente.getDato()
+ *
+ * 4. BLOCKCHAIN:
+ *    ¡Cada bloque es un nodo que apunta al bloque anterior!
+ *    Es literalmente una cadena de nodos.
+ *
+ * 5. SISTEMA DE ARCHIVOS:
+ *    Los enlaces simbólicos son como nodos que apuntan a otros archivos.
+ *
+ * ESTRUCTURAS RELACIONADAS:
+ *
+ * 1. LISTA DOBLEMENTE ENLAZADA:
+ *    Cada nodo tiene referencias a siguiente Y anterior:
+ *    null ← [10|↔] ↔ [20|↔] ↔ [30|↔] → null
+ *    Puedes recorrer en ambas direcciones.
+ *
+ * 2. LISTA CIRCULAR:
+ *    El último nodo apunta al primero:
+ *    [10|→] → [20|→] → [30|→] ┐
+ *     ↑________________________┘
+ *
+ * 3. ÁRBOL BINARIO:
+ *    Cada nodo tiene DOS referencias (izquierda y derecha):
+ *            [10]
+ *           /    \
+ *        [5]      [15]
+ *       /   \     /   \
+ *     [3]  [7] [12]  [20]
+ *
+ * 4. GRAFO:
+ *    Cada nodo puede tener MÚLTIPLES referencias a otros nodos.
+ *    Como una red social: cada usuario conecta con sus amigos.
+ *
+ * ERROR COMÚN: NULL POINTER EXCEPTION
+ *
+ * Si intentas hacer:
+ *   NodoSimple nodo = null;
+ *   nodo.getDato(); // ¡CRASH! nodo es null
+ *
+ * SIEMPRE verifica:
+ *   if (nodo != null) {
+ *       nodo.getDato();
+ *   }
+ *
+ * ERROR COMÚN 2: CICLOS INFINITOS
+ *
+ * Si accidentalmente creas un ciclo:
+ *   nodo1.setSiguiente(nodo2);
+ *   nodo2.setSiguiente(nodo1); // ¡Ciclo!
+ *
+ * Y luego intentas recorrer:
+ *   while (actual != null) { // ¡Nunca será null! Loop infinito
+ *       actual = actual.getSiguiente();
+ *   }
+ *
+ * MEMORIA Y GARBAGE COLLECTION:
+ *
+ * Cuando eliminas un nodo (pierdes la referencia), Java automáticamente
+ * libera esa memoria (garbage collection). Esto NO pasa en C/C++ donde
+ * debes liberar manualmente (free/delete).
+ *
+ * SIGUIENTE PASO:
+ *
+ * ¡Felicitaciones! Ahora entiendes el concepto de Nodo.
+ * En el próximo ejercicio, usarás nodos para implementar una
+ * LISTA ENLAZADA completa, con todos los métodos que esperarías
+ * de una estructura de datos profesional.
+ *
+ * La lista enlazada es la base para entender:
+ * - LinkedList de Java Collections
+ * - Árboles binarios
+ * - Grafos
+ * - Algoritmos avanzados
+ */

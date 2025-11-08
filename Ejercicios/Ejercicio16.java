@@ -1,248 +1,353 @@
 /*
  * ========================================
- * EJERCICIO 16: ArrayList - Sistema de Biblioteca
- * DIFICULTAD: ⭐⭐⭐⭐⭐⭐ (Muy Difícil)
+ * EJERCICIO 16: Arrays de Objetos con Operaciones Complejas
+ * DIFICULTAD: ⭐⭐⭐⭐⭐ (Avanzado)
  * ========================================
  *
  * OBJETIVO:
- * Aprender a usar ARRAYLIST - una lista dinámica de Java
+ * Dominar el manejo de arrays de objetos con operaciones más avanzadas:
+ * búsqueda, filtrado, ordenamiento y transformaciones.
  *
  * CONCEPTO CLAVE:
- * ArrayList es una estructura de datos que puede crecer y encogerse dinámicamente.
- * A diferencia de los arrays normales, no necesitas definir el tamaño inicial.
+ * Los arrays de objetos son fundamentales en programación. Debes ser capaz de:
+ * - Buscar objetos que cumplan condiciones específicas
+ * - Filtrar y crear nuevos arrays con subconjuntos
+ * - Ordenar objetos según diferentes criterios
+ * - Realizar transformaciones sobre colecciones
  *
- * DIFERENCIA: Array vs ArrayList
- * - Array: Tamaño FIJO, más rápido, sintaxis: int[] numeros = new int[5];
- * - ArrayList: Tamaño DINÁMICO, más flexible, sintaxis: ArrayList<Integer> numeros = new ArrayList<>();
+ * Estas operaciones son la base de procesamiento de datos y se usan
+ * en TODAS las aplicaciones reales.
  *
  * INSTRUCCIONES:
- * 1. Crea una clase "Libro" con:
- *    - Atributos privados: titulo (String), autor (String), anio (int), prestado (boolean)
- *    - Constructor que reciba título, autor y año (prestado empieza en false)
+ * 1. Crea una clase "Producto" con:
+ *    - Atributos privados: nombre (String), precio (double), stock (int), categoria (String)
+ *    - Constructor con todos los parámetros
  *    - Getters para todos los atributos
- *    - Métodos "prestar()" y "devolver()" que cambien el estado de prestado
- *    - Método "toString()" que retorne la información del libro formateada
+ *    - Método "setStock(int stock)" - actualiza el stock
+ *    - Método "setPrecio(double precio)" - actualiza el precio
+ *    - Método "aplicarDescuento(double porcentaje)" - reduce el precio
+ *    - Método "estaDisponible()" - retorna true si stock > 0
+ *    - Método "mostrarInfo()" - muestra toda la información
  *
- * 2. Crea una clase "Biblioteca" con:
- *    - Atributo privado: ArrayList<Libro> libros
- *    - Constructor que inicialice el ArrayList vacío
- *    - Método "agregarLibro(Libro libro)" - agrega un libro a la colección
- *    - Método "mostrarTodosLosLibros()" - muestra todos los libros
- *    - Método "buscarPorTitulo(String titulo)" - busca y retorna un libro (o null)
- *    - Método "mostrarLibrosDisponibles()" - muestra solo los no prestados
- *    - Método "contarLibros()" - retorna el total de libros
- *    - Método "eliminarLibro(String titulo)" - elimina un libro por título
+ * 2. Crea una clase "Inventario" con:
+ *    - Atributo privado: productos (Producto[]) - máximo 50 productos
+ *    - Atributo privado: cantidadProductos (int)
+ *    - Constructor sin parámetros
+ *    - Método "agregarProducto(Producto p)"
+ *    - Método "buscarPorNombre(String nombre)" - retorna el Producto o null
+ *    - Método "buscarPorCategoria(String categoria)" - retorna array con productos de esa categoría
+ *    - Método "productoMasCaro()" - retorna el producto de mayor precio
+ *    - Método "productoMasBarato()" - retorna el producto de menor precio
+ *    - Método "calcularValorInventario()" - suma precio * stock de todos los productos
+ *    - Método "productosConBajoStock(int minimo)" - retorna productos con stock <= minimo
+ *    - Método "aplicarDescuentoCategoria(String categoria, double porcentaje)" - descuento a categoría
+ *    - Método "ordenarPorPrecio()" - ordena el array de productos por precio (menor a mayor)
+ *    - Método "mostrarInventario()" - muestra todos los productos
  *
  * 3. En el main:
- *    - Crea una biblioteca
- *    - Agrega 5 libros
- *    - Muestra todos los libros
- *    - Presta 2 libros
- *    - Muestra solo los disponibles
- *    - Busca un libro por título
- *    - Devuelve un libro
- *    - Elimina un libro
- *    - Muestra el total de libros
+ *    - Crea un inventario
+ *    - Agrega 8 productos de diferentes categorías
+ *    - Realiza búsquedas por nombre y categoría
+ *    - Muestra el producto más caro y más barato
+ *    - Calcula el valor total del inventario
+ *    - Encuentra productos con bajo stock
+ *    - Aplica descuentos a una categoría específica
+ *    - Ordena por precio y muestra el inventario
  *
  * SALIDA ESPERADA:
- * === SISTEMA DE BIBLIOTECA ===
+ * ====== Inventario TechStore ======
+ * Total de productos: 8
  *
- * Libro agregado: Cien años de soledad
- * Libro agregado: Don Quijote
- * ...
+ * Laptop HP - $899.99 - Stock: 5 - Categoría: Electrónica
+ * Mouse Logitech - $25.50 - Stock: 15 - Categoría: Accesorios
+ * [... más productos ...]
  *
- * === TODOS LOS LIBROS ===
- * 1. Cien años de soledad - Gabriel García Márquez (1967) [Disponible]
- * 2. Don Quijote - Miguel de Cervantes (1605) [Disponible]
- * ...
+ * ====== Búsquedas ======
+ * Buscando 'Laptop HP': Encontrado - $899.99 (5 unidades)
  *
- * Prestando: Cien años de soledad
- * Prestando: Don Quijote
+ * Productos en categoría 'Accesorios':
+ *   - Mouse Logitech ($25.50)
+ *   - Teclado Mecánico ($75.00)
+ *   - Audífonos Sony ($120.00)
  *
- * === LIBROS DISPONIBLES ===
- * 1. El principito - Antoine de Saint-Exupéry (1943) [Disponible]
- * ...
+ * ====== Análisis de Precios ======
+ * Producto más caro: Monitor 4K ($549.99)
+ * Producto más barato: Cable USB-C ($8.99)
  *
- * Total de libros en la biblioteca: 4
+ * ====== Análisis de Inventario ======
+ * Valor total del inventario: $15,234.50
+ *
+ * Productos con bajo stock (<= 3):
+ *   - Webcam Logitech (2 unidades)
+ *   - Cable USB-C (1 unidad)
+ *
+ * ====== Aplicando 20% de descuento a 'Accesorios' ======
+ * 3 productos actualizados.
+ *
+ * ====== Inventario Ordenado por Precio ======
+ * Cable USB-C - $7.19 - Stock: 1 - Categoría: Accesorios
+ * Mouse Logitech - $20.40 - Stock: 15 - Categoría: Accesorios
+ * [... productos en orden de precio ...]
+ *
+ * PISTAS:
+ * - Para buscarPorCategoria():
+ *   1. Cuenta cuántos productos cumplen la condición
+ *   2. Crea un array del tamaño correcto
+ *   3. Llena el array con los productos encontrados
+ *
+ * - Para ordenarPorPrecio(), usa Bubble Sort simple:
+ *   for (int i = 0; i < n-1; i++)
+ *       for (int j = 0; j < n-i-1; j++)
+ *           if (productos[j].getPrecio() > productos[j+1].getPrecio())
+ *               // swap
+ *
+ * - Recuerda manejar el caso cuando no se encuentra nada (retornar null o array vacío)
  *
  * CONCEPTOS NUEVOS:
- * - ArrayList<Tipo>: Colección dinámica de objetos
- * - .add(elemento): Agrega un elemento al final
- * - .get(índice): Obtiene un elemento por posición
- * - .size(): Retorna el tamaño actual
- * - .remove(índice): Elimina un elemento
- * - .contains(elemento): Verifica si existe un elemento
- * - Enhanced for: for (Libro libro : libros) { ... }
- *
- * PISTA:
- * - Importa: import java.util.ArrayList;
- * - Crear: ArrayList<Libro> libros = new ArrayList<>();
- * - Agregar: libros.add(new Libro("Titulo", "Autor", 2020));
- * - Recorrer: for (Libro libro : libros) { System.out.println(libro); }
+ * - Búsqueda en arrays de objetos
+ * - Filtrado y creación de subarrays
+ * - Ordenamiento de objetos (Bubble Sort)
+ * - Operaciones agregadas (sum, max, min)
+ * - Transformaciones sobre colecciones (aplicar descuento)
  */
 
-import java.util.ArrayList;
-
-// TODO: Crea la clase Libro
-class Libro {
-    // Atributos privados
-    private String titulo;
-    private String autor;
-    private int anio;
-    private boolean prestado;
-
-    // Constructor
-    public Libro(String titulo, String autor, int anio) {
-        // TODO: Inicializa los atributos
+// TODO: Crea la clase Producto
+class Producto {
+    // TODO: Atributos privados
 
 
+    // TODO: Constructor
 
-    }
 
-    // Getters
-    public String getTitulo() {
-        return titulo;
-    }
+    // TODO: Getters
 
-    public String getAutor() {
-        return autor;
-    }
 
-    public int getAnio() {
-        return anio;
-    }
+    // TODO: Setters para stock y precio
 
-    public boolean isPrestado() {
-        return prestado;
-    }
 
-    // Métodos para prestar y devolver
-    public void prestar() {
-        // TODO: Cambia prestado a true
+    // TODO: Método aplicarDescuento
 
-    }
 
-    public void devolver() {
-        // TODO: Cambia prestado a false
+    // TODO: Método estaDisponible
 
-    }
 
-    // toString: representa el objeto como String
-    @Override
-    public String toString() {
-        String estado = prestado ? "Prestado" : "Disponible";
-        return titulo + " - " + autor + " (" + anio + ") [" + estado + "]";
-    }
+    // TODO: Método mostrarInfo
+
 }
 
-// TODO: Crea la clase Biblioteca
-class Biblioteca {
-    // Atributo: ArrayList de Libros
-    private ArrayList<Libro> libros;
-
-    // Constructor
-    public Biblioteca() {
-        // TODO: Inicializa el ArrayList vacío
-        libros = new ArrayList<>();
-    }
-
-    // Método agregarLibro
-    public void agregarLibro(Libro libro) {
-        // TODO: Agrega el libro al ArrayList
-
-        System.out.println("Libro agregado: " + libro.getTitulo());
-    }
-
-    // Método mostrarTodosLosLibros
-    public void mostrarTodosLosLibros() {
-        System.out.println("\n=== TODOS LOS LIBROS ===");
-        // TODO: Recorre el ArrayList e imprime cada libro
-        // for (int i = 0; i < libros.size(); i++) {
-        //     System.out.println((i + 1) + ". " + libros.get(i));
-        // }
+// TODO: Crea la clase Inventario
+class Inventario {
+    // TODO: Atributos privados
 
 
-    }
-
-    // Método mostrarLibrosDisponibles
-    public void mostrarLibrosDisponibles() {
-        System.out.println("\n=== LIBROS DISPONIBLES ===");
-        // TODO: Recorre e imprime solo los no prestados
-        int contador = 1;
+    // TODO: Constructor
 
 
-    }
-
-    // Método buscarPorTitulo
-    public Libro buscarPorTitulo(String titulo) {
-        // TODO: Busca y retorna el libro (o null si no existe)
+    // TODO: Método agregarProducto
 
 
-        return null; // Si no se encuentra
-    }
-
-    // Método contarLibros
-    public int contarLibros() {
-        // TODO: Retorna el tamaño del ArrayList
-        return 0; // TEMPORAL: reemplaza esto con libros.size()
-    }
-
-    // Método eliminarLibro
-    public void eliminarLibro(String titulo) {
-        // TODO: Busca el libro y elimínalo del ArrayList
-        // Pista: primero búscalo, luego usa libros.remove(libro)
+    // TODO: Método buscarPorNombre
 
 
-    }
+    // TODO: Método buscarPorCategoria (retorna array)
+
+
+    // TODO: Método productoMasCaro
+
+
+    // TODO: Método productoMasBarato
+
+
+    // TODO: Método calcularValorInventario
+
+
+    // TODO: Método productosConBajoStock
+
+
+    // TODO: Método aplicarDescuentoCategoria
+
+
+    // TODO: Método ordenarPorPrecio (Bubble Sort)
+
+
+    // TODO: Método mostrarInventario
+
 }
 
 public class Ejercicio16 {
     public static void main(String[] args) {
-        System.out.println("=== SISTEMA DE BIBLIOTECA ===\n");
+        // TODO: Crea inventario
 
-        // TODO: Crea una biblioteca
-        Biblioteca biblioteca = new Biblioteca();
 
-        // TODO: Crea y agrega 5 libros
-        // biblioteca.agregarLibro(new Libro("Cien años de soledad", "Gabriel García Márquez", 1967));
-        // biblioteca.agregarLibro(new Libro("Don Quijote", "Miguel de Cervantes", 1605));
-        // ... etc
+        // TODO: Agrega 8 productos
+        // Ejemplo: inv.agregarProducto(new Producto("Laptop HP", 899.99, 5, "Electrónica"));
 
 
 
 
-        // TODO: Muestra todos los libros
-
-
-        // TODO: Presta 2 libros
-        System.out.println("\n=== PRESTANDO LIBROS ===");
-        // Libro libro1 = biblioteca.buscarPorTitulo("Cien años de soledad");
-        // if (libro1 != null) {
-        //     libro1.prestar();
-        //     System.out.println("Prestando: " + libro1.getTitulo());
-        // }
 
 
 
-        // TODO: Muestra solo los disponibles
 
 
-        // TODO: Devuelve un libro
-        System.out.println("\n=== DEVOLVIENDO LIBRO ===");
+        // TODO: Muestra inventario inicial
 
 
-        // TODO: Elimina un libro
-        System.out.println("\n=== ELIMINANDO LIBRO ===");
+        // TODO: Realiza búsquedas
 
 
-        // TODO: Muestra el total de libros
-        System.out.println("\nTotal de libros en la biblioteca: " + biblioteca.contarLibros());
+        // TODO: Muestra análisis de precios
 
-        // REFLEXIÓN:
-        // ¿Cuándo usar ArrayList en vez de Array?
-        // - Cuando no sabes cuántos elementos tendrás
-        // - Cuando necesitas agregar/eliminar elementos frecuentemente
-        // - Cuando quieres métodos útiles como .contains(), .indexOf(), etc.
-        // - Para colecciones de objetos es más conveniente
+
+        // TODO: Calcula valor total
+
+
+        // TODO: Productos con bajo stock
+
+
+        // TODO: Aplica descuentos
+
+
+        // TODO: Ordena y muestra
+
+
     }
 }
+
+/*
+ * ========================================
+ * REFLEXIÓN Y PROFUNDIZACIÓN
+ * ========================================
+ *
+ * ¿POR QUÉ ESTE EJERCICIO ES IMPORTANTE?
+ *
+ * 1. OPERACIONES CRUD:
+ *    Create (agregar), Read (buscar), Update (actualizar), Delete (eliminar)
+ *    Son las operaciones básicas de TODA aplicación con datos.
+ *    Este ejercicio practica todas excepto Delete.
+ *
+ * 2. BÚSQUEDA Y FILTRADO:
+ *    En aplicaciones reales constantemente buscas datos:
+ *    - Buscar usuario por email
+ *    - Filtrar productos por categoría
+ *    - Encontrar pedidos de un cliente
+ *
+ *    Dos enfoques:
+ *    a) Retornar UN objeto (buscarPorNombre) → retorna null si no existe
+ *    b) Retornar MÚLTIPLES objetos (buscarPorCategoria) → retorna array
+ *
+ * 3. AGREGACIONES:
+ *    Cálculos sobre colecciones:
+ *    - MAX: productoMasCaro()
+ *    - MIN: productoMasBarato()
+ *    - SUM: calcularValorInventario()
+ *    - COUNT: cantidadProductos
+ *
+ *    En SQL serían: SELECT MAX(precio), SELECT SUM(precio * stock)
+ *    En Java, los haces recorriendo el array.
+ *
+ * 4. ORDENAMIENTO:
+ *    Aquí usas Bubble Sort (simple pero lento O(n²)).
+ *    En producción usarías:
+ *    - Arrays.sort() para arrays primitivos
+ *    - Collections.sort() para ArrayList
+ *    - Implementar Comparable/Comparator para objetos personalizados
+ *
+ * 5. TRANSFORMACIONES:
+ *    aplicarDescuentoCategoria() transforma el estado de múltiples objetos.
+ *    Es como hacer: UPDATE productos SET precio = precio * 0.8 WHERE categoria = 'X'
+ *
+ * TÉCNICAS DE BÚSQUEDA:
+ *
+ * 1. BÚSQUEDA LINEAL (lo que hiciste aquí):
+ *    Recorrer todo el array elemento por elemento.
+ *    Complejidad: O(n) - lento para arrays grandes
+ *    Ventaja: funciona en arrays desordenados
+ *
+ * 2. BÚSQUEDA BINARIA (más adelante):
+ *    Requiere array ordenado.
+ *    Complejidad: O(log n) - mucho más rápido
+ *    Desventaja: el array DEBE estar ordenado
+ *
+ * 3. HASHTABLE (HashMap - más adelante):
+ *    Usa una estructura de datos especial.
+ *    Complejidad: O(1) - casi instantánea
+ *    La mejor opción para búsquedas frecuentes
+ *
+ * BUBBLE SORT EXPLICADO:
+ *
+ * El algoritmo compara pares adyacentes y los intercambia si están en orden incorrecto:
+ *
+ * Pasada 1: [5, 2, 8, 1] → [2, 5, 1, 8] (el 8 "sube")
+ * Pasada 2: [2, 5, 1, 8] → [2, 1, 5, 8] (el 5 "sube")
+ * Pasada 3: [2, 1, 5, 8] → [1, 2, 5, 8] (el 2 "sube")
+ *
+ * Después de cada pasada, el elemento más grande está en su posición final.
+ *
+ * CASOS DE USO EN EL MUNDO REAL:
+ *
+ * 1. E-COMMERCE:
+ *    class ProductoCatalogo {
+ *        public Producto[] buscarPorCategoria(String cat);
+ *        public Producto[] ordenarPorPrecio();
+ *        public Producto[] filtrarPorRango(double min, double max);
+ *    }
+ *
+ * 2. SISTEMA DE BIBLIOTECA:
+ *    class Biblioteca {
+ *        public Libro[] buscarPorAutor(String autor);
+ *        public Libro[] buscarPorISBN(String isbn);
+ *        public Libro[] librosPorAnio(int anio);
+ *    }
+ *
+ * 3. SISTEMA DE EMPLEADOS:
+ *    class RRHH {
+ *        public Empleado[] empleadosPorDepartamento(String dept);
+ *        public Empleado[] empleadosConSalarioMayor(double minimo);
+ *        public Empleado empleadoMejorPagado();
+ *    }
+ *
+ * 4. STREAMING (Netflix/Spotify):
+ *    class Catalogo {
+ *        public Pelicula[] buscarPorGenero(String genero);
+ *        public Pelicula[] ordenarPorCalificacion();
+ *        public Pelicula[] recomendaciones(Usuario u);
+ *    }
+ *
+ * OPTIMIZACIONES POSIBLES:
+ *
+ * 1. ÍNDICES:
+ *    Mantener arrays auxiliares ordenados por diferentes criterios
+ *    (por nombre, por precio, etc.) para búsquedas más rápidas.
+ *
+ * 2. CACHÉ:
+ *    Guardar resultados de búsquedas frecuentes.
+ *
+ * 3. ALGORITMOS MÁS EFICIENTES:
+ *    - QuickSort o MergeSort en lugar de Bubble Sort
+ *    - Binary Search en lugar de linear search
+ *
+ * 4. ESTRUCTURAS DE DATOS AVANZADAS:
+ *    - HashMap para búsquedas O(1)
+ *    - TreeMap para datos ordenados
+ *    - ArrayList en lugar de arrays fijos
+ *
+ * ERROR COMÚN: NULL POINTER EXCEPTION
+ *
+ * Si buscarPorNombre() retorna null y luego haces:
+ *   Producto p = inv.buscarPorNombre("NoExiste");
+ *   System.out.println(p.getNombre()); // ¡CRASH! p es null
+ *
+ * SIEMPRE VALIDA:
+ *   Producto p = inv.buscarPorNombre("...");
+ *   if (p != null) {
+ *       System.out.println(p.getNombre());
+ *   } else {
+ *       System.out.println("Producto no encontrado");
+ *   }
+ *
+ * SIGUIENTE PASO:
+ * Ahora que dominas operaciones complejas sobre arrays de objetos,
+ * estás listo para aprender sobre NODOS y LISTAS ENLAZADAS, donde
+ * los objetos se conectan entre sí mediante referencias.
+ */
