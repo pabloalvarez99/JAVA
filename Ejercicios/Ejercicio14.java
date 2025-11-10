@@ -162,7 +162,13 @@ class ListaTareas {
 
     // TODO: Método limpiarCompletadas
     // PISTA: Recorre de atrás hacia adelante
-    
+    public void limpiarCompletadas() {
+        for (int i = tareas.size()-1; i < 0; i--) {
+            if (!tareas.get(i).getCompletada()) {
+                tareas.eliminarTarea(i);
+            }
+        }
+    }
 }
 
 public class Ejercicio14 {
