@@ -89,17 +89,6 @@
  * ====== Estructura Actualizada ======
  * [Muestra la nueva estructura]
  *
- * PISTAS:
- * - En agregarEmpleado():
- *   empleados.add(emp);
- *   emp.setDepartamento(this); // "this" es el departamento actual
- *
- * - En cambiarDepartamento():
- *   1. Remover del departamento actual
- *   2. Agregar al nuevo departamento
- *
- * - Para buscar en toda la empresa, recorre cada departamento y sus empleados (nested loops)
- *
  * CONCEPTOS NUEVOS:
  * - Referencias bidireccionales (A conoce a B, B conoce a A)
  * - Uso de "this" para referirse al objeto actual
@@ -107,117 +96,6 @@
  * - Sincronización de relaciones (mantener consistencia)
  * - Búsqueda en estructuras anidadas
  */
-
-import java.util.ArrayList;
-
-// TODO: Crea la clase Departamento
-class Departamento {
-    // TODO: Atributos privados
-
-
-    // TODO: Constructor
-
-
-    // TODO: Método agregarEmpleado (establece relación bidireccional)
-
-
-    // TODO: Método calcularNominaTotal
-
-
-    // TODO: Getters
-
-
-    // TODO: Método mostrarEmpleados
-
-}
-
-// TODO: Crea la clase Empleado
-class Empleado {
-    // TODO: Atributos privados
-
-
-    // TODO: Constructor
-
-
-    // TODO: Getters
-
-
-    // TODO: Método setDepartamento
-
-
-    // TODO: Método cambiarDepartamento
-
-
-    // TODO: Método aumentarSalario
-
-
-    // TODO: Método mostrarInfo
-
-}
-
-// TODO: Crea la clase Empresa
-class Empresa {
-    // TODO: Atributo privado
-
-
-    // TODO: Constructor
-
-
-    // TODO: Método agregarDepartamento
-
-
-    // TODO: Método buscarEmpleado
-
-
-    // TODO: Método calcularNominaTotal
-
-
-    // TODO: Método departamentoConMasEmpleados
-
-
-    // TODO: Método mostrarEstructura
-
-}
-
-public class Ejercicio15 {
-    public static void main(String[] args) {
-        // TODO: Crea empresa
-
-
-        // TODO: Crea 3 departamentos
-
-
-
-
-        // TODO: Crea 7 empleados
-
-
-
-
-        // TODO: Asigna empleados a departamentos
-        // deptIT.agregarEmpleado(emp1);
-
-
-
-
-        // TODO: Agrega departamentos a la empresa
-
-
-
-
-        // TODO: Muestra estructura
-
-
-        // TODO: Muestra estadísticas
-
-
-        // TODO: Realiza cambios (traslados, aumentos)
-
-
-        // TODO: Muestra estructura actualizada
-
-    }
-}
 
 /*
  * ========================================
@@ -331,4 +209,121 @@ public class Ejercicio15 {
  * - Árboles (padre ↔ hijos)
  * - Grafos (nodo ↔ nodos conectados)
  * - Listas enlazadas (nodo ↔ siguiente nodo)
- */
+*/
+import java.util.ArrayList;
+
+class Departamento {
+   // Atributos
+   private String nombre;
+   private ArrayList<Empleado> empleados = new ArrayList<>();
+
+   // Constructor
+   public Departamento(String nombre) {
+      this.nombre = nombre;
+      empleados = new ArrayList<>();
+   }
+
+   // Agregar Empleado
+   public void agregarEmpleado(Empleado emp) {
+      empleados.add(emp);
+   }
+
+   // Salario total
+   public double calcularNominaTotal() {
+      double sumaTotal = 0;
+      for (int i = 0; i < empleados.size(); i++) {
+         sumaTotal += empleados.get(i).getSalario();
+      }
+      return sumaTotal;
+   }
+   // Getters
+   public ArrayList<Empleado> getEmpleados() {
+      return empleados;
+   }
+   public String getNombre() {
+      return nombre;
+   }
+   public void mostrarEmpleados() {
+      for (int i = 0; i < empleados.size(); i++) {
+         System.out.println("Departamento: " + nombre);
+         empleados.get(i).mostrarInfo();
+      }
+   } 
+}
+
+class Empleado {
+   // Atributos
+   private String nombre;
+   private double salario;
+   private Departamento departamento;
+
+   // Constructor
+   public Empleado(String nombre, double salario) {
+      this.nombre = nombre;
+      this.salario = salario;
+      departamento = null;
+   }
+   // Getters
+   public double getSalario() {
+      return salario;
+   }
+   public String getNombre() {
+      return nombre;
+   }
+   // Metodos
+   public void setDepartamento(Departamento dept) {
+      departamento = dept;
+   }
+   public void cambiarDepartamento(Departamento nuevoDept) {
+      departamento = nuevoDept;
+   }
+   public void aumentarSalario(double porcentaje) {
+      salario += (salario * porcentaje);
+   }
+   public void mostrarInfo() {
+      System.out.println(" - " + nombre + " ($" + salario + ")");
+   }
+}
+
+class Empresa {
+   private String nombre;
+   private ArrayList<Departamento> departamentos = new ArrayList<>();
+
+   public Empresa() {
+      this.nombre = nombre;
+      this.departamentos = new ArrayList<>();
+   }
+
+   public void agregarDepartamento(Departamento dept) {
+      departamentos.add(dept);
+   }
+   public double calcularNominaTotal() {
+      double nominaTotal = 0;
+      for (int i = 0; i < departamentos.size(); i++) {  
+         nominaTotal += departamentos.get(i).calcularNominaTotal();
+      }
+      return nominaTotal;
+   }
+
+   public Departamento departamentoConMasEmpleados() {
+      int masEmpleados = -1;
+      Departamento deptMasEmp = new Departamento(null);
+      for (int i = 0; i < departamentos.size();i++) {
+         if (departamentos.size() >= masEmpleados ) {
+            masEmpleados = departamentos.size();
+            deptMasEmp = departamentos.get(i);
+         }
+      }
+      return deptMasEmp;
+   }
+   public void mostrarEstructura() {
+      for (int i = 0; i < departamentos.size(); i++) {
+         System.out.println("====== " + nombre + " ======");
+      }
+   }
+}
+public class Ejercicio15 {
+   public static void main(String[] args) {
+      System.out.println("hola");
+   }
+}
