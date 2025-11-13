@@ -85,26 +85,6 @@
  * Cadena después de eliminar: 20 30 40 50
  * Visualización: 20 → 30 → 40 → 50 → null
  *
- * PISTAS:
- * - Para agregarAlInicio():
- *   NodoSimple nuevoNodo = new NodoSimple(dato);
- *   nuevoNodo.setSiguiente(primero);  // El nuevo apunta al antiguo primero
- *   primero = nuevoNodo;              // El nuevo es ahora el primero
- *
- * - Para agregarAlFinal():
- *   Si la cadena está vacía (primero == null), es igual que agregarAlInicio
- *   Si no, recorre hasta encontrar el último (siguiente == null) y agrégalo ahí
- *
- * - Para recorrer:
- *   NodoSimple actual = primero;
- *   while (actual != null) {
- *       // Procesa actual.getDato()
- *       actual = actual.getSiguiente(); // Avanza al siguiente
- *   }
- *
- * - Para obtener(indice):
- *   Recorre contando hasta llegar al índice deseado
- *
  * CONCEPTOS NUEVOS:
  * - Nodo: objeto con referencia a otro del mismo tipo
  * - Auto-referencia: NodoSimple contiene NodoSimple
@@ -135,11 +115,9 @@ class CadenaDeNodos {
 
 
     // TODO: Método agregarAlInicio
-    // PISTA: El nuevo nodo apunta al antiguo primero, luego se convierte en el nuevo primero
 
 
     // TODO: Método agregarAlFinal
-    // PISTA: Si está vacía, usa agregarAlInicio. Si no, recorre hasta el final
 
 
     // TODO: Método imprimir
@@ -158,7 +136,6 @@ class CadenaDeNodos {
 
 
     // TODO: Método imprimirConFlechas
-    // PISTA: Imprime "dato → " para cada nodo, y "null" al final
 
 }
 

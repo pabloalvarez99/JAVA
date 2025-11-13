@@ -31,10 +31,6 @@
  * Promedio: 5.33
  * ¿Aprobó? true
  *
- * PISTA:
- * - Getter: public String getNombre() { return nombre; }
- * - Setter: public void setNota1(double nota) { if (nota >= 1.0 && nota <= 7.0) this.nota1 = nota; }
- * - Promedio: (nota1 + nota2 + nota3) / 3.0
  */
 
 // TODO: Crea la clase Estudiante

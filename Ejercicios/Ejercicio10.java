@@ -29,10 +29,6 @@
  * Hola, soy María, tengo 30 años y mido 1.60m
  * ¿Es mayor de edad? true
  *
- * PISTA:
- * - Clase dentro del mismo archivo (antes o después de la clase principal)
- * - Constructor: public Persona(String nombre, int edad, double altura) { this.nombre = nombre; ... }
- * - Crear objeto: Persona p1 = new Persona("Ana", 25, 1.65);
  */
 
 // TODO: Crea la clase Persona aquí (ANTES de la clase Ejercicio10)

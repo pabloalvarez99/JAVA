@@ -128,11 +128,6 @@
  * - No puedes usar instanceof con genéricos
  * - Type erasure: en runtime, T se convierte en Object
  *
- * PISTA:
- * - Clase genérica: class Caja<T> { private T contenido; }
- * - Método genérico: public static <T> void imprimir(T elemento) { }
- * - Bounded type: <T extends Comparable<T>>
- * - Crear instancia: Caja<String> caja = new Caja<>("Hola");
  */
 
 // TODO: Crea la clase genérica Caja<T>

@@ -64,12 +64,6 @@
  * Libros largos (>300 pág): 3 de 5
  * Libro más antiguo: Don Quijote de la Mancha (1605)
  *
- * PISTAS:
- * - En Libro, guarda una referencia al objeto Autor: private Autor autor;
- * - En Biblioteca, recorre el array y compara: libro.getAutor().getNombre()
- * - Para el libro más antiguo, recorre y mantén el de menor año
- * - toString() sobrescribe un método heredado de Object (lo verás más adelante)
- *
  * CONCEPTOS NUEVOS:
  * - Composición: objetos dentro de objetos
  * - Referencias entre objetos

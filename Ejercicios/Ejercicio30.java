@@ -214,14 +214,6 @@
  * - Quieres ordenamientos opcionales/dinámicos
  * - Necesitas ordenar de diferentes formas en diferentes contextos
  *
- * PISTAS:
- * - Comparable: implements Comparable<Producto>
- * - compareTo: return this.precio.compareTo(otro.precio)
- * - Comparator: implements Comparator<Producto>
- * - compare: return p1.nombre.compareTo(p2.nombre)
- * - Orden descendente: intercambia p1 y p2
- * - Para números: Integer.compare(a, b) o Double.compare(a, b)
- * - Collections.sort() modifica la lista original
  */
 
 import java.util.*;

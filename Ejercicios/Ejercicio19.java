@@ -103,13 +103,6 @@
  * - Queue: Procesamiento en orden de llegada (FIFO)
  * - Stack: Procesamiento en orden inverso (LIFO - Last In First Out)
  *
- * PISTA:
- * - Importa: import java.util.LinkedList; import java.util.Queue;
- * - Crear Queue: Queue<Cliente> cola = new LinkedList<>();
- * - Crear LinkedList: LinkedList<Cliente> lista = new LinkedList<>();
- * - Agregar a Queue: cola.offer(cliente);
- * - Atender (remover): Cliente c = cola.poll();
- * - Ver siguiente: Cliente c = cola.peek();
  */
 
 import java.util.LinkedList;

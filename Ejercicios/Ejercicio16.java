@@ -89,20 +89,6 @@
  * Mouse Logitech - $20.40 - Stock: 15 - Categoría: Accesorios
  * [... productos en orden de precio ...]
  *
- * PISTAS:
- * - Para buscarPorCategoria():
- *   1. Cuenta cuántos productos cumplen la condición
- *   2. Crea un array del tamaño correcto
- *   3. Llena el array con los productos encontrados
- *
- * - Para ordenarPorPrecio(), usa Bubble Sort simple:
- *   for (int i = 0; i < n-1; i++)
- *       for (int j = 0; j < n-i-1; j++)
- *           if (productos[j].getPrecio() > productos[j+1].getPrecio())
- *               // swap
- *
- * - Recuerda manejar el caso cuando no se encuentra nada (retornar null o array vacío)
- *
  * CONCEPTOS NUEVOS:
  * - Búsqueda en arrays de objetos
  * - Filtrado y creación de subarrays

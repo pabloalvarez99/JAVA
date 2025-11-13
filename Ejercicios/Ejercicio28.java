@@ -159,12 +159,6 @@
  * - Supplier<T>: () -> T (generate)
  * - BinaryOperator<T>: (T, T) -> T (reduce)
  *
- * PISTAS:
- * - .stream(): Convierte colección en stream
- * - .filter(producto -> producto.getPrecio() > 100)
- * - .map(Producto::getNombre): Extrae nombres
- * - .collect(Collectors.toList()): Convierte a lista
- * - .reduce(0.0, (a, b) -> a + b): Suma elementos
  */
 
 import java.util.*;

@@ -25,10 +25,6 @@
  * 7 x 9 = 63
  * 7 x 10 = 70
  *
- * PISTA:
- * - Usa un for que vaya de 1 a 10
- * - Dentro del loop, multiplica: numero * i
- * - Usa System.out.println() para mostrar cada línea
  */
 
 public class Ejercicio6 {

@@ -255,12 +255,6 @@
  * ✓ MVC (Model-View-Controller)
  * ✓ Reactive programming
  *
- * PISTAS:
- * - Builder: clase interna static con métodos que retornan this
- * - build(): crea y retorna el objeto final
- * - Observer: interface con método update()
- * - Subject: mantiene List<Observer> y notifica a todos
- * - attach(): add a la lista, detach(): remove de la lista
  */
 
 import java.util.*;

@@ -149,11 +149,6 @@
  * ✓ Rendimiento predecible
  * ✓ Listas enlazadas (eficiente sin acceso aleatorio)
  *
- * PISTAS:
- * - Caso base de recursión: si izq >= der, ya está ordenado
- * - Calcula medio: medio = izq + (der - izq) / 2
- * - Merge usa dos punteros: uno para cada subarray
- * - Copia elementos restantes después del merge
  */
 
 public class Ejercicio26 {

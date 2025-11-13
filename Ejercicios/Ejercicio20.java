@@ -114,12 +114,6 @@
  * - Por defecto, Java compara referencias de memoria
  * - Nosotros queremos comparar por ID (contenido)
  *
- * PISTA:
- * - Importa: import java.util.HashSet; import java.util.TreeSet;
- * - Crear: HashSet<Estudiante> set = new HashSet<>();
- * - Agregar: boolean agregado = set.add(estudiante); // false si era duplicado
- * - Contiene: boolean existe = set.contains(estudiante);
- * - TreeSet ordena automáticamente Strings alfabéticamente
  */
 
 import java.util.HashSet;

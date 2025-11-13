@@ -293,12 +293,6 @@
  * ✓ Queue con operaciones en ambos extremos
  * ✓ Sliding window algorithms
  *
- * PISTAS:
- * - TreeMap mantiene orden automático de keys
- * - PriorityQueue.poll() siempre retorna elemento de mayor prioridad
- * - Deque.addFirst() agrega al inicio, addLast() al final
- * - ArrayDeque es preferible a LinkedList para Deque
- * - TreeMap y PriorityQueue NO permiten null
  */
 
 import java.util.*;

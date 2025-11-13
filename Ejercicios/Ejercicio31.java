@@ -180,12 +180,6 @@
  * ✗ Cuando necesitas estabilidad (usa MergeSort)
  * ✗ Cuando el peor caso debe ser O(n log n) (usa HeapSort)
  *
- * PISTAS:
- * - Caso base de la recursión: low >= high
- * - Partición: recorre array y mueve elementos menores a la izquierda
- * - Swap: usa variable temporal para intercambiar
- * - Pivote: elige el último elemento (arr[high])
- * - Índice i: mantiene la "frontera" entre menores y mayores
  */
 
 import java.util.Arrays;

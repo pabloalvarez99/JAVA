@@ -19,10 +19,6 @@
  * ¿El número 7 es par? false
  * Hola Pablo, bienvenido!
  *
- * PISTA:
- * - Método que retorna: public static int sumar(int a, int b) { return a + b; }
- * - Método void: public static void saludar(String nombre) { ... }
- * - Operador módulo % sirve para saber si es par: numero % 2 == 0
  */
 
 public class Ejercicio8 {

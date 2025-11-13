@@ -249,12 +249,6 @@
  * ✓ Define serialVersionUID en clases Serializable
  * ✓ Marca campos sensibles como transient
  *
- * PISTAS:
- * - try-with-resources: try (Recurso r = new Recurso()) { }
- * - Leer línea: reader.readLine() retorna null al final
- * - Append: new FileWriter(archivo, true)
- * - Serializar: implements Serializable
- * - transient: campo que NO se serializa
  */
 
 import java.io.*;

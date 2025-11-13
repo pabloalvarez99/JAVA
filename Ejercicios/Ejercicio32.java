@@ -224,12 +224,6 @@
  * ✓ Expresiones aritméticas
  * ✓ Bases de datos (índices B-Tree)
  *
- * PISTAS:
- * - Usa recursión para insertar y buscar
- * - Caso base: node == null
- * - In-order produce valores ordenados
- * - Altura = 1 + max(altura_izq, altura_der)
- * - Tamaño = 1 + tamaño_izq + tamaño_der
  */
 
 // ========================================

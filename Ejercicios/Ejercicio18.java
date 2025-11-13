@@ -33,10 +33,6 @@
  * VISUALIZACIÓN:
  * cabeza -> [10|next] -> [20|next] -> [30|next] -> [40|next] -> [50|null]
  *
- * PISTA:
- * - Para agregar al final, recorre hasta encontrar el último nodo (siguiente == null)
- * - Para imprimir, recorre desde cabeza usando getNodoSiguiente()
- * - Similar al ejemplo de Station del metro, pero más simple
  */
 
 // TODO: Crea la clase Nodo

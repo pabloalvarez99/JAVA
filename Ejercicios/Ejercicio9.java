@@ -24,10 +24,6 @@
  * El nombre "María" tiene 5 letras
  * El nombre más largo es: Carlos (6 letras)
  *
- * PISTA:
- * - Para obtener longitud de String: nombre.length()
- * - Para recorrer array: for (int i = 0; i < array.length; i++)
- * - O usar for-each: for (String nombre : nombres)
  */
 
 public class Ejercicio9 {

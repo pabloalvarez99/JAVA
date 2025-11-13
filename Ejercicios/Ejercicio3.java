@@ -22,9 +22,6 @@
  * a = 20
  * b = 10
  *
- * PISTA:
- * Necesitas una variable temporal para guardar un valor mientras intercambias
- * Ejemplo: temp = a; a = b; b = temp;
  */
 
 public class Ejercicio3 {

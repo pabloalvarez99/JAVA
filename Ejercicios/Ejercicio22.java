@@ -139,10 +139,6 @@
  * - Solución: Memoization o Dynamic Programming
  * - O usar versión iterativa
  *
- * PISTA:
- * - Siempre define el CASO BASE primero (previene infinito)
- * - Asegúrate que cada llamada recursiva acerque al caso base
- * - Para visualizar: System.out.println antes de la llamada recursiva
  */
 
 // TODO: Crea la clase Recursividad

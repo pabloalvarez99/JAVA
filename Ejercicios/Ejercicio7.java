@@ -20,11 +20,6 @@
  * Suma total: 63
  * Número más grande: 20
  *
- * PISTA:
- * - Declarar array: int[] numeros = {5, 12, 8, 3, 20, 15};
- * - Obtener longitud: numeros.length
- * - Acceder elemento: numeros[i]
- * - Para el máximo, usa una variable que vaya guardando el mayor
  */
 
 public class Ejercicio7 {

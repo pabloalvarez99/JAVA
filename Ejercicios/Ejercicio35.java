@@ -269,12 +269,6 @@
  * ✗ Operaciones simples secuenciales
  * ✗ Si la complejidad no vale la pena
  *
- * PISTAS:
- * - Implementa Runnable en lugar de extender Thread
- * - Usa synchronized para evitar race conditions
- * - join() espera a que el thread termine
- * - sleep() pausa el thread actual
- * - Siempre llama start(), no run()
  */
 
 import java.util.*;

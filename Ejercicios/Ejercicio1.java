@@ -18,11 +18,6 @@
  * Tengo 20 años
  * Mido 1.75 metros
  *
- * PISTA:
- * - Usa String para texto
- * - Usa int para números enteros
- * - Usa double para números decimales
- * - Usa System.out.println() para imprimir
  */
 
 public class Ejercicio1 {

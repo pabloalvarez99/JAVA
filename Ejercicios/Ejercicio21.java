@@ -106,11 +106,6 @@
  * MEJORA BUBBLE SORT:
  * - Optimización: Si en una pasada no hay intercambios, el array está ordenado
  *
- * PISTA:
- * - Bubble Sort: for externo (pasadas), for interno (comparaciones)
- * - Selection Sort: for externo (posiciones), for interno (buscar mínimo)
- * - Intercambio: int temp = array[i]; array[i] = array[j]; array[j] = temp;
- * - Copiar: int[] copia = array.clone(); o System.arraycopy()
  */
 
 import java.util.Arrays;

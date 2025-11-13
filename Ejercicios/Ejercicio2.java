@@ -19,12 +19,6 @@
  * 15 / 4 = 3
  * 15 % 4 = 3
  *
- * PISTA:
- * - Suma: +
- * - Resta: -
- * - Multiplicación: *
- * - División: /
- * - Módulo (residuo): %
  */
 
 public class Ejercicio2 {

@@ -138,14 +138,6 @@
  * - Parámetros opcionales en APIs
  * - Cadenas de transformación seguras
  *
- * PISTAS:
- * - Enum: enum Prioridad { BAJA(1, "descripcion"), ... }
- * - Constructor de enum es privado
- * - Optional.of(valor): crea Optional con valor (no null)
- * - Optional.ofNullable(valor): crea Optional, puede ser null
- * - Optional.empty(): crea Optional vacío
- * - map(): transforma el valor si presente
- * - orElse(default): retorna valor o default si vacío
  */
 
 import java.util.Optional;

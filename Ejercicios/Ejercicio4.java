@@ -22,10 +22,6 @@
  * SALIDA ESPERADA (con edad = 70):
  * Eres adulto mayor
  *
- * PISTA:
- * - Usa if, else if, else
- * - Usa operadores de comparación: <, >, <=, >=, ==
- * - Usa operadores lógicos: && (y), || (o)
  */
 
 public class Ejercicio4 {

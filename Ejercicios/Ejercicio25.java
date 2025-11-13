@@ -124,11 +124,6 @@
  * ✗ Requiere array ordenado
  * ✗ No funciona con listas enlazadas eficientemente
  *
- * PISTAS:
- * - Siempre calcula el punto medio: medio = (inicio + fin) / 2
- * - Cuidado con overflow: mejor usar medio = inicio + (fin - inicio) / 2
- * - Actualiza inicio o fin según la comparación
- * - Versión recursiva: llama a sí misma con inicio/fin actualizado
  */
 
 public class Ejercicio25 {

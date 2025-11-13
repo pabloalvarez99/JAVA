@@ -130,13 +130,6 @@
  * ✓ Útil para deshacer/rehacer
  * ✓ Natural para recursión (call stack)
  *
- * PISTAS:
- * - Usa ArrayList<T> como almacenamiento interno
- * - push(): usa add() del ArrayList
- * - pop(): usa remove(size() - 1)
- * - peek(): usa get(size() - 1)
- * - Para validar paréntesis: push cuando abres, pop cuando cierras
- * - Para postfijo: números van al stack, operadores combinan los últimos 2
  */
 
 import java.util.ArrayList;

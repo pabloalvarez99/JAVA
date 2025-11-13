@@ -55,12 +55,6 @@
  * Estudiantes Aprobados: 3 de 4
  * Porcentaje de Aprobación: 75.00%
  *
- * PISTAS:
- * - Array de objetos: Estudiante[] estudiantes = new Estudiante[30];
- * - Para agregar: estudiantes[cantidadEstudiantes] = est; cantidadEstudiantes++;
- * - Para recorrer: for (int i = 0; i < cantidadEstudiantes; i++)
- * - Promedio del aula: suma todos los promedios y divide por cantidadEstudiantes
- *
  * CONCEPTOS NUEVOS:
  * - Arrays de objetos (no primitivos)
  * - Objetos que contienen otros objetos

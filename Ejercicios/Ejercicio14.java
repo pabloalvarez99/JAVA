@@ -73,15 +73,6 @@
  *
  * Tareas pendientes: 3 de 3
  *
- * PISTAS:
- * - Crear ArrayList: ArrayList<Tarea> tareas = new ArrayList<>();
- * - Agregar: tareas.add(nuevaTarea);
- * - Obtener: tareas.get(indice);
- * - Tamaño: tareas.size();
- * - Eliminar: tareas.remove(indice);
- * - Para eliminar múltiples, recorre de ATRÁS hacia ADELANTE:
- *   for (int i = tareas.size() - 1; i >= 0; i--)
- *
  * CONCEPTOS NUEVOS:
  * - ArrayList<T> (colección dinámica)
  * - Genéricos básicos: <Tarea>
@@ -129,7 +120,6 @@ class ListaTareas {
     public ListaTareas() {
         this.tareas = new ArrayList<>();
     } 
-
     // TODO: Método agregarTarea
     public void agregarTarea(String descripcion) {
         Tarea tarea = new Tarea(descripcion);
@@ -153,42 +143,54 @@ class ListaTareas {
     public int cantidadPendientes() {
         int pendientes = 0;
         for(int i = 0; i < this.tareas.size(); i++) {
-            if (this.tareas.get(i).getCompletada() == false) {
+            if (!this.tareas.get(i).getCompletada()) {
                 pendientes++;
             }
         }
         return pendientes;
     }
-
     // TODO: Método limpiarCompletadas
-    // PISTA: Recorre de atrás hacia adelante
-    
+    public void limpiarCompletadas() {
+        for (int i = this.tareas.size() - 1; i >= 0; i-- ) {
+            if (this.tareas.get(i).getCompletada()) {
+                this.tareas.remove(i);
+            }
+        }
+    }
+
+    // Método para obtener el tamaño total de la lista
+    public int size() {
+        return this.tareas.size();
+    }
 }
 
 public class Ejercicio14 {
     public static void main(String[] args) {
         // TODO: Crea una lista de tareas
-
+        ListaTareas listaTareas = new ListaTareas();
 
         // TODO: Agrega 5 tareas
-
-
-
-
+        listaTareas.agregarTarea("Estudiar");
+        listaTareas.agregarTarea("Quehaceres hogar");
+        listaTareas.agregarTarea("Alimentacion");
+        listaTareas.agregarTarea("Trabajar");
+        listaTareas.agregarTarea("Crear");
         // TODO: Completa algunas tareas (índices 1 y 3)
-
-
+        listaTareas.completarTarea(1);
+        listaTareas.completarTarea(3);
         // TODO: Muestra la lista
-
-
+        System.out.println("\n====== Mi Lista de Tareas ======");
+        listaTareas.mostrarTareas();
         // TODO: Muestra estadísticas
-
-
+        System.out.println("\nTareas pendientes: " + listaTareas.cantidadPendientes() + " de " + listaTareas.size());
         // TODO: Limpia las completadas
-
+        System.out.println("\n====== Limpiando tareas completadas... ======");
+        listaTareas.limpiarCompletadas();
 
         // TODO: Muestra la lista actualizada
-
+        System.out.println("\n====== Lista Actualizada ======");
+        listaTareas.mostrarTareas();
+        System.out.println("\nTareas pendientes: " + listaTareas.cantidadPendientes() + " de " + listaTareas.size());
     }
 }
 

@@ -199,11 +199,6 @@
  * ✓ Centraliza lógica de creación
  * ✓ Reduce acoplamiento
  *
- * PISTAS:
- * - Singleton: constructor privado + getInstance()
- * - Thread-safe: synchronized o doble-check locking
- * - Factory: método estático que retorna interface
- * - Usa switch o if-else para decidir qué crear
  */
 
 // ========================================

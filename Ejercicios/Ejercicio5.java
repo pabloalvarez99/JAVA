@@ -22,10 +22,6 @@
  * Cuenta regresiva:
  * 5 4 3 2 1 ¡Despegue!
  *
- * PISTA:
- * - Sintaxis: for (int i = inicio; i <= fin; i++)
- * - Para pares: i += 2 (incrementa de 2 en 2)
- * - Para regresiva: i-- (decrementa)
  */
 
 public class Ejercicio5 {
