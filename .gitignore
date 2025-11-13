@@ -33,3 +33,9 @@ target/
 build/
 out/
 bin/
+
+# Claude Code specific
+.claude/
+
+# Temporary files
+nul
