@@ -1,0 +1,7 @@
+3
+VIN001,Toyota,Camry,Auto,14.5
+VIN002,Ford,Explorer,SUV,10.2
+VIN003,Chevrolet,Silverado,Camioneta,8.5
+VIN001,Normal,120,80,95
+VIN002,Sport,200,150
+VIN003,Eco,180,90,110,75

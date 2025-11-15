@@ -1,0 +1,9 @@
+4
+T001,Toyota,Prius,Hibrido,15.5
+T002,Nissan,Sentra,Estandar,18.2
+T003,Toyota,Corolla,Estandar,17.8
+T004,Tesla,Model 3,Electrico,12.3
+T001,Normal,25,30,15,40
+T002,Sport,35,20,25,30,10
+T003,Eco,40,35,28
+T004,Normal,50,45,38,42,35,28

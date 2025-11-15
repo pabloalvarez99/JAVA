@@ -72,101 +72,32 @@
  */
 
 // TODO: Crea la clase Autor
-class Autor {
-    // TODO: Atributos privados
-    private String autor;
-    private String nacionalidad;
 
-    // TODO: Constructor
-    public Autor(String autor, String nacionalidad) {
-        this.autor = autor;
-        this.nacionalidad = nacionalidad;
-    }
 
-    // TODO: Getters
-    public String getAutor() {
-        return this.autor;
-    }
-    public String getNacionalidad() {
-        return this.nacionalidad;
-    }
-    // TODO: Método toString()
-    public String toString(Autor autor) {
-        return autor.autor + " (" + autor.nacionalidad + ")";
-    }
-}
+
+
+
+
 
 // TODO: Crea la clase Libro
-class Libro {
-    // TODO: Atributos privados
-    private String titulo;
-    private Autor autor;
-    private int año;
-    private int paginas;
 
-    // TODO: Constructor
-    public Libro(String titulo, Autor autor, int año, int paginas) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.año = año;
-        this.paginas = paginas;
-    }
 
-    // TODO: Getters
-    public String getTitulo() {
-        return this.titulo;
-    }
-    public Autor getAutor() {
-        return this.autor;
-    }
-    public int getAño() {
-        return this.año;
-    }
-    public int getPaginas() {
-        return this.paginas;
-    }
-    // TODO: Método esLargo()
-    public boolean esLargo(Libro libro) {
-        if (libro.getPaginas() > 300) {
-            return true;
-        } else {
-            return false;
-        }
-    } 
 
-    // TODO: Método mostrarInfo()
-    public static void mostrarInfo(Libro libro) {
-        System.out.println(libro.getTitulo() + " (" + libro.getAño() + ") - " + libro.getAño() + " paginas\n  Autor:" + libro.getAutor() + " (" + libro.autor.getNacionalidad() +")");
-    }
-}
+
+
+
+
+
 
 // TODO: Crea la clase Biblioteca
-class Biblioteca {
-    // TODO: Atributos privados
-    private Libro[] libros = new Libro[100];
-    private int cantidadLibros;
-    // TODO: Constructor
-    public Biblioteca() {
-        this.cantidadLibros = cantidadLibros;
-        this.libros =libros;
-    }
-
-    // TODO: Método agregarLibro
-    public Libro agregarLibro(Libro[] libro) {
-        for (libros : Libro[] libros ) {
-
-        }
-    }
-
-    // TODO: Método buscarPorAutor
 
 
-    // TODO: Método contarLibrosLargos
 
 
-    // TODO: Método libroMasAntiguo
 
-}
+
+
+
 
 public class Ejercicio13 {
     public static void main(String[] args) {
@@ -183,6 +114,7 @@ public class Ejercicio13 {
 
 
 
+
         // TODO: Crea biblioteca y agrega libros
         // Biblioteca biblioteca = new Biblioteca();
         // biblioteca.agregarLibro(libro1);
@@ -190,94 +122,15 @@ public class Ejercicio13 {
 
 
 
+
         // TODO: Busca libros por autor
+
 
 
         // TODO: Muestra estadísticas
 
 
 
+
     }
 }
-
-/*
- * ========================================
- * REFLEXIÓN Y PROFUNDIZACIÓN
- * ========================================
- *
- * ¿QUÉ APRENDISTE EN ESTE EJERCICIO?
- *
- * 1. COMPOSICIÓN VS HERENCIA:
- *    - Composición: "tiene un" (has-a) → Un Libro TIENE UN Autor
- *    - Herencia: "es un" (is-a) → Un Perro ES UN Animal (lo verás después)
- *    La composición es más flexible y se usa más en aplicaciones reales.
- *
- * 2. NAVEGACIÓN ENTRE OBJETOS:
- *    libro.getAutor().getNombre()
- *         ↓         ↓
- *    Objeto Libro → Objeto Autor → String nombre
- *
- *    Este "encadenamiento" es común en POO. Navegas a través de la
- *    estructura de objetos usando getters.
- *
- * 3. REFERENCIAS VS COPIAS:
- *    Cuando haces: Libro libro1 = new Libro("...", autor1, ...);
- *    El libro NO copia el autor - guarda una REFERENCIA al mismo objeto Autor.
- *    Si modificas el autor después, todos los libros de ese autor se ven afectados.
- *
- * 4. NULL SAFETY:
- *    ¿Qué pasa si haces libro.getAutor().getNombre() pero autor es null?
- *    ¡NullPointerException! Siempre valida antes:
- *    if (libro.getAutor() != null) { ... }
- *
- * CASOS DE USO EN EL MUNDO REAL:
- *
- * 1. SISTEMA DE PEDIDOS (E-COMMERCE):
- *    class Pedido {
- *        private Cliente cliente;
- *        private Producto[] productos;
- *        private DireccionEnvio direccion;
- *
- *        public double calcularTotal() {
- *            // Navega por productos y suma precios
- *        }
- *    }
- *
- * 2. RED SOCIAL:
- *    class Publicacion {
- *        private Usuario autor;
- *        private Comentario[] comentarios;
- *        private Like[] likes;
- *
- *        public boolean esPopular() {
- *            return likes.length > 100;
- *        }
- *    }
- *
- * 3. SISTEMA MÉDICO:
- *    class Paciente {
- *        private String nombre;
- *        private Medico[] medicos;
- *        private Cita[] citas;
- *        private HistoriaClinica historia;
- *    }
- *
- * 4. EMPRESA:
- *    class Empleado {
- * - Herencia para reutilizar código
- *        private Departamento departamento;
- *        private Cargo cargo;
- *        private Proyecto[] proyectos;
- *    }
- *
- * PATRONES DE DISEÑO:
- * Este ejercicio es la base para patrones como:
- * - Composite Pattern (estructuras de árbol)
- * - Facade Pattern (simplificar interfaces complejas)
- * - Decorator Pattern (agregar funcionalidad dinámicamente)
- *
- * MEJORA FUTURA:
- * Más adelante aprenderás sobre:
- * - ArrayList para colecciones dinámicas
- * - Interfaces para definir contratos
- */

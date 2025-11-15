@@ -24,19 +24,17 @@
 
 public class Ejercicio7 {
     public static void main(String[] args) {
-        int[] numeros = {5, 12, 8, 3, 20, 15};
-        int suma = 0;
-        int mayor = 0;
-        System.out.println("Elementos del array:");
-        for (int i = 0; i < numeros.length; i++) {
-            System.out.print(numeros[i] + " ");
-            suma += numeros[i];
-            if (numeros[i] > mayor) {
-                mayor = numeros[i];
-            }
-        }
-        System.out.println("\nSuma total: " + suma);
-        System.out.println("Numero mas grande: " + mayor);
+        // TODO: Crea un array de int con los valores: {5, 12, 8, 3, 20, 15}
+
+
+        // TODO: Imprime todos los elementos del array
+
+
+        // TODO: Calcula e imprime la suma de todos los elementos
+
+
+        // TODO: Encuentra e imprime el número más grande del array
+
 
     }
 }

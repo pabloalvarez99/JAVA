@@ -23,13 +23,18 @@
 
 public class Ejercicio2 {
     public static void main(String[] args) {
-        int numero1 = 15;
-        int numero2 = 4;
-        System.out.println(numero1 + " + " + numero2 + " = " + (numero1 + numero2));
-        System.out.println(numero1 + " - " + numero2 + " = " + (numero1 - numero2));
-        System.out.println(numero1 + " * " + numero2 + " = " + (numero1 * numero2));
-        System.out.println(numero1 + " / " + numero2 + " = " + (numero1 / numero2));
-        System.out.println(numero1 + " % " + numero2 + " = " + (numero1 % numero2));
+        // TODO: Crea dos variables int: numero1 = 15 y numero2 = 4
+
+
+        // TODO: Calcula y muestra la suma: 15 + 4 = 19
+
+        // TODO: Calcula y muestra la resta: 15 - 4 = 11
+
+        // TODO: Calcula y muestra la multiplicación: 15 * 4 = 60
+
+        // TODO: Calcula y muestra la división: 15 / 4 = 3
+
+        // TODO: Calcula y muestra el módulo (residuo): 15 % 4 = 3
 
     }
 }

@@ -27,48 +27,32 @@
  */
 
 public class Ejercicio9 {
-    // TODO: Crea el método imprimirNombres
-    public static void imprimirNombres(String[] nombres) {
-        System.out.println("Lista de nombres:");
-        for (int i = 0; i < nombres.length; i++) {
-            System.out.println((i+1) + ". " + nombres[i]);
-        }
-    }
-
-    // TODO: Crea el método contarLetras
-    public static int contarLetras(String nombre) {
-        return nombre.length();
-    }
+    // TODO: Crea el método imprimirNombres que reciba un array de String e imprima todos los nombres con su número
 
 
-    // TODO: Crea el método nombreMasLargo
-    public static String nombreMasLargo(String[] nombres) {
-        String masLargo = nombres[0];
-        // Completa aquí
-        for (int i = 0; i < nombres.length;i++) {
-            int cantLetras = contarLetras(nombres[i]);
-            if (cantLetras > contarLetras(masLargo)) {
-                masLargo = nombres[i];
-            }
-        }
-        return masLargo;
-    }
+
+
+    // TODO: Crea el método contarLetras que reciba un String y retorne la cantidad de letras
+
+
+
+
+    // TODO: Crea el método nombreMasLargo que reciba el array y retorne el nombre más largo
+
+
+
 
     public static void main(String[] args) {
-        // TODO: Crea el array de nombres
-        String[] nombres = {"Ana", "Luis", "María", "Carlos", "Elena"};
+        // TODO: Crea un array de String con 5 nombres: {"Ana", "Luis", "María", "Carlos", "Elena"}
+
 
         // TODO: Llama a imprimirNombres
-        imprimirNombres(nombres);
 
-        // TODO: Llama a contarLetras para "María"
-        contarLetras("Maria");
 
-        System.out.println("El nombre \"Maria\" tiene " + contarLetras("Maria") + " letras");
+        // TODO: Llama a contarLetras para "María" e imprime el resultado
 
-        // TODO: Llama a nombreMasLargo
 
-        System.out.println("El nombre mas largo es: " + nombreMasLargo(nombres) + " (" + nombreMasLargo(nombres).length() + " letras)");
+        // TODO: Llama a nombreMasLargo e imprime el nombre más largo con su cantidad de letras
 
 
     }

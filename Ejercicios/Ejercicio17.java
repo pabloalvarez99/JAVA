@@ -94,85 +94,9 @@
  * - Concepto de "cabeza" o "primero" de la lista
  */
 
-// TODO: Crea la clase NodoSimple
-class NodoSimple {
-    // TODO: Atributos privados (dato y siguiente)
-
-
-    // TODO: Constructor
-
-
-    // TODO: Getters y setters
-
-}
-
-// TODO: Crea la clase CadenaDeNodos
-class CadenaDeNodos {
-    // TODO: Atributo privado (primero)
-
-
-    // TODO: Constructor
-
-
-    // TODO: Método agregarAlInicio
-
-
-    // TODO: Método agregarAlFinal
-
-
-    // TODO: Método imprimir
-
-
-    // TODO: Método contar
-
-
-    // TODO: Método buscar
-
-
-    // TODO: Método obtener (por índice)
-
-
-    // TODO: Método eliminarPrimero
-
-
-    // TODO: Método imprimirConFlechas
-
-}
-
 public class Ejercicio17 {
-    public static void main(String[] args) {
-        // TODO: Crea una cadena de nodos
-
-
-        // TODO: Agrega varios nodos al inicio
-        System.out.println("====== Cadena de Nodos ======\n");
-
-
-
-
-        // TODO: Imprime la cadena
-
-
-        // TODO: Agrega nodos al final
-
-
-
-        // TODO: Imprime la cadena y visualización
-
-
-        // TODO: Cuenta los nodos
-
-
-        // TODO: Busca valores
-
-
-        // TODO: Obtén valores por índice
-
-
-        // TODO: Elimina el primero y muestra
-
-
-    }
+    // TODO: Lee las instrucciones arriba y escribe TODO el código
+    // TODO: Implementa todas las clases, métodos y lógica necesaria
 }
 
 /*

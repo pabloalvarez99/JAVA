@@ -22,11 +22,17 @@
 
 public class Ejercicio1 {
     public static void main(String[] args) {
-        String nombre = "Pablo";
-        int edad = 20;
-        double altura = 1.75;
-        System.out.println("Hola, me llamo " + nombre);
-        System.out.println("Tengo " + edad + " años");
-        System.out.println("Mido " + altura + " metros");
+        // TODO: Crea una variable llamada "nombre" de tipo String con tu nombre
+
+        // TODO: Crea una variable llamada "edad" de tipo int con tu edad
+
+        // TODO: Crea una variable llamada "altura" de tipo double con tu altura en metros
+
+        // TODO: Imprime "Hola, me llamo [nombre]"
+
+        // TODO: Imprime "Tengo [edad] años"
+
+        // TODO: Imprime "Mido [altura] metros"
+
     }
 }

@@ -96,108 +96,137 @@
  * - Operaciones agregadas (sum, max, min)
  * - Transformaciones sobre colecciones (aplicar descuento)
  */
-
-// TODO: Crea la clase Producto
-class Producto {
-    // TODO: Atributos privados
-
-
-    // TODO: Constructor
-
-
-    // TODO: Getters
-
-
-    // TODO: Setters para stock y precio
-
-
-    // TODO: Método aplicarDescuento
-
-
-    // TODO: Método estaDisponible
-
-
-    // TODO: Método mostrarInfo
-
-}
-
-// TODO: Crea la clase Inventario
-class Inventario {
-    // TODO: Atributos privados
-
-
-    // TODO: Constructor
-
-
-    // TODO: Método agregarProducto
-
-
-    // TODO: Método buscarPorNombre
-
-
-    // TODO: Método buscarPorCategoria (retorna array)
-
-
-    // TODO: Método productoMasCaro
-
-
-    // TODO: Método productoMasBarato
-
-
-    // TODO: Método calcularValorInventario
-
-
-    // TODO: Método productosConBajoStock
-
-
-    // TODO: Método aplicarDescuentoCategoria
-
-
-    // TODO: Método ordenarPorPrecio (Bubble Sort)
-
-
-    // TODO: Método mostrarInventario
-
-}
-
-public class Ejercicio16 {
-    public static void main(String[] args) {
-        // TODO: Crea inventario
-
-
-        // TODO: Agrega 8 productos
-        // Ejemplo: inv.agregarProducto(new Producto("Laptop HP", 899.99, 5, "Electrónica"));
-
-
-
-
-
-
-
-
-
-        // TODO: Muestra inventario inicial
-
-
-        // TODO: Realiza búsquedas
-
-
-        // TODO: Muestra análisis de precios
-
-
-        // TODO: Calcula valor total
-
-
-        // TODO: Productos con bajo stock
-
-
-        // TODO: Aplica descuentos
-
-
-        // TODO: Ordena y muestra
-
-
+import java.util.ArrayList;
+class Producto{
+    private String nombre;
+    private double precio;
+    private int stock;
+    private String categoria;
+    public Producto(String nombre, double precio, int stock, String categoria) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.categoria = categoria;
     }
+    public String getNombre() {
+        return nombre;
+    }
+    public double getPrecio() {
+        return precio;
+    }
+    public int getStock() {
+        return stock;
+    }
+    public String getCategoria() {
+        return categoria;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+    public double aplicarDescuento(double porcentaje) {
+        return precio*(porcentaje/100);
+    }
+    public boolean estaDisponible() {
+        if (stock > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void mostrarInfo() {
+        System.out.println(nombre + " Laptop HP - $" + precio + " Strock:" + stock + " - Categoria: " + categoria);
+    }
+}
+class Inventario {
+    ArrayList<Producto> productos = new ArrayList<>();
+    int cantidadProductos = 0;
+    public Inventario() {}
+    public ArrayList<Producto> agregarProducto(Producto p) {
+        productos.add(p);
+        return productos;
+    }
+    public Producto buscarPorNombre(String nombre) {
+        System.out.println("====== Búsquedas ======");
+        System.out.println("Buscando '" + nombre + "': ");
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getNombre() == nombre) {
+                System.out.print("Encontrado - $" + productos.get(i).getPrecio() + " (" + productos.get(i).getStock() + " unidades)");
+                Producto x = productos.get(i);
+                return x;
+            }
+        }
+        return null;
+    }
+    public ArrayList<Producto> buscarPorCategoria(String cat) {
+        ArrayList<Producto> x = new ArrayList<>();
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getCategoria() == cat) {
+                x.add(productos.get(i));
+            }
+        }
+        return x;
+    }
+    public Producto productoMasCaro() {
+        double x = 0;
+        Producto p = null;
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getPrecio() > x) {
+                x = productos.get(i).getPrecio();
+                p = productos.get(i);
+            }
+        }
+        return p;
+    }
+    public Producto productoMasBarato() {
+        double x = 9999999;
+        Producto p = null;
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getPrecio() < x) {
+                x = productos.get(i).getPrecio();
+                p = productos.get(i);
+            }
+        }
+        return p;
+    }
+    public double calcularValorInventario() {
+        double x = 0;
+        for (int i = 0; i < productos.size(); i++) {;
+            x += productos.get(i).getPrecio() * productos.get(i).getStock();
+        }
+        return (x/productos.size());
+    }
+    public ArrayList<Producto> productosConBajoStock(int minimo) {
+        ArrayList<Producto> p = new ArrayList<>();
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getStock() >= minimo) {
+                p.add(productos.get(i));
+            }
+        }
+        return p;
+    }
+    public ArrayList<Producto> aplicarDescuentoCategoria(String categoria, double porcentaje) {
+        ArrayList<Producto> p = new ArrayList<>();
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getCategoria().equals(categoria)) {
+                productos.get(i).setPrecio(productos.get(i).getPrecio()-(productos.get(i).getPrecio()*(porcentaje/100)));
+                p.add(productos.get(i));
+            }
+        }
+        return p;
+    }
+    public ArrayList<Producto> ordenarPorPrecio() {
+        ArrayList<Producto> aux = productos;
+        for(int i = 0; i < productos.size(); i++) {
+            
+        }
+    }
+}
+public class Ejercicio16 {
+    // TODO: Lee las instrucciones arriba y escribe TODO el código
+    // TODO: Implementa todas las clases, métodos y lógica necesaria
 }
 
 /*
@@ -250,7 +279,7 @@ public class Ejercicio16 {
  *    Complejidad: O(n) - lento para arrays grandes
  *    Ventaja: funciona en arrays desordenados
  *
- * 2. BÚSQUEDA BINARIA (más adelante):
+ * 2. BÚSQUEDA BINARIA (más adelante): 
  *    Requiere array ordenado.
  *    Complejidad: O(log n) - mucho más rápido
  *    Desventaja: el array DEBE estar ordenado

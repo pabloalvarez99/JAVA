@@ -26,21 +26,20 @@
 
 public class Ejercicio5 {
     public static void main(String[] args) {
-        // TODO: Loop 1 - Números del 1 al 10
+        // TODO: Loop 1 - Usa un for para imprimir los números del 1 al 10
         System.out.println("Números del 1 al 10:");
-        for (int i = 1; i < 11; i++) {
-            System.out.print(i+" ");
-        }
-        System.out.println("\nNúmeros pares del 2 al 20:");
-        for (int i = 2; i < 21; i+=2) {
-            System.out.print(i + " ");
-        }
 
-        // TODO: Loop 3 - Cuenta regresiva del 5 al 1
+
+
+        // TODO: Loop 2 - Usa un for para imprimir los números pares del 2 al 20
+        System.out.println("\nNúmeros pares del 2 al 20:");
+
+
+
+        // TODO: Loop 3 - Usa un for para la cuenta regresiva del 5 al 1
         System.out.println("\nCuenta regresiva:");
-        for (int i = 5; i > 0; i--) {
-            System.out.print(i + " ");
-        }
-        System.out.print("¡Despegue!");
+
+
+
     }
 }

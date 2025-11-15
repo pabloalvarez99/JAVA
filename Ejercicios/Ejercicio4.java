@@ -26,16 +26,17 @@
 
 public class Ejercicio4 {
     public static void main(String[] args) {
-        // TODO: Declara la variable edad
-        int edad = 25;  // Cambia este valor para probar
+        // TODO: Declara la variable edad con un valor numérico
 
-        // TODO: Escribe las condiciones if-else if-else
-        if (edad < 18) {
-            System.out.println("Eres menor de edad");
-        } else if (edad >= 18 && edad <= 65) {
-            System.out.println("Eres adulto");
-        } else {
-            System.out.println("Eres adulto mayor");
-        }
+
+        // TODO: Si la edad es menor a 18, imprime "Eres menor de edad"
+
+
+        // TODO: Si la edad es entre 18 y 65, imprime "Eres adulto"
+
+
+        // TODO: Si la edad es mayor a 65, imprime "Eres adulto mayor"
+
+
     }
 }

@@ -26,16 +26,19 @@
 
 public class Ejercicio3 {
     public static void main(String[] args) {
-        int a = 10;
-        int b = 20;
-        int temp = a;
-        System.out.println("Antes del intercambio:");
-        System.out.println("a = " + a);
-        System.out.println("b = " + b);
-        a = b;
-        b = temp;
-        System.out.println("\nDespués del intercambio:");
-        System.out.println("a = " + a);
-        System.out.println("b = " + b);
+        // TODO: Crea dos variables: a = 10 y b = 20
+
+
+        // TODO: Muestra los valores antes del intercambio
+
+
+
+        // TODO: Intercambia los valores (pista: necesitarás una variable temporal)
+
+
+
+        // TODO: Muestra los valores después del intercambio
+
+
     }
 }

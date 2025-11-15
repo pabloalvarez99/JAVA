@@ -16,7 +16,8 @@
       "Bash(java Ejercicio3:*)",
       "Bash(java:*)",
       "Bash(nul)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

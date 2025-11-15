@@ -22,39 +22,31 @@
  */
 
 public class Ejercicio8 {
-    // TODO: Crea el método sumar
-    public static int sumar(int a, int b) {
-        return a + b;
-    }
-    public static boolean esPar(int a) {
-        if (a % 2 == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public static void saludar(String nombre) {
-        System.out.println("Hola " + nombre + ", bienvenido!");
-    }
+    // TODO: Crea un método llamado "sumar" que reciba dos int y retorne la suma
 
 
-    // TODO: Crea el método saludar
+
+
+    // TODO: Crea un método llamado "esPar" que reciba un int y retorne true si es par
+
+
+
+
+    // TODO: Crea un método llamado "saludar" que reciba un String (nombre) y no retorne nada (void)
+
 
 
 
     public static void main(String[] args) {
-        // TODO: Llama al método sumar
-        int resultado = sumar(15, 8);
-        System.out.println("La suma de 15 y 8 es: " + resultado);
-
-        // TODO: Llama al método esPar
-        int num1 = 10;
-        int num2 = 7;
-        System.out.println("")
+        // TODO: Llama al método sumar con 15 y 8, guarda el resultado e imprímelo
 
 
 
-        // TODO: Llama al método saludar
+        // TODO: Llama al método esPar con 10 y con 7, imprime los resultados
+
+
+
+        // TODO: Llama al método saludar con tu nombre
 
 
     }

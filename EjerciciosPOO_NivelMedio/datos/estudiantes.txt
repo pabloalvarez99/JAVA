@@ -1,0 +1,11 @@
+5
+Juan,Perez,20567890-1,Ingenieria
+85,90,78,92
+Maria,Lopez,21234567-8,Medicina
+95,88,91,87
+Carlos,Ruiz,19876543-2,Derecho
+70,75,72,68
+Ana,Martinez,20111222-3,Ingenieria
+88,92,85,90
+Luis,Gomez,21333444-5,Medicina
+65,70,68,72

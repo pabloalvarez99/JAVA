@@ -29,14 +29,15 @@
 
 public class Ejercicio6 {
     public static void main(String[] args) {
-        // TODO: Declara la variable numero
-        int numero = 7;  // Cambia este valor para otras tablas
+        // TODO: Declara la variable numero con el valor 7
 
-        System.out.println("Tabla de multiplicar del " + numero + ":");
 
-        // TODO: Escribe el loop for para la tabla de multiplicar
-        for (int i = 1; i <= 10; i++) {
-            System.out.println(numero + " x " + i + " = " + (numero * i));
-        }
+        // TODO: Imprime "Tabla de multiplicar del 7:"
+
+
+        // TODO: Usa un loop for para imprimir la tabla de multiplicar del 7 (desde 7 x 1 hasta 7 x 10)
+
+
+
     }
 }
