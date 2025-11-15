@@ -17,7 +17,11 @@
       "Bash(java:*)",
       "Bash(nul)",
       "Bash(git pull:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(powershell -Command \"Get-Content -Path ''Ejercicio07_FlotaTaxis.md'' -Tail 30\")",
+      "Bash(powershell -Command \"Get-Content -Path ''Ejercicio08_RentaCarSimplificado.md'' -Tail 10\")",
+      "Bash(powershell -Command \"Get-Content -Path ''Ejercicio09_RuteoGUI.md'' -Tail 10\")",
+      "Bash(powershell -Command \"Get-Content -Path ''Ejercicio10_RentaCarCompleto.md'' -Tail 10\")"
     ],
     "deny": [],
     "ask": []
