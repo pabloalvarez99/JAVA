@@ -1,0 +1,16 @@
+15
+A1-B2-C3-D4-E5-01,Brachiosaurus,65000,25.5,35,Norte,20.5
+A1-B2-C3-D4-E5-02,Tiranosaurio,7000,5.5,40,Sur,5
+A1-B2-C3-D4-E5-03,Triceratops,9000,3.0,25,Norte,Helechos
+A1-B2-C3-D4-E5-04,Velociraptor,25,1.8,65,Sur,45000
+A1-B2-C3-D4-E5-05,Brachiosaurus,70000,27.0,32,Sur,22.0
+A1-B2-C3-D4-E5-06,Tiranosaurio,6800,5.8,38,Norte,4
+A1-B2-C3-D4-E5-07,Triceratops,8500,2.9,28,Sur,Cicadaceas
+A1-B2-C3-D4-E5-08,Velociraptor,30,1.9,62,Norte,48000
+A1-B2-C3-D4-E5-09,Brachiosaurus,68000,26.2,34,Norte,21.3
+A1-B2-C3-D4-E5-10,Tiranosaurio,7200,5.6,42,Sur,6
+A1-B2-C3-D4-E5-11,Triceratops,9200,3.1,26,Norte,Helechos
+A1-B2-C3-D4-E5-12,Velociraptor,28,1.7,67,Sur,42000
+A1-B2-C3-D4-E5-13,Brachiosaurus,66500,25.8,33,Sur,20.8
+A1-B2-C3-D4-E5-14,Tiranosaurio,7100,5.7,41,Norte,5
+A1-B2-C3-D4-E5-15,Velociraptor,26,1.85,64,Norte,46000

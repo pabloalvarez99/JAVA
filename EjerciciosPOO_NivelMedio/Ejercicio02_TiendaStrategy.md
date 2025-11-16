@@ -486,4 +486,92 @@ public double calcularTotal() {
 
 ---
 
+## ✅ CHECKLIST DE DOMINIO
+
+Puedes considerar que dominas este ejercicio cuando:
+
+### Comprensión del Patrón:
+- [ ] Puedes explicar qué problema resuelve Strategy
+- [ ] Entiendes la diferencia entre usar if-else vs Strategy
+- [ ] Sabes cuándo aplicar este patrón en problemas nuevos
+- [ ] Puedes dibujar el diagrama UML del patrón
+
+### Implementación:
+- [ ] Creas la interface `EstrategiaDescuento` correctamente
+- [ ] Implementas al menos 3 estrategias concretas
+- [ ] Usas composición (CarritoCompras TIENE una estrategia)
+- [ ] Cambias estrategias dinámicamente con `setEstrategia()`
+
+### Buenas Prácticas:
+- [ ] Cada estrategia está en su propia clase
+- [ ] Implementas TODOS los métodos de la interface
+- [ ] Usas nombres descriptivos (no Estrategia1, Estrategia2)
+- [ ] Validas parámetros (ej: porcentaje entre 0-100)
+
+### Código Funcional:
+- [ ] Tu código compila sin errores
+- [ ] Produces la salida esperada
+- [ ] Puedes agregar una cuarta estrategia en < 5 minutos
+- [ ] Implementas la solución completa en < 50 minutos
+
+### Conexión con Conceptos:
+- [ ] Entiendes cómo Strategy usa polimorfismo
+- [ ] Sabes explicar por qué sigue Open/Closed Principle
+- [ ] Reconoces Strategy cuando lo ves en código existente
+
+---
+
+## 🔗 RELACIÓN CON EL EXAMEN
+
+**Strategy es OBLIGATORIO en el examen** (Problema 2 - 70% del puntaje).
+
+### En este ejercicio:
+```java
+interface EstrategiaDescuento {
+    double calcularPrecioFinal(double precio);
+}
+
+class DescuentoPorcentual implements EstrategiaDescuento { ... }
+class DescuentoFijo implements EstrategiaDescuento { ... }
+```
+
+### En el examen:
+```java
+interface ModoManejoStrategy {
+    double calcularEficiencia(double eficienciaNominal);
+}
+
+class ModoEco implements ModoManejoStrategy { ... }
+class ModoNormal implements ModoManejoStrategy { ... }
+class ModoSport implements ModoManejoStrategy { ... }
+```
+
+**¡Es EXACTAMENTE la misma estructura!**
+
+### Similitudes con el examen:
+
+| Este Ejercicio | Examen |
+|----------------|--------|
+| `EstrategiaDescuento` | `ModoManejoStrategy` |
+| `DescuentoPorcentual` | `ModoEco` |
+| `DescuentoFijo` | `ModoNormal` |
+| `SinDescuento` | `ModoSport` |
+| `CarritoCompras` tiene estrategia | `Vehiculo` usa estrategia |
+| `calcularPrecioFinal()` | `calcularEficiencia()` |
+
+### Complejidad añadida en el examen:
+- ✅ Combina Strategy + **Visitor** + **Singleton/Factory**
+- ✅ Lectura de archivo (fleet.txt)
+- ✅ Herencia de vehículos (Auto/SUV/Camioneta)
+- ✅ HashMap para evitar ciclos anidados
+
+**Si dominas este ejercicio:**
+- ✅ Entiendes 33% del examen (Strategy)
+- ✅ Listo para aprender Visitor y Singleton
+- ✅ Base sólida para el Ejercicio 08 y 10
+
+**Próximo paso:** Ejercicio 03 (Singleton), luego Ejercicio 06 (Visitor), luego combinar todo en Ejercicio 08.
+
+---
+
 **Este ejercicio es fundamental para entender el patron Strategy, que es OBLIGATORIO en el examen.**

@@ -526,3 +526,237 @@ public class SistemaBancario {
 ---
 
 **El patron Singleton es uno de los patrones que debes elegir en el examen (Singleton o Factory).**
+
+---
+
+## 🎓 VENTAJAS DE ESTA ARQUITECTURA
+
+### Sin Singleton (enfoque ingenuo):
+
+```java
+// CODIGO MALO: Multiples instancias del sistema bancario
+public class SistemaBancario {
+    private ArrayList<CuentaBancaria> cuentas;
+
+    // Constructor PUBLICO - cualquiera puede crear instancias
+    public SistemaBancario() {
+        cuentas = new ArrayList<>();
+    }
+}
+
+// En Main.java
+public class Main {
+    public static void main(String[] args) {
+        // PROBLEMA 1: Multiples sistemas independientes
+        SistemaBancario sistema1 = new SistemaBancario();
+        sistema1.crearCuenta("CTA001", "Juan", 1000);
+
+        SistemaBancario sistema2 = new SistemaBancario();
+        sistema2.crearCuenta("CTA002", "Maria", 2000);
+
+        // PROBLEMA 2: No puedes transferir entre CTA001 y CTA002
+        // porque estan en sistemas diferentes!
+        sistema1.transferir("CTA001", "CTA002", 500);  // ERROR!
+
+        // PROBLEMA 3: Datos fragmentados
+        System.out.println("Total cuentas sistema1: " + sistema1.getTotalCuentas());  // 1
+        System.out.println("Total cuentas sistema2: " + sistema2.getTotalCuentas());  // 1
+        // ¿Cual es el total REAL? ¿2? ¿Pero estan en sistemas diferentes!
+
+        // PROBLEMA 4: Cuentas duplicadas posibles
+        SistemaBancario sistema3 = new SistemaBancario();
+        sistema3.crearCuenta("CTA001", "Pedro", 3000);  // Mismo numero que en sistema1!
+    }
+}
+```
+
+**Problemas criticos:**
+- Datos fragmentados en multiples instancias
+- Imposible realizar operaciones entre sistemas
+- Numeros de cuenta pueden duplicarse
+- No hay control centralizado
+- Desperdicio de memoria (multiples listas)
+- Viola el principio de responsabilidad unica
+
+### Con Singleton (nuestra solucion):
+
+```java
+public class SistemaBancario {
+    private static SistemaBancario instance = null;
+    private ArrayList<CuentaBancaria> cuentas;
+
+    // Constructor PRIVADO - nadie puede crear instancias
+    private SistemaBancario() {
+        cuentas = new ArrayList<>();
+    }
+
+    // Unico punto de acceso
+    public static SistemaBancario getInstance() {
+        if (instance == null) {
+            instance = new SistemaBancario();
+        }
+        return instance;
+    }
+}
+
+// En Main.java
+public class Main {
+    public static void main(String[] args) {
+        // VENTAJA 1: Siempre obtienes la MISMA instancia
+        SistemaBancario sistema1 = SistemaBancario.getInstance();
+        sistema1.crearCuenta("CTA001", "Juan", 1000);
+
+        SistemaBancario sistema2 = SistemaBancario.getInstance();
+        sistema2.crearCuenta("CTA002", "Maria", 2000);
+
+        // VENTAJA 2: Las transferencias funcionan sin problema
+        sistema1.transferir("CTA001", "CTA002", 500);  // FUNCIONA!
+
+        // VENTAJA 3: Datos centralizados
+        System.out.println("Total cuentas: " + sistema1.getTotalCuentas());  // 2
+        System.out.println("Son el mismo: " + (sistema1 == sistema2));  // true
+
+        // VENTAJA 4: Imposible duplicar numeros de cuenta
+        sistema2.crearCuenta("CTA001", "Pedro", 3000);  // ERROR detectado!
+    }
+}
+```
+
+**Ventajas:**
+- UNA sola instancia garantizada
+- Datos centralizados en un solo lugar
+- Control global sobre todas las cuentas
+- Validaciones efectivas (no duplicados)
+- Ahorro de memoria
+- Acceso global consistente
+
+---
+
+## ✅ CHECKLIST DE DOMINIO
+
+Puedes considerar que dominas este ejercicio cuando:
+
+### Conceptos Singleton:
+- [ ] Entiendes por que se necesita UNA sola instancia del sistema bancario
+- [ ] Sabes explicar que es "lazy initialization" vs "eager initialization"
+- [ ] Puedes identificar casos de uso apropiados para Singleton
+- [ ] Entiendes las tres partes: constructor privado, instancia estatica, getInstance()
+
+### Implementacion:
+- [ ] Implementas el constructor PRIVADO correctamente
+- [ ] Creas la instancia estatica privada
+- [ ] Implementas getInstance() con validacion de null
+- [ ] Puedes verificar que dos variables apuntan a la misma instancia (con ==)
+
+### Logica Bancaria:
+- [ ] Validas que no existan cuentas duplicadas antes de crear
+- [ ] Implementas transferencias con validacion de fondos
+- [ ] Manejas correctamente depositos y retiros
+- [ ] Calculas el saldo total del banco
+- [ ] Buscas cuentas por numero eficientemente
+
+### Buenas Practicas:
+- [ ] Usas mensajes de error claros y descriptivos
+- [ ] Retornas boolean en operaciones que pueden fallar
+- [ ] Validas fondos suficientes antes de retirar
+- [ ] Usas String.format() para formatear salida con 2 decimales
+- [ ] Tu codigo compila sin errores y warnings
+
+### Tiempo:
+- [ ] Implementas la solucion completa en < 40 minutos
+- [ ] Puedes explicar el flujo de getInstance() paso a paso
+- [ ] Identificas inmediatamente si un Singleton esta mal implementado
+
+---
+
+## 🔗 RELACION CON EL EXAMEN
+
+Este patron es CRITICO para el examen - es una de las dos opciones principales que debes elegir.
+
+### Comparacion: Este Ejercicio vs Examen
+
+| Aspecto | Ejercicio 03 | Examen Real |
+|---------|--------------|-------------|
+| **Patron usado** | Singleton | Singleton O Factory (tu eliges) |
+| | Sistema Bancario | Sistema de Vehiculos/Envios |
+| **Estructura** | Una clase Singleton | Singleton + Visitor + Strategy |
+| **Complejidad** | Basica (solo Singleton) | Media (3 patrones combinados) |
+| **Tiempo estimado** | 40 minutos | 20-25 minutos (parte Singleton) |
+| **Validaciones** | Cuentas duplicadas, fondos | Similar + validaciones de archivo |
+| **Lectura archivo** | No | Si (lectura de datos.txt) |
+| **Porcentaje del examen** | ~25% | Singleton es ~30% del total |
+
+### Como se usa Singleton en el examen:
+
+**En el examen (Ejercicio 10 - RentaCarCompleto):**
+```java
+public class SistemaRentaCar {
+    private static SistemaRentaCar instance;
+    private ArrayList<Vehiculo> vehiculos;
+
+    private SistemaRentaCar() {
+        vehiculos = new ArrayList<>();
+    }
+
+    public static SistemaRentaCar getInstance() {
+        if (instance == null) {
+            instance = new SistemaRentaCar();
+        }
+        return instance;
+    }
+
+    // Combina con Visitor y Strategy
+    public void cargarVehiculos(String archivo) { ... }
+    public void calcularCostos(VisitorCostos visitor) { ... }
+}
+```
+
+**Diferencias clave con este ejercicio:**
+1. **Mas complejo:** El Singleton del examen tambien gestiona:
+   - Lectura de archivos
+   - Aplicacion de Visitors
+   - Cambio de Strategies
+
+2. **Mas integracion:** No es solo Singleton aislado, sino:
+   - Singleton como contenedor
+   - Visitor para calculos
+   - Strategy para tarifas
+
+### Que cubre este ejercicio:
+
+- ✅ **30% del examen:** Patron Singleton completo
+- ✅ **Validaciones:** Evitar duplicados (similar a validar patentes)
+- ✅ **Busqueda:** Encontrar elementos por ID
+- ✅ **Operaciones:** Transferencias (similar a calculos en examen)
+- ❌ **No cubre:** Visitor, Strategy, File I/O (ver Ejercicios 06, 07)
+
+### Proximos pasos sugeridos:
+
+1. **Si elegiste Singleton para el examen:**
+   - ✅ Ejercicio 03 (este) - Dominar Singleton puro
+   - ➡️ Ejercicio 05 - Agregar lectura de archivos
+   - ➡️ Ejercicio 06 - Aprender Visitor
+   - ➡️ Ejercicio 07 - Combinar Singleton + Visitor + Strategy
+   - ➡️ Ejercicio 10 - Simulacro completo de examen
+
+2. **Si elegiste Factory para el examen:**
+   - Puedes saltar al Ejercicio 04 (Factory Pattern)
+   - Pero IGUAL debes entender Singleton (se usa en Ejercicio 10)
+
+### Errores comunes en el examen relacionados con Singleton:
+
+1. **Constructor publico** → 0 puntos en patron Singleton
+2. **No validar null en getInstance()** → NullPointerException
+3. **Crear multiples instancias** → Pierde sentido el patron
+4. **No usar instancia estatica** → No funciona como Singleton
+
+### Tips para el examen:
+
+- ⏱️ **Tiempo:** Dedica MAX 15 minutos al Singleton
+- 📝 **Plantilla:** Memoriza la estructura basica (3 partes)
+- ✅ **Verificacion:** Siempre prueba con `sistema1 == sistema2`
+- 🔍 **Prioridad:** El Singleton es FACIL - no pierdas puntos aqui
+
+---
+
+**Si dominas este ejercicio, tienes el 30% del examen garantizado. El Singleton es tu base solida - construye el resto sobre ella.**

@@ -21,7 +21,10 @@
       "Bash(powershell -Command \"Get-Content -Path ''Ejercicio07_FlotaTaxis.md'' -Tail 30\")",
       "Bash(powershell -Command \"Get-Content -Path ''Ejercicio08_RentaCarSimplificado.md'' -Tail 10\")",
       "Bash(powershell -Command \"Get-Content -Path ''Ejercicio09_RuteoGUI.md'' -Tail 10\")",
-      "Bash(powershell -Command \"Get-Content -Path ''Ejercicio10_RentaCarCompleto.md'' -Tail 10\")"
+      "Bash(powershell -Command \"Get-Content -Path ''Ejercicio10_RentaCarCompleto.md'' -Tail 10\")",
+      "Bash(powershell -Command \"Get-Content ''C:\\Users\\Pablo\\Documents\\Build\\1\\EjerciciosPOO_NivelMedio\\Ejercicio08_RentaCarSimplificado.md'' | Measure-Object -Line\")",
+      "Bash(powershell -Command \"Get-Content ''C:\\Users\\Pablo\\Documents\\Build\\1\\EjerciciosPOO_NivelMedio\\Ejercicio10_RentaCarCompleto.md'' | Measure-Object -Line\")",
+      "Bash(powershell -Command:*)"
     ],
     "deny": [],
     "ask": []

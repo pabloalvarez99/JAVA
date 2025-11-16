@@ -498,3 +498,377 @@ public class Main {
 ---
 
 **Dominar la combinacion de patrones es esencial para el examen.**
+
+---
+
+## 🎓 VENTAJAS DE ESTA ARQUITECTURA
+
+### Sin patrones de diseño (enfoque ingenuo):
+
+```java
+// CODIGO MALO: Todo mezclado, sin patrones
+public class Taxi {
+    private String id;
+    private String tipo;  // "estandar", "hibrido", "electrico"
+    private double consumo;
+    private ArrayList<Double> viajes;
+
+    // PROBLEMA 1: If-else gigante para cada calculo
+    public double calcularGanancias(String tipoCobro) {
+        double total = 0;
+        for (double km : viajes) {
+            // If anidados horribles
+            if (tipoCobro.equals("diurno")) {
+                if (tipo.equals("estandar")) {
+                    total += km * 0.80;
+                } else if (tipo.equals("hibrido")) {
+                    total += km * 0.90;
+                } else if (tipo.equals("electrico")) {
+                    total += km * 1.00;
+                }
+            } else if (tipoCobro.equals("nocturno")) {
+                if (tipo.equals("estandar")) {
+                    total += km * 1.20;
+                } else if (tipo.equals("hibrido")) {
+                    total += km * 1.35;
+                } else if (tipo.equals("electrico")) {
+                    total += km * 1.50;
+                }
+            }
+        }
+        return total;
+    }
+
+    // PROBLEMA 2: Mas if-else para costos
+    public double calcularCostos() {
+        double totalKm = 0;
+        for (double km : viajes) {
+            totalKm += km;
+        }
+
+        if (tipo.equals("estandar")) {
+            return (totalKm / consumo) * 1.50;
+        } else if (tipo.equals("hibrido")) {
+            return (totalKm / (consumo * 1.2)) * 1.50;
+        } else if (tipo.equals("electrico")) {
+            return (totalKm / consumo) * 0.12;
+        }
+        return 0;
+    }
+
+    // PROBLEMA 3: Datos hardcodeados
+    // No hay lectura de archivo - todo en el codigo
+}
+
+// En Main.java - horror absoluto
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Taxi> taxis = new ArrayList<>();
+
+        // PROBLEMA 4: Crear taxis manualmente
+        Taxi t1 = new Taxi("T001", "hibrido", 15.5);
+        t1.agregarViaje(25);
+        t1.agregarViaje(30);
+        // ... agregar cada viaje manualmente
+
+        // PROBLEMA 5: Calcular todo manualmente
+        double gananciasDiurnas = 0;
+        double gananciasNocturnas = 0;
+        double costos = 0;
+
+        for (Taxi t : taxis) {
+            gananciasDiurnas += t.calcularGanancias("diurno");
+            gananciasNocturnas += t.calcularGanancias("nocturno");
+            costos += t.calcularCostos();
+        }
+
+        // PROBLEMA 6: Para agregar nueva tarifa, modificas TODAS las clases
+        // PROBLEMA 7: Para agregar nuevo calculo, modificas TODAS las clases
+    }
+}
+```
+
+**Problemas criticos:**
+- If-else masivo (codigo espagueti)
+- Logica dispersa y duplicada
+- Datos hardcodeados (no escalable)
+- Viola Open/Closed Principle
+- Imposible agregar tarifas sin modificar codigo
+- Imposible agregar calculos sin modificar codigo
+- No reutilizable ni testeable
+
+### Con 3 patrones combinados (nuestra solucion):
+
+```java
+// CODIGO BUENO: Herencia + Strategy + Visitor + File I/O
+
+// 1. HERENCIA: Jerarquia clara
+public abstract class Taxi {
+    protected String id;
+    protected double consumo;
+    protected ArrayList<Double> viajes;
+    protected TarifaStrategy tarifa;  // STRATEGY
+
+    public abstract double accept(VisitorCalculos visitor);  // VISITOR
+}
+
+public class TaxiHibrido extends Taxi {
+    @Override
+    public double accept(VisitorCalculos visitor) {
+        return visitor.visitarHibrido(this);
+    }
+
+    @Override
+    public double calcularCostoCombustible() {
+        return (getTotalKilometros() / (consumo * 1.2)) * 1.50;
+    }
+}
+
+// 2. STRATEGY: Tarifas intercambiables
+public interface TarifaStrategy {
+    double calcularTarifa(Taxi taxi);
+}
+
+public class TarifaDiurna implements TarifaStrategy {
+    @Override
+    public double calcularTarifa(Taxi taxi) {
+        double km = taxi.getTotalKilometros();
+        if (taxi instanceof TaxiHibrido) {
+            return km * 0.90;
+        }
+        // ... otros tipos
+    }
+}
+
+// 3. VISITOR: Calculos separados
+public interface VisitorCalculos {
+    double visitarEstandar(TaxiEstandar taxi);
+    double visitarHibrido(TaxiHibrido taxi);
+    double visitarElectrico(TaxiElectrico taxi);
+}
+
+public class CalculadorGanancias implements VisitorCalculos {
+    @Override
+    public double visitarHibrido(TaxiHibrido taxi) {
+        return taxi.getTarifa().calcularTarifa(taxi);  // Usa Strategy!
+    }
+}
+
+// 4. FILE I/O: Datos externos
+public class SistemaFlotaTaxis {
+    public void cargarFlota(String archivo) {
+        try (Scanner sc = new Scanner(new File(archivo))) {
+            int n = Integer.parseInt(sc.nextLine().trim());
+            // ... leer y crear taxis
+        }
+    }
+}
+
+// En Main.java - codigo elegante
+public class Main {
+    public static void main(String[] args) {
+        SistemaFlotaTaxis sistema = new SistemaFlotaTaxis();
+
+        // FILE I/O: Una linea carga todo
+        sistema.cargarFlota("flota.txt");
+
+        // STRATEGY: Cambiar tarifa es trivial
+        sistema.establecerTarifa(new TarifaDiurna());
+
+        // VISITOR: Aplicar calculos es simple
+        sistema.mostrarReporte(new CalculadorGanancias(), "Ganancias Diurnas");
+
+        // Cambiar estrategia - una sola linea
+        sistema.establecerTarifa(new TarifaNocturna());
+        sistema.mostrarReporte(new CalculadorGanancias(), "Ganancias Nocturnas");
+
+        // Otro visitor - misma simplicidad
+        sistema.mostrarReporte(new CalculadorCostos(), "Costos");
+    }
+}
+```
+
+**Ventajas:**
+- Separacion de responsabilidades perfecta
+- Open/Closed: agregar tarifas/calculos sin modificar existentes
+- Datos externos (escalable a miles de taxis)
+- Codigo limpio y mantenible
+- Altamente testeable
+- Reutilizable
+- Profesional (asi funcionan sistemas reales)
+
+---
+
+## ✅ CHECKLIST DE DOMINIO
+
+Puedes considerar que dominas este ejercicio cuando:
+
+### Integracion de Patrones:
+- [ ] Entiendes COMO los 3 patrones trabajan juntos
+- [ ] Identificas que hace cada patron (Herencia, Strategy, Visitor)
+- [ ] Sabes CUANDO usar cada patron
+- [ ] Puedes explicar el flujo completo del sistema
+
+### Herencia:
+- [ ] Creas jerarquia Taxi → TaxiEstandar/Hibrido/Electrico
+- [ ] Usas clase abstracta base correctamente
+- [ ] Cada subclase implementa calcularCostoCombustible()
+- [ ] Cada subclase implementa accept() para Visitor
+
+### Strategy Pattern:
+- [ ] Creas interface TarifaStrategy
+- [ ] Implementas TarifaDiurna y TarifaNocturna
+- [ ] Cambias estrategia en tiempo de ejecucion
+- [ ] Cada taxi usa la tarifa actual
+
+### Visitor Pattern:
+- [ ] Creas interface VisitorCalculos
+- [ ] Implementas CalculadorGanancias y CalculadorCostos
+- [ ] CalculadorGanancias usa la Strategy actual
+- [ ] Aplicas visitors sobre la flota completa
+
+### File I/O:
+- [ ] Lees archivo flota.txt correctamente
+- [ ] Parseas datos de taxis y viajes
+- [ ] Manejas excepciones apropiadamente
+- [ ] Creas taxis dinamicamente segun tipo
+
+### Logica de Negocio:
+- [ ] Calculas kilometraje total por taxi
+- [ ] Calculas ganancias usando tarifa actual
+- [ ] Calculas costos de combustible/electricidad
+- [ ] Calculas ganancia neta (ganancias - costos)
+- [ ] Encuentras taxi mas rentable
+
+### Tiempo:
+- [ ] Implementas la solucion completa en < 90 minutos
+- [ ] Puedes agregar nueva tarifa en < 10 minutos
+- [ ] Puedes agregar nuevo visitor en < 15 minutos
+- [ ] Explicas la interaccion entre patrones
+
+---
+
+## 🔗 RELACION CON EL EXAMEN
+
+Este ejercicio es el MAS CERCANO al examen real - practica integracion de patrones.
+
+### Comparacion: Este Ejercicio vs Examen
+
+| Aspecto | Ejercicio 07 | Examen Real (Ejercicio 10) |
+|---------|--------------|----------------------------|
+| **Patrones combinados** | 3 (Herencia + Strategy + Visitor) | 3-4 (+ Singleton/Factory) |
+| | Flota de Taxis | Sistema Renta de Vehiculos |
+| **File I/O** | Si (flota.txt) | Si (datos.txt) |
+| **Jerarquia** | Taxi → 3 tipos | Vehiculo → 3 tipos |
+| **Strategy** | Tarifa Diurna/Nocturna | Tarifa Diurna/Nocturna (identico) |
+| **Visitor** | Ganancias, Costos | Ganancias, Costos (identico) |
+| **Complejidad** | Alta | Alta |
+| **Tiempo estimado** | 90 minutos | 90-120 minutos |
+| **Porcentaje del examen** | ~85% | Este es ~85% del examen |
+
+### Como se compara con el examen:
+
+**Similitudes (casi identico):**
+1. Lee archivo con datos de vehiculos y viajes
+2. Crea jerarquia de 3 tipos
+3. Usa Strategy para tarifas intercambiables
+4. Usa Visitor para calculos (Ganancias y Costos)
+5. Calcula ganancia neta
+6. Encuentra vehiculo mas rentable
+
+**Diferencias minimas:**
+1. Examen: Agrega Singleton o Factory
+2. Examen: Puede tener un Visitor adicional
+3. Examen: Formato de salida especifico
+
+### Que cubre este ejercicio:
+
+- ✅ **85% del examen:** Casi todo el examen esta aqui
+- ✅ **Herencia:** Jerarquia completa
+- ✅ **Strategy:** Tarifas intercambiables
+- ✅ **Visitor:** Calculos separados
+- ✅ **File I/O:** Lectura y parsing
+- ✅ **Integracion:** Como los patrones trabajan juntos
+- ❌ **Solo falta:** Singleton o Factory (~15% restante)
+
+### Flujo completo del sistema (CRITICO entender esto):
+
+```
+PASO 1: CARGAR DATOS (File I/O)
+├─ Leer flota.txt
+├─ Parsear lineas de datos
+├─ Crear objetos Taxi (TaxiEstandar/Hibrido/Electrico)
+└─ Agregar viajes a cada taxi
+
+PASO 2: ESTABLECER ESTRATEGIA (Strategy)
+├─ Crear TarifaDiurna o TarifaNocturna
+└─ Asignar a todos los taxis
+
+PASO 3: APLICAR VISITOR GANANCIAS (Visitor + Strategy)
+├─ Crear CalculadorGanancias
+├─ Para cada taxi: taxi.accept(visitor)
+│   ├─ Taxi llama visitor.visitarXXX(this)
+│   ├─ Visitor obtiene tarifa: taxi.getTarifa()
+│   ├─ Tarifa calcula: tarifa.calcularTarifa(taxi)
+│   └─ Visitor retorna resultado
+└─ Sumar todas las ganancias
+
+PASO 4: APLICAR VISITOR COSTOS (Visitor)
+├─ Crear CalculadorCostos
+├─ Para cada taxi: taxi.accept(visitor)
+│   ├─ Taxi llama visitor.visitarXXX(this)
+│   ├─ Visitor llama: taxi.calcularCostoCombustible()
+│   └─ Visitor retorna resultado
+└─ Sumar todos los costos
+
+PASO 5: CALCULAR GANANCIA NETA
+└─ Ganancia neta = Ganancias - Costos
+```
+
+### Proximos pasos sugeridos:
+
+1. **Ruta final hacia el examen:**
+   - ✅ Ejercicio 07 (este) - Dominar integracion completa
+   - ➡️ Agregar Singleton (envolver sistema en Singleton)
+   - ➡️ Ejercicio 10 - Simulacro examen completo
+   - 🔁 Repetir Ejercicio 07 al menos 2 veces
+
+2. **Practica CRITICA para el examen:**
+   - Implementa TODO desde cero SIN mirar la solucion
+   - Cronometrate (objetivo: < 90 minutos)
+   - Crea variantes del archivo flota.txt
+   - Agrega un tercer Visitor (ej: CalculadorDistanciaTotal)
+   - Agrega una tercera Strategy (ej: TarifaFinDeSemana)
+
+### Errores CRITICOS en el examen (relacionados con este ejercicio):
+
+1. **No integrar Strategy con Visitor** → Ganancias mal calculadas → 0 puntos
+2. **Olvidar setTarifa() antes de calcular** → Visitor no tiene tarifa → NullPointerException
+3. **No parsear viajes correctamente** → Datos incorrectos → Calculos mal → 0 puntos
+4. **Confundir orden de operaciones** → Aplicar Visitor antes de leer archivo → Crash
+5. **No retornar valor de accept()** → Visitor no funciona → 0 puntos
+
+### Tips para el examen:
+
+- ⏱️ **Tiempo:** Dedica 90 minutos completos a implementar todo
+- 📝 **Orden:** File I/O → Herencia → Strategy → Visitor → Main
+- ✅ **Verificacion:** Prueba cada patron ANTES de integrar
+- 🔍 **Prioridad:** Visitor (35%) > Strategy (20%) > File I/O (20%) > Factory/Singleton (15%)
+- 💡 **Debug:** Si falla, verifica la integracion Strategy-Visitor primero
+
+### Como se relacionan los patrones en el examen:
+
+```
+SINGLETON/FACTORY (15%):
+└─ Contiene la lista de vehiculos
+   └─ Carga vehiculos con File I/O (20%)
+      └─ Cada vehiculo es parte de HERENCIA (10%)
+         └─ Cada vehiculo tiene STRATEGY (20%)
+            └─ VISITOR usa la Strategy para calcular (35%)
+
+TODO CONECTADO - SI FALLA UNO, FALLA TODO
+```
+
+---
+
+**Si dominas este ejercicio, tienes el 85% del examen garantizado. Solo falta agregar Singleton/Factory (15%). Este es tu ejercicio MAS IMPORTANTE - repitelo hasta que sea automatico.**

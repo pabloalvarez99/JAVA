@@ -439,3 +439,283 @@ Menu desayuno = MenuFactory.crearMenu("desayuno");
 ---
 
 **El patron Factory es uno de los patrones que puedes elegir en el examen (Singleton o Factory).**
+
+---
+
+## 🎓 VENTAJAS DE ESTA ARQUITECTURA
+
+### Sin Factory (enfoque ingenuo):
+
+```java
+// CODIGO MALO: If-else gigante repetido en cada lugar
+public class Main {
+    public static void main(String[] args) {
+        String tipoMenu = "desayuno";
+        Menu menu = new Menu(tipoMenu);
+
+        // PROBLEMA 1: Codigo duplicado y repetitivo
+        if (tipoMenu.equals("desayuno")) {
+            Entrada entrada = new Entrada("Frutas Frescas", 5.00, 5, "Individual");
+            PlatoPrincipal principal = new PlatoPrincipal("Huevos Revueltos", 7.00, 10, "Huevo");
+            Postre postre = new Postre("Yogurt", 3.00, 2, 150);
+            menu.setEntrada(entrada);
+            menu.setPrincipal(principal);
+            menu.setPostre(postre);
+        } else if (tipoMenu.equals("almuerzo")) {
+            Entrada entrada = new Entrada("Ensalada Cesar", 8.00, 8, "Individual");
+            PlatoPrincipal principal = new PlatoPrincipal("Pollo a la Parrilla", 15.00, 20, "Pollo");
+            Postre postre = new Postre("Helado", 4.00, 3, 250);
+            menu.setEntrada(entrada);
+            menu.setPrincipal(principal);
+            menu.setPostre(postre);
+        } else if (tipoMenu.equals("cena")) {
+            Entrada entrada = new Entrada("Tabla de Quesos", 12.00, 10, "Para compartir");
+            PlatoPrincipal principal = new PlatoPrincipal("Salmon al Horno", 22.00, 25, "Pescado");
+            Postre postre = new Postre("Torta de Chocolate", 6.00, 15, 400);
+            menu.setEntrada(entrada);
+            menu.setPrincipal(principal);
+            menu.setPostre(postre);
+        }
+
+        // PROBLEMA 2: Si necesitas crear otro menu, copias TODO el if-else
+        // PROBLEMA 3: Para agregar "brunch", modificas CADA lugar con este codigo
+        // PROBLEMA 4: Facil cometer errores (olvidar un plato, precio equivocado)
+    }
+}
+
+// Metodo alternativo igualmente malo
+public class Menu {
+    public void crearDesayuno() {
+        this.entrada = new Entrada(...);
+        this.principal = new PlatoPrincipal(...);
+        this.postre = new Postre(...);
+    }
+
+    public void crearAlmuerzo() {
+        // Codigo duplicado...
+    }
+
+    public void crearCena() {
+        // Mas codigo duplicado...
+    }
+}
+```
+
+**Problemas criticos:**
+- Codigo altamente repetitivo (viola DRY)
+- Dificil de mantener (cambios requieren editar multiples lugares)
+- Propenso a errores (copiar-pegar bugs)
+- Agregar nuevo tipo de menu requiere modificar multiples clases
+- Viola Open/Closed Principle
+- No hay separacion de responsabilidades
+
+### Con Factory (nuestra solucion):
+
+```java
+// CODIGO BUENO: Una sola linea crea el menu completo
+public class Main {
+    public static void main(String[] args) {
+        // VENTAJA 1: Creacion simple y elegante
+        Menu desayuno = MenuFactory.crearMenu("desayuno");
+        Menu almuerzo = MenuFactory.crearMenu("almuerzo");
+        Menu cena = MenuFactory.crearMenu("cena");
+
+        // VENTAJA 2: Toda la logica de creacion esta centralizada
+        // VENTAJA 3: Para agregar "brunch", solo modificas MenuFactory
+        // VENTAJA 4: Codigo limpio y facil de entender
+    }
+}
+
+// Factory centraliza TODA la logica de creacion
+public class MenuFactory {
+    public static Menu crearMenu(String tipo) {
+        Menu menu = new Menu(tipo);
+
+        switch(tipo.toLowerCase()) {
+            case "desayuno":
+                menu.setEntrada(new Entrada("Frutas Frescas", 5.00, 5, "Individual"));
+                menu.setPrincipal(new PlatoPrincipal("Huevos Revueltos", 7.00, 10, "Huevo"));
+                menu.setPostre(new Postre("Yogurt", 3.00, 2, 150));
+                break;
+
+            case "almuerzo":
+                menu.setEntrada(new Entrada("Ensalada Cesar", 8.00, 8, "Individual"));
+                menu.setPrincipal(new PlatoPrincipal("Pollo a la Parrilla", 15.00, 20, "Pollo"));
+                menu.setPostre(new Postre("Helado", 4.00, 3, 250));
+                break;
+
+            case "cena":
+                menu.setEntrada(new Entrada("Tabla de Quesos", 12.00, 10, "Para compartir"));
+                menu.setPrincipal(new PlatoPrincipal("Salmon al Horno", 22.00, 25, "Pescado"));
+                menu.setPostre(new Postre("Torta de Chocolate", 6.00, 15, 400));
+                break;
+
+            default:
+                throw new IllegalArgumentException("Tipo de menu invalido");
+        }
+
+        return menu;
+    }
+
+    // VENTAJA 5: Agregar "brunch" es facil
+    // Solo agregas un nuevo case - no tocas nada mas
+}
+```
+
+**Ventajas:**
+- Centralizacion: toda la logica de creacion en UN solo lugar
+- Simplicidad: una linea crea un menu completo
+- Mantenibilidad: cambios en un solo archivo
+- Extensibilidad: agregar nuevos tipos es trivial
+- Validacion: errores detectados en un solo punto
+- Testeable: facil hacer pruebas unitarias del factory
+
+---
+
+## ✅ CHECKLIST DE DOMINIO
+
+Puedes considerar que dominas este ejercicio cuando:
+
+### Conceptos Factory:
+- [ ] Entiendes por que Factory centraliza la creacion de objetos
+- [ ] Sabes cuando usar Factory vs creacion directa con `new`
+- [ ] Puedes explicar la diferencia entre Factory Method y Abstract Factory
+- [ ] Identificas casos donde Factory simplifica el codigo
+
+### Implementacion:
+- [ ] Implementas metodo estatico `crearMenu(String tipo)`
+- [ ] Usas switch/if para determinar que tipo crear
+- [ ] Lanzas excepcion para tipos invalidos
+- [ ] Retornas un objeto completamente configurado
+- [ ] No necesitas instanciar la Factory (metodo estatico)
+
+### Jerarquia de Platos:
+- [ ] Creas clase abstracta `Plato` correctamente
+- [ ] Implementas tres subclases (Entrada, PlatoPrincipal, Postre)
+- [ ] Cada subclase tiene atributos especificos
+- [ ] Sobrescribes `obtenerDetalles()` en cada subclase
+- [ ] Usas `super()` correctamente en constructores
+
+### Logica de Negocio:
+- [ ] Calculas precio total sumando todos los platos
+- [ ] Calculas tiempo total de preparacion
+- [ ] Muestras detalles completos del menu
+- [ ] Validas que los platos no sean null
+- [ ] Formateas precios con 2 decimales
+
+### Tiempo:
+- [ ] Implementas la solucion completa en < 45 minutos
+- [ ] Puedes agregar un nuevo tipo de menu en < 5 minutos
+- [ ] Explicas las ventajas de Factory vs creacion manual
+
+---
+
+## 🔗 RELACION CON EL EXAMEN
+
+Este patron es una ALTERNATIVA a Singleton - debes elegir uno de los dos para el examen.
+
+### Comparacion: Este Ejercicio vs Examen
+
+| Aspecto | Ejercicio 04 | Examen Real |
+|---------|--------------|-------------|
+| **Patron usado** | Factory | Factory O Singleton (tu eliges) |
+| | MenuFactory | VehiculoFactory (si eliges Factory) |
+| **Estructura** | Factory + Herencia | Factory + Visitor + Strategy |
+| **Complejidad** | Basica (solo Factory) | Media (3 patrones combinados) |
+| **Tiempo estimado** | 45 minutos | 20-25 minutos (parte Factory) |
+| **Tipos creados** | 3 tipos de menu | 3 tipos de vehiculo |
+| **Metodo estatico** | Si | Si |
+| **Lectura archivo** | No | Si (vehiculos desde archivo) |
+| **Porcentaje del examen** | ~25% | Factory es ~30% del total |
+
+### Como se usa Factory en el examen:
+
+**En el examen (si eliges Factory):**
+```java
+public class VehiculoFactory {
+    public static Vehiculo crearVehiculo(String tipo, String patente,
+                                        String marca, double consumo) {
+        switch(tipo.toLowerCase()) {
+            case "auto":
+                return new Auto(patente, marca, consumo);
+            case "suv":
+                return new SUV(patente, marca, consumo);
+            case "camioneta":
+                return new Camioneta(patente, marca, consumo);
+            default:
+                throw new IllegalArgumentException("Tipo invalido: " + tipo);
+        }
+    }
+}
+
+// En SistemaRentaCar al leer archivo
+public void cargarVehiculos(String archivo) {
+    // ... leer linea
+    String[] datos = linea.split(",");
+    String tipo = datos[0];
+    String patente = datos[1];
+    // ...
+
+    // USAR EL FACTORY
+    Vehiculo v = VehiculoFactory.crearVehiculo(tipo, patente, marca, consumo);
+    vehiculos.add(v);
+}
+```
+
+**Diferencias clave con este ejercicio:**
+1. **Parametros dinamicos:** En el examen, los datos vienen del archivo
+2. **Integracion:** Factory se usa DENTRO del sistema principal
+3. **Combinacion:** Factory + Visitor + Strategy trabajando juntos
+
+### Que cubre este ejercicio:
+
+- ✅ **30% del examen:** Patron Factory completo
+- ✅ **Herencia:** Plato → Entrada/Principal/Postre (similar a Vehiculo → Auto/SUV/Camioneta)
+- ✅ **Metodo estatico:** Como debe implementarse
+- ✅ **Validacion:** Detectar tipos invalidos
+- ❌ **No cubre:** Visitor, Strategy, File I/O (ver Ejercicios 05, 06, 07)
+
+### Factory vs Singleton - ¿Cual elegir en el examen?
+
+**Elige Factory si:**
+- Te sientes comodo creando objetos dinamicamente
+- Prefieres codigo mas "orientado a objetos"
+- Quieres practicar herencia + factory juntos
+
+**Elige Singleton si:**
+- Prefieres un patron mas simple
+- Quieres control centralizado del sistema
+- Te sientes mas seguro con menos complejidad
+
+**AMBOS son igualmente validos en el examen.**
+
+### Proximos pasos sugeridos:
+
+1. **Si elegiste Factory para el examen:**
+   - ✅ Ejercicio 04 (este) - Dominar Factory puro
+   - ➡️ Ejercicio 05 - Agregar lectura de archivos
+   - ➡️ Ejercicio 06 - Aprender Visitor
+   - ➡️ Ejercicio 07 - Combinar Factory + Visitor + Strategy
+   - ➡️ Ejercicio 10 - Simulacro completo (adaptar con Factory)
+
+2. **Si elegiste Singleton para el examen:**
+   - Puedes saltar al Ejercicio 05
+   - Pero IGUAL entiende Factory (concepto importante POO)
+
+### Errores comunes en el examen relacionados con Factory:
+
+1. **Factory no estatica** → Tienes que instanciarla (innecesario)
+2. **No validar tipo invalido** → NullPointerException
+3. **Olvidar retornar el objeto** → Error de compilacion
+4. **Factory dentro de Main** → Mala separacion de responsabilidades
+
+### Tips para el examen:
+
+- ⏱️ **Tiempo:** Dedica MAX 20 minutos al Factory
+- 📝 **Plantilla:** Memoriza la estructura switch/case
+- ✅ **Validacion:** Siempre incluye `default` con excepcion
+- 🔍 **Integracion:** El Factory se usa en `cargarVehiculos()`
+
+---
+
+**Si dominas este ejercicio, tienes el 30% del examen garantizado (alternativa a Singleton). Elige el patron que mas te guste y dominalo completamente.**

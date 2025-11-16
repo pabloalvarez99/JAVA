@@ -630,3 +630,290 @@ Antes de considerar completo el ejercicio, verifica:
 ---
 
 **Este ejercicio es esencial para el examen. Practica variando el archivo de datos y agregando mas validaciones.**
+
+---
+
+## 🎓 VENTAJAS DE ESTA ARQUITECTURA
+
+### Sin File I/O estructurado (enfoque ingenuo):
+
+```java
+// CODIGO MALO: Datos hardcodeados en el codigo
+public class Main {
+    public static void main(String[] args) {
+        SistemaUniversidad sistema = new SistemaUniversidad();
+
+        // PROBLEMA 1: Datos embebidos en el codigo (hardcoded)
+        Estudiante e1 = new Estudiante("Juan", "Perez", "20567890-1", "Ingenieria");
+        e1.agregarNota(85);
+        e1.agregarNota(90);
+        e1.agregarNota(78);
+        e1.agregarNota(92);
+        sistema.agregarEstudiante(e1);
+
+        Estudiante e2 = new Estudiante("Maria", "Lopez", "21234567-8", "Medicina");
+        e2.agregarNota(95);
+        e2.agregarNota(88);
+        e2.agregarNota(91);
+        e2.agregarNota(87);
+        sistema.agregarEstudiante(e2);
+
+        // PROBLEMA 2: Para agregar mas estudiantes, recompilas el programa
+        // PROBLEMA 3: No puedes compartir datos facilmente
+        // PROBLEMA 4: Dificil de testear con diferentes conjuntos de datos
+        // PROBLEMA 5: Imposible que usuarios finales agreguen datos
+    }
+}
+
+// Alternativa con arrays (igualmente mala)
+String[][] datosEstudiantes = {
+    {"Juan", "Perez", "20567890-1", "Ingenieria", "85,90,78,92"},
+    {"Maria", "Lopez", "21234567-8", "Medicina", "95,88,91,87"}
+    // Arrays gigantes en el codigo - horrible!
+};
+```
+
+**Problemas criticos:**
+- Datos y logica mezclados (viola separacion de concerns)
+- Imposible modificar datos sin recompilar
+- No escalable (agregar 1000 estudiantes es impráctico)
+- No reutilizable (cada programa necesita su propio dataset)
+- Dificil de testear (no puedes cambiar datos facilmente)
+- No apto para usuarios finales
+
+### Con File I/O y Parsing (nuestra solucion):
+
+```java
+// CODIGO BUENO: Datos separados en archivo externo
+public class SistemaUniversidad {
+    public void cargarDesdeArchivo(String nombreArchivo) {
+        try (Scanner scanner = new Scanner(new File(nombreArchivo))) {
+            int cantidad = Integer.parseInt(scanner.nextLine().trim());
+
+            for (int i = 0; i < cantidad; i++) {
+                // Leer y parsear datos
+                String lineaDatos = scanner.nextLine();
+                String[] datos = lineaDatos.split(",");
+
+                String nombre = datos[0].trim();
+                String apellido = datos[1].trim();
+                String rut = datos[2].trim();
+                String carrera = datos[3].trim();
+
+                // Validar antes de crear
+                if (!validarRUT(rut)) {
+                    System.out.println("RUT invalido: " + rut);
+                    scanner.nextLine();  // Saltar notas
+                    continue;
+                }
+
+                Estudiante estudiante = new Estudiante(nombre, apellido, rut, carrera);
+
+                // Leer notas
+                String lineaNotas = scanner.nextLine();
+                String[] notasStr = lineaNotas.split(",");
+
+                for (String notaStr : notasStr) {
+                    int nota = Integer.parseInt(notaStr.trim());
+                    estudiante.agregarNota(nota);
+                }
+
+                estudiantes.add(estudiante);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Archivo no encontrado");
+        }
+    }
+}
+
+// En Main.java
+public class Main {
+    public static void main(String[] args) {
+        SistemaUniversidad sistema = new SistemaUniversidad();
+
+        // VENTAJA: Una sola linea carga todos los datos
+        sistema.cargarDesdeArchivo("estudiantes.txt");
+
+        // Ahora puedes procesar los datos
+        sistema.mostrarEstadisticas();
+    }
+}
+```
+
+**Ventajas:**
+- Separacion completa entre datos y codigo
+- Modificar datos sin recompilar (editar archivo .txt)
+- Escalable (millones de registros posibles)
+- Reutilizable (mismo programa, diferentes datasets)
+- Testeable (creas archivos de prueba facilmente)
+- Apto para usuarios finales (editan archivo .txt)
+- Profesional (asi funcionan sistemas reales)
+
+---
+
+## ✅ CHECKLIST DE DOMINIO
+
+Puedes considerar que dominas este ejercicio cuando:
+
+### Conceptos File I/O:
+- [ ] Entiendes la diferencia entre FileReader, BufferedReader y Scanner
+- [ ] Sabes por que usar try-with-resources para archivos
+- [ ] Comprendes que es parsing y por que es necesario
+- [ ] Identificas formatos CSV, TSV y otros delimitados
+
+### Implementacion de Lectura:
+- [ ] Usas Scanner con try-with-resources correctamente
+- [ ] Lees la primera linea para obtener cantidad
+- [ ] Iteras el numero exacto de veces
+- [ ] Parseas con split(",") y trim()
+- [ ] Manejas FileNotFoundException apropiadamente
+- [ ] Manejas NumberFormatException para datos invalidos
+
+### Validacion de Datos:
+- [ ] Validas formato de RUT con regex (\\d{8}-\\d)
+- [ ] Verificas que notas esten en rango 0-100
+- [ ] Manejas lineas mal formateadas sin crashear
+- [ ] Continuas procesando despues de un error
+- [ ] Informas al usuario sobre datos invalidos
+
+### Procesamiento de Datos:
+- [ ] Calculas promedios correctamente (division double)
+- [ ] Encuentras minimos y maximos
+- [ ] Usas HashMap para contar por categoria
+- [ ] Filtras listas segun criterios
+- [ ] Ordenas resultados apropiadamente
+
+### Buenas Practicas:
+- [ ] Cierras recursos automaticamente (try-with-resources)
+- [ ] Validas archivo existe antes de procesarlo
+- [ ] Muestras mensajes de error descriptivos
+- [ ] Formateas numeros con printf/String.format
+- [ ] Tu codigo es robusto ante datos incorrectos
+
+### Tiempo:
+- [ ] Implementas la solucion completa en < 60 minutos
+- [ ] Puedes agregar una nueva estadistica en < 10 minutos
+- [ ] Explicas el flujo de lectura linea por linea
+
+---
+
+## 🔗 RELACION CON EL EXAMEN
+
+La lectura de archivos es OBLIGATORIA en el examen - todos los datos vienen de un archivo.
+
+### Comparacion: Este Ejercicio vs Examen
+
+| Aspecto | Ejercicio 05 | Examen Real |
+|---------|--------------|-------------|
+| **Lectura archivo** | Si (estudiantes.txt) | Si (datos.txt o similar) |
+| | Estudiantes + Notas | Vehiculos + Viajes |
+| **Formato** | N lineas, pares datos/notas | N lineas, datos + viajes |
+| **Parsing** | split(",") + trim() | Identico |
+| **Validaciones** | RUT, rango notas | Patente, consumo, distancias |
+| **Estructuras** | ArrayList, HashMap | ArrayList, HashMap |
+| **Excepciones** | FileNotFoundException | Identico |
+| **Complejidad** | Media | Media |
+| **Tiempo estimado** | 60 minutos | 15-20 minutos (parte archivo) |
+| **Porcentaje del examen** | ~20% | File I/O es ~20% del total |
+
+### Como se usa File I/O en el examen:
+
+**En el examen (Ejercicio 10 - RentaCarCompleto):**
+```java
+public void cargarVehiculos(String archivo) {
+    try (Scanner sc = new Scanner(new File(archivo))) {
+        int n = Integer.parseInt(sc.nextLine().trim());
+
+        for (int i = 0; i < n; i++) {
+            // Leer datos del vehiculo
+            String linea = sc.nextLine();
+            String[] datos = linea.split(",");
+
+            String tipo = datos[0].trim();
+            String patente = datos[1].trim();
+            String marca = datos[2].trim();
+            double consumo = Double.parseDouble(datos[3].trim());
+
+            // CREAR VEHICULO (usando Factory o constructor)
+            Vehiculo v = VehiculoFactory.crearVehiculo(tipo, patente, marca, consumo);
+
+            // Leer viajes (siguiente linea)
+            String lineaViajes = sc.nextLine();
+            String[] viajesStr = lineaViajes.split(",");
+            String patenteViajes = viajesStr[0].trim();
+
+            for (int j = 1; j < viajesStr.length; j++) {
+                double distancia = Double.parseDouble(viajesStr[j].trim());
+                v.agregarViaje(distancia);
+            }
+
+            vehiculos.add(v);
+        }
+    } catch (FileNotFoundException e) {
+        System.out.println("Error: Archivo no encontrado");
+    }
+}
+```
+
+**Similitudes con este ejercicio:**
+1. **Estructura identica:** Primera linea = cantidad, luego pares de lineas
+2. **Parsing identico:** split(",") + trim() + casting
+3. **Validaciones similares:** Verificar formatos y rangos
+4. **Excepciones identicas:** FileNotFoundException, NumberFormatException
+
+### Que cubre este ejercicio:
+
+- ✅ **20% del examen:** Lectura y parsing de archivos
+- ✅ **Scanner:** Uso correcto con try-with-resources
+- ✅ **Parsing:** split(), trim(), Integer.parseInt()
+- ✅ **Validaciones:** Regex, rangos, formatos
+- ✅ **HashMap:** Contar elementos por categoria
+- ✅ **Estadisticas:** Promedios, min, max, filtrado
+- ❌ **No cubre:** Visitor, Strategy (ver Ejercicios 06, 07)
+
+### Diferencias clave con el examen:
+
+1. **Integracion con patrones:**
+   - Este ejercicio: File I/O aislado
+   - Examen: File I/O + Factory/Singleton + Visitor + Strategy
+
+2. **Tipos de objetos:**
+   - Este ejercicio: Una clase simple (Estudiante)
+   - Examen: Jerarquia (Vehiculo → Auto/SUV/Camioneta)
+
+3. **Procesamiento:**
+   - Este ejercicio: Estadisticas simples
+   - Examen: Aplicar Visitors para calculos complejos
+
+### Proximos pasos sugeridos:
+
+1. **Ruta completa hacia el examen:**
+   - ✅ Ejercicio 05 (este) - Dominar File I/O
+   - ➡️ Ejercicio 06 - Aprender Visitor
+   - ➡️ Ejercicio 07 - Integrar File I/O + Visitor + Strategy
+   - ➡️ Ejercicio 10 - Simulacro completo de examen
+
+2. **Practica adicional recomendada:**
+   - Crea variantes del archivo estudiantes.txt
+   - Agrega datos invalidos para testear validaciones
+   - Implementa exportacion a archivo (inverso de lectura)
+
+### Errores comunes en el examen relacionados con File I/O:
+
+1. **No usar try-with-resources** → Scanner no se cierra, leak de recursos
+2. **No validar archivo existe** → FileNotFoundException crashea programa
+3. **No usar trim()** → Espacios causan parsing incorrecto
+4. **Division entera en promedios** → 85/2 = 42 en lugar de 42.5
+5. **No manejar cantidad variable** → Codigo rigido para 4 notas exactas
+
+### Tips para el examen:
+
+- ⏱️ **Tiempo:** Dedica MAX 20 minutos a la lectura de archivo
+- 📝 **Plantilla:** Memoriza la estructura try-with-resources + for loop
+- ✅ **Validacion:** Siempre valida ANTES de crear objetos
+- 🔍 **Debug:** Si falla, imprime cada linea leida para verificar formato
+- 💡 **Orden:** Lee archivo PRIMERO, luego aplica Visitors
+
+---
+
+**Si dominas este ejercicio, tienes el 20% del examen garantizado. La lectura de archivos es CRITICA - no puedes aprobar sin dominarla.**

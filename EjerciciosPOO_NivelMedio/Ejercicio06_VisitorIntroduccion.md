@@ -629,3 +629,358 @@ Simplemente creas una nueva clase que implemente `VisitorCosto`. Las clases de p
 ---
 
 **El patron Visitor es complejo pero muy poderoso. Practica este ejercicio hasta que el flujo de double dispatch sea natural para ti.**
+
+---
+
+## 🎓 VENTAJAS DE ESTA ARQUITECTURA
+
+### Sin Visitor (enfoque ingenuo):
+
+```java
+// CODIGO MALO: Calculos embebidos en cada clase de paquete
+public class PaqueteDocumento {
+    private String codigo;
+    private double peso;
+    private int numeroHojas;
+
+    // PROBLEMA 1: Cada paquete tiene multiples metodos de calculo
+    public double calcularCostoEstandar() {
+        return peso * 2 + (numeroHojas / 10.0) * 0.10;
+    }
+
+    public double calcularCostoExpress() {
+        return peso * 5 + (numeroHojas / 10.0) * 0.20;
+    }
+
+    public double calcularCostoInternacional() {
+        return peso * 10 + (numeroHojas / 10.0) * 0.50;
+    }
+
+    public double calcularCostoPremium() {
+        return peso * 15 + (numeroHojas / 10.0) * 1.00;
+    }
+
+    // PROBLEMA 2: Cada nuevo metodo de calculo requiere modificar TODAS las clases
+    // PROBLEMA 3: Logica de calculo dispersa en multiples archivos
+}
+
+// Lo mismo para PaqueteCaja y PaqueteFragil - codigo MASIVAMENTE duplicado
+public class PaqueteCaja {
+    public double calcularCostoEstandar() { ... }
+    public double calcularCostoExpress() { ... }
+    public double calcularCostoInternacional() { ... }
+    public double calcularCostoPremium() { ... }
+    // Y asi sucesivamente...
+}
+
+// En Main.java - decide manualmente que metodo llamar
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Object> paquetes = new ArrayList<>();
+        paquetes.add(new PaqueteDocumento(...));
+        paquetes.add(new PaqueteCaja(...));
+
+        // PROBLEMA 4: If-else gigante para cada calculo
+        String metodo = "estandar";
+        for (Object obj : paquetes) {
+            if (obj instanceof PaqueteDocumento) {
+                PaqueteDocumento doc = (PaqueteDocumento) obj;
+                if (metodo.equals("estandar")) {
+                    System.out.println(doc.calcularCostoEstandar());
+                } else if (metodo.equals("express")) {
+                    System.out.println(doc.calcularCostoExpress());
+                }
+            } else if (obj instanceof PaqueteCaja) {
+                PaqueteCaja caja = (PaqueteCaja) obj;
+                if (metodo.equals("estandar")) {
+                    System.out.println(caja.calcularCostoEstandar());
+                } else if (metodo.equals("express")) {
+                    System.out.println(caja.calcularCostoExpress());
+                }
+            }
+            // Horror absoluto...
+        }
+    }
+}
+```
+
+**Problemas criticos:**
+- Viola Open/Closed Principle (modificas clases existentes constantemente)
+- Logica de calculo dispersa en multiples clases
+- Agregar nuevo metodo = modificar TODAS las clases de paquetes
+- If-else monstruoso en codigo cliente
+- Casting inseguro (instanceof everywhere)
+- Dificil de mantener y testear
+
+### Con Visitor (nuestra solucion):
+
+```java
+// CODIGO BUENO: Paquetes simples y estables
+public class PaqueteDocumento implements Paquete {
+    private String codigo;
+    private double peso;
+    private int numeroHojas;
+
+    @Override
+    public double accept(VisitorCosto visitor) {
+        return visitor.visitarDocumento(this);  // Double dispatch
+    }
+
+    // Solo getters - NO logica de calculo
+}
+
+// Visitors centralizan TODA la logica de calculo
+public class CalculadorCostoEstandar implements VisitorCosto {
+    @Override
+    public double visitarDocumento(PaqueteDocumento doc) {
+        return doc.getPeso() * 2 + (doc.getNumeroHojas() / 10.0) * 0.10;
+    }
+
+    @Override
+    public double visitarCaja(PaqueteCaja caja) {
+        return caja.getPeso() * 3 + (caja.calcularVolumen() / 100.0) * 0.05;
+    }
+
+    @Override
+    public double visitarFragil(PaqueteFragil fragil) {
+        return fragil.getPeso() * 5 + fragil.getValorAsegurado() * 0.02;
+    }
+}
+
+// NUEVO metodo de calculo = NUEVA clase Visitor
+// NO tocas ninguna clase de paquete!
+public class CalculadorCostoInternacional implements VisitorCosto {
+    @Override
+    public double visitarDocumento(PaqueteDocumento doc) {
+        return doc.getPeso() * 10 + (doc.getNumeroHojas() / 10.0) * 0.50;
+    }
+    // ... otros metodos
+}
+
+// En Main.java - codigo elegante y limpio
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Paquete> paquetes = new ArrayList<>();
+        paquetes.add(new PaqueteDocumento(...));
+        paquetes.add(new PaqueteCaja(...));
+
+        // VENTAJA: Cambiar de metodo es trivial
+        VisitorCosto visitor = new CalculadorCostoEstandar();
+
+        for (Paquete paquete : paquetes) {
+            double costo = paquete.accept(visitor);  // Una sola linea!
+            System.out.println(costo);
+        }
+
+        // Cambiar a Express - una sola linea!
+        visitor = new CalculadorCostoExpress();
+        // Reutilizar el mismo loop
+    }
+}
+```
+
+**Ventajas:**
+- Open/Closed: agregar operaciones sin modificar paquetes
+- Logica centralizada: cada Visitor tiene TODA su logica
+- Extensible: nuevo Visitor = nueva clase (no modificas existentes)
+- Sin if-else: polimorfismo maneja todo
+- Sin casting: compilador garantiza tipos correctos
+- Facil de testear: cada Visitor se prueba independientemente
+
+---
+
+## ✅ CHECKLIST DE DOMINIO
+
+Puedes considerar que dominas este ejercicio cuando:
+
+### Conceptos Visitor:
+- [ ] Entiendes que es "double dispatch" y por que se llama asi
+- [ ] Sabes explicar las dos interfaces (Paquete y VisitorCosto)
+- [ ] Comprendes por que Visitor separa operaciones de estructuras
+- [ ] Identificas cuando Visitor es apropiado vs cuando no lo es
+
+### Implementacion de Paquetes:
+- [ ] Creas interface Paquete con metodo accept()
+- [ ] Implementas tres clases concretas (Documento, Caja, Fragil)
+- [ ] Cada clase llama al metodo correcto del visitor en accept()
+- [ ] Pasas `this` al visitor (double dispatch)
+- [ ] Provees getters para que visitor acceda a datos
+
+### Implementacion de Visitors:
+- [ ] Creas interface VisitorCosto con un metodo por tipo
+- [ ] Implementas dos visitors concretos (Estandar, Express)
+- [ ] Cada metodo visitarXXX() tiene acceso completo al paquete
+- [ ] Retornas el resultado del calculo
+- [ ] Puedes agregar un tercer visitor sin modificar paquetes
+
+### Double Dispatch:
+- [ ] Explicas el flujo: paquete.accept() → visitor.visitarXXX()
+- [ ] Entiendes que el tipo de paquete determina que metodo se llama
+- [ ] Sabes por que se necesitan DOS llamadas polimorficas
+- [ ] Puedes diagramar el flujo completo
+
+### Buenas Practicas:
+- [ ] Usas nombres descriptivos (visitarDocumento, no visitar1)
+- [ ] Cada visitor implementa TODOS los metodos de la interface
+- [ ] No mezclas logica de negocio en accept()
+- [ ] Formateas numeros correctamente
+- [ ] Tu codigo compila sin warnings
+
+### Tiempo:
+- [ ] Implementas la solucion completa en < 75 minutos
+- [ ] Puedes agregar un nuevo Visitor en < 15 minutos
+- [ ] Explicas double dispatch sin mirar apuntes
+
+---
+
+## 🔗 RELACION CON EL EXAMEN
+
+El patron Visitor es OBLIGATORIO en el examen - no puedes aprobar sin dominarlo.
+
+### Comparacion: Este Ejercicio vs Examen
+
+| Aspecto | Ejercicio 06 | Examen Real |
+|---------|--------------|-------------|
+| **Patron usado** | Visitor | Visitor (OBLIGATORIO) |
+| | VisitorCosto | VisitorCalculos |
+| **Jerarquia** | Paquete → 3 tipos | Vehiculo → 3 tipos |
+| **Visitors implementados** | 2 (Estandar, Express) | 2-3 (Ganancias, Costos, etc.) |
+| **Complejidad** | Media | Media-Alta |
+| **Tiempo estimado** | 75 minutos | 30-35 minutos (parte Visitor) |
+| **Double dispatch** | Si | Si |
+| **Integracion** | Standalone | Con Strategy + File I/O |
+| **Porcentaje del examen** | ~30% | Visitor es ~35% del total |
+
+### Como se usa Visitor en el examen:
+
+**En el examen (Ejercicio 10 - RentaCarCompleto):**
+```java
+// Interface Vehiculo
+public interface Vehiculo {
+    double accept(VisitorCalculos visitor);
+}
+
+// Clases concretas
+public class Auto implements Vehiculo {
+    @Override
+    public double accept(VisitorCalculos visitor) {
+        return visitor.visitarAuto(this);
+    }
+}
+
+// Interface Visitor
+public interface VisitorCalculos {
+    double visitarAuto(Auto auto);
+    double visitarSUV(SUV suv);
+    double visitarCamioneta(Camioneta camioneta);
+}
+
+// Visitor de Ganancias (usa Strategy)
+public class CalculadorGanancias implements VisitorCalculos {
+    @Override
+    public double visitarAuto(Auto auto) {
+        // Usa la tarifa actual (Strategy Pattern)
+        TarifaStrategy tarifa = auto.getTarifa();
+        return tarifa.calcularTarifa(auto);
+    }
+    // ... otros metodos
+}
+
+// Visitor de Costos
+public class CalculadorCostos implements VisitorCalculos {
+    @Override
+    public double visitarAuto(Auto auto) {
+        return auto.calcularCostoCombustible();
+    }
+    // ... otros metodos
+}
+
+// En Main.java - aplicar visitors
+public static void main(String[] args) {
+    SistemaRentaCar sistema = SistemaRentaCar.getInstance();
+    sistema.cargarVehiculos("datos.txt");
+
+    // Establecer tarifa (Strategy)
+    sistema.establecerTarifa(new TarifaDiurna());
+
+    // Aplicar Visitor de Ganancias
+    VisitorCalculos visitorGanancias = new CalculadorGanancias();
+    double totalGanancias = sistema.calcularTotal(visitorGanancias);
+
+    // Aplicar Visitor de Costos
+    VisitorCalculos visitorCostos = new CalculadorCostos();
+    double totalCostos = sistema.calcularTotal(visitorCostos);
+
+    // Calcular ganancia neta
+    double ganancia = totalGanancias - totalCostos;
+}
+```
+
+**Diferencias clave con este ejercicio:**
+1. **Integracion con Strategy:** Visitor de Ganancias usa la Strategy actual
+2. **Jerarquia diferente:** Vehiculos en lugar de Paquetes
+3. **Mas visitors:** Ganancias, Costos, posiblemente mas
+4. **Mas complejidad:** Combinar 3 patrones (Visitor + Strategy + Singleton/Factory)
+
+### Que cubre este ejercicio:
+
+- ✅ **35% del examen:** Patron Visitor completo
+- ✅ **Double Dispatch:** Flujo accept() → visitarXXX()
+- ✅ **Dos interfaces:** Paquete y VisitorCosto
+- ✅ **Multiples visitors:** Estandar, Express (similar a Ganancias, Costos)
+- ✅ **Polimorfismo:** ArrayList<Paquete> con diferentes tipos
+- ❌ **No cubre:** Strategy, File I/O (ver Ejercicio 07)
+
+### Por que Visitor es el patron MAS IMPORTANTE:
+
+1. **Obligatorio:** No puedes aprobar sin implementarlo
+2. **Mas puntos:** Vale 35% del examen (mas que cualquier otro)
+3. **Mas dificil:** Double dispatch confunde a muchos estudiantes
+4. **Base para todo:** Strategy se integra CON Visitor
+
+### Proximos pasos sugeridos:
+
+1. **Ruta completa hacia el examen:**
+   - ✅ Ejercicio 06 (este) - DOMINAR Visitor puro
+   - ➡️ Ejercicio 07 - Integrar Visitor + Strategy + File I/O
+   - ➡️ Ejercicio 10 - Simulacro completo de examen
+   - 🔁 Repetir Ejercicio 06 hasta que sea automatico
+
+2. **Practica adicional CRITICA:**
+   - Implementa un tercer Visitor (CalculadorCostoInternacional)
+   - Agrega un cuarto tipo de paquete (PaqueteCongelado)
+   - Dibuja diagramas de flujo del double dispatch
+   - Explica Visitor a alguien en voz alta
+
+### Errores FATALES en el examen relacionados con Visitor:
+
+1. **Olvidar `this` en accept()** → Visitor no puede acceder a datos → 0 puntos
+2. **No implementar todos los metodos visitarXXX()** → Error compilacion → 0 puntos
+3. **Poner logica en accept()** → No es double dispatch → Puntos parciales
+4. **Confundir nombre de metodos** → visitarDocumento vs visitDocument → Error
+5. **No retornar valor** → Visitor no funciona → 0 puntos
+
+### Tips para el examen:
+
+- ⏱️ **Tiempo:** Dedica MIN 30 minutos al Visitor (no apures esto)
+- 📝 **Plantilla:** Memoriza la estructura de ambas interfaces
+- ✅ **Verificacion:** Prueba CADA visitor con CADA tipo de objeto
+- 🔍 **Prioridad:** Si falla algo, que NO sea Visitor
+- 💡 **Estrategia:** Implementa Visitor PRIMERO, luego Strategy
+
+### Relacion Visitor - Strategy:
+
+```
+Strategy: CUAL tarifa usar (Diurna vs Nocturna)
+Visitor: COMO calcular usando esa tarifa
+
+En el examen:
+1. Estableces Strategy (tarifa diurna)
+2. Aplicas Visitor Ganancias (usa la tarifa actual)
+3. Cambias Strategy (tarifa nocturna)
+4. Aplicas Visitor Ganancias OTRA VEZ (usa la nueva tarifa)
+```
+
+---
+
+**Si dominas este ejercicio, tienes el 35% del examen garantizado. Visitor es EL patron mas importante - dedica el tiempo necesario para dominarlo COMPLETAMENTE.**
