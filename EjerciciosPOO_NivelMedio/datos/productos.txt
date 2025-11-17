@@ -1,0 +1,6 @@
+5
+E001,Laptop,799.99,Electronico,24
+R001,Camisa,29.99,Ropa,M
+A001,Leche,2.50,Alimento,2024-12-15
+E002,Mouse,25.00,Electronico,12
+R002,Pantalon,45.00,Ropa,L

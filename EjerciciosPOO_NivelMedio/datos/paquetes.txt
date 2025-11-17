@@ -1,0 +1,4 @@
+3
+DOC001,0.5,Documento,50
+CAJ001,3.2,Caja,30,40,25
+FRG001,1.5,Fragil,500.00

@@ -1,4 +1,4 @@
-# CHECKLIST PRE-EXAMEN - Revisión Final
+si# CHECKLIST PRE-EXAMEN - Revisión Final
 
 **Objetivo:** Verificación completa antes del examen para asegurar que dominas todos los conceptos clave.
 
@@ -14,6 +14,95 @@
 ---
 
 ## PARTE 1: STRATEGY PATTERN (10 items)
+
+### ¿Qué es Strategy?
+
+**Definición:**
+El patrón Strategy permite encapsular diferentes algoritmos (estrategias) en clases separadas que implementan una interfaz común, permitiendo cambiar el comportamiento de un objeto en tiempo de ejecución sin modificar su código.
+
+**Problema que resuelve:**
+Evita tener largas cadenas de if-else o switch cuando necesitas diferentes variaciones de un algoritmo.
+
+**Código de ejemplo:**
+
+```java
+// Interface Strategy
+public interface EstrategiaDescuento {
+    double calcularPrecioFinal(double precio);
+}
+
+// Estrategia Concreta 1
+public class DescuentoPorcentual implements EstrategiaDescuento {
+    private double porcentaje;
+
+    public DescuentoPorcentual(double porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+
+    @Override
+    public double calcularPrecioFinal(double precio) {
+        return precio * (1 - porcentaje/100);
+    }
+}
+
+// Estrategia Concreta 2
+public class DescuentoFijo implements EstrategiaDescuento {
+    private double monto;
+
+    public DescuentoFijo(double monto) {
+        this.monto = monto;
+    }
+
+    @Override
+    public double calcularPrecioFinal(double precio) {
+        double resultado = precio - monto;
+        return resultado < 0 ? 0 : resultado;
+    }
+}
+
+// Context que usa la estrategia
+public class CarritoCompras {
+    private EstrategiaDescuento estrategia;
+
+    public void setEstrategia(EstrategiaDescuento estrategia) {
+        this.estrategia = estrategia;
+    }
+
+    public double calcularTotal(double subtotal) {
+        // Usa la estrategia actual
+        return estrategia.calcularPrecioFinal(subtotal);
+    }
+}
+
+// Uso en Main
+CarritoCompras carrito = new CarritoCompras();
+carrito.setEstrategia(new DescuentoPorcentual(15));  // 15% descuento
+double total1 = carrito.calcularTotal(100);  // $85
+
+carrito.setEstrategia(new DescuentoFijo(20));  // $20 descuento
+double total2 = carrito.calcularTotal(100);  // $80
+```
+
+**Errores comunes:**
+
+- NO implementar todos los métodos de la interface
+- NO validar si la estrategia es null antes de usarla
+- Usar if-else en lugar de Strategy cuando deberías usar el patrón
+- Olvidar que cada estrategia puede tener sus propios atributos (porcentaje, monto, etc.)
+- No usar `@Override` al implementar la interface
+- Confundir Strategy con Factory
+
+**Cuándo usar Strategy vs if-else:**
+
+USAR STRATEGY cuando:
+- Tienes 3+ variaciones del mismo algoritmo
+- Las variaciones pueden cambiar en runtime
+- Quieres código extensible (agregar nuevas estrategias sin modificar código existente)
+
+USAR IF-ELSE cuando:
+- Solo tienes 2 opciones simples
+- La lógica nunca cambia en runtime
+- No planeas agregar más opciones
 
 ### Conceptos Fundamentales
 - [ ] Puedo explicar qué problema resuelve Strategy
@@ -33,11 +122,139 @@
 - [ ] Entiendo cuándo usar interface vs abstract class
 - [ ] Sé testear el patrón Strategy
 
+**Verificación práctica:**
+Escribe de memoria (sin ver ejemplos) una interface con un método, dos clases que la implementen con lógica diferente, y un Context que use la estrategia. Si no puedes, repasa GUIA_PATRON_STRATEGY.md
+
 **Si marcaste menos de 8:** Repasa GUIA_PATRON_STRATEGY.md
 
 ---
 
 ## PARTE 2: VISITOR PATTERN (10 items)
+
+### ¿Qué es Visitor?
+
+**Definición:**
+El patrón Visitor permite agregar nuevas operaciones a una jerarquía de clases sin modificar esas clases. Separa los algoritmos de los objetos sobre los que operan.
+
+**Concepto clave - Double Dispatch:**
+El método correcto se selecciona DOS veces:
+1. Primera vez: cuando llamas `elemento.accept(visitor)`
+2. Segunda vez: cuando accept() llama `visitor.visit(this)` - Java determina qué método visit usar según el tipo REAL de `this`
+
+**Código de ejemplo:**
+
+```java
+// Interface Visitor
+public interface VisitorCosto {
+    double visitarAuto(Auto auto);
+    double visitarSUV(SUV suv);
+    double visitarCamioneta(Camioneta camioneta);
+}
+
+// Interface Element
+public interface Vehiculo {
+    double accept(VisitorCosto visitor);
+}
+
+// Elemento Concreto 1
+public class Auto implements Vehiculo {
+    private double kilometraje;
+
+    public Auto(double kilometraje) {
+        this.kilometraje = kilometraje;
+    }
+
+    @Override
+    public double accept(VisitorCosto visitor) {
+        // CLAVE: pasa "this" al visitor
+        return visitor.visitarAuto(this);
+    }
+
+    public double getKilometraje() {
+        return kilometraje;
+    }
+}
+
+// Elemento Concreto 2
+public class SUV implements Vehiculo {
+    private double kilometraje;
+
+    public SUV(double kilometraje) {
+        this.kilometraje = kilometraje;
+    }
+
+    @Override
+    public double accept(VisitorCosto visitor) {
+        return visitor.visitarSUV(this);  // Pasa THIS
+    }
+
+    public double getKilometraje() {
+        return kilometraje;
+    }
+}
+
+// Visitor Concreto
+public class CalculadorMantenimiento implements VisitorCosto {
+    @Override
+    public double visitarAuto(Auto auto) {
+        // Auto: $0.05 por km
+        return auto.getKilometraje() * 0.05;
+    }
+
+    @Override
+    public double visitarSUV(SUV suv) {
+        // SUV: $0.08 por km (más costoso)
+        return suv.getKilometraje() * 0.08;
+    }
+
+    @Override
+    public double visitarCamioneta(Camioneta camioneta) {
+        // Camioneta: $0.10 por km (aún más costoso)
+        return camioneta.getKilometraje() * 0.10;
+    }
+}
+
+// Uso en Main
+List<Vehiculo> flota = new ArrayList<>();
+flota.add(new Auto(10000));
+flota.add(new SUV(15000));
+
+VisitorCosto calculador = new CalculadorMantenimiento();
+
+for (Vehiculo v : flota) {
+    double costo = v.accept(calculador);  // Polimorfismo
+    System.out.println("Costo: $" + costo);
+}
+```
+
+**Errores comunes:**
+
+- ERROR FATAL: Olvidar pasar `this` en accept(): `visitor.visit()` en lugar de `visitor.visit(this)`
+- NO implementar todos los métodos visitXXX() en la interface Visitor
+- NO usar @Override en accept()
+- Confundir cuál clase llama a cuál (Element llama a Visitor, NO al revés)
+- Agregar nuevos elementos es costoso (tienes que modificar TODAS las interfaces/visitors)
+- No retornar valores cuando el visitor necesita calcular algo
+
+**Cuándo usar Visitor:**
+
+USAR VISITOR cuando:
+- Tu estructura de clases es ESTABLE (raramente agregas nuevos tipos)
+- Necesitas MUCHAS operaciones diferentes sobre la misma estructura
+- Quieres separar algoritmos de la estructura de datos
+
+NO USAR VISITOR cuando:
+- Agregas nuevos tipos de elementos frecuentemente
+- Solo tienes 1-2 operaciones simples
+
+**Ventajas:**
+- Agregar nuevas operaciones es fácil (solo creas un nuevo Visitor)
+- Separa la lógica de la estructura
+- Toda la lógica de una operación está en una clase
+
+**Desventajas:**
+- Agregar nuevos elementos requiere modificar TODOS los Visitors
+- Más complejo que otros patrones
 
 ### Conceptos Fundamentales
 - [ ] Puedo explicar qué es double dispatch
@@ -57,11 +274,116 @@
 - [ ] Sé cómo dar estado a un Visitor (acumuladores)
 - [ ] Puedo aplicar Visitor a una estructura tipo árbol
 
+**Verificación práctica:**
+Escribe de memoria: (1) Interface Visitor con visit(ElementA), visit(ElementB), (2) Interface Element con accept(Visitor), (3) Implementación de accept() en ElementA que pase `this`. Si fallas en el paso 3, REPASA AHORA.
+
 **Si marcaste menos de 8:** Repasa GUIA_PATRON_VISITOR.md
 
 ---
 
 ## PARTE 3: SINGLETON PATTERN (10 items)
+
+### ¿Qué es Singleton?
+
+**Definición:**
+El patrón Singleton garantiza que una clase tenga UNA SOLA instancia en toda la aplicación y provee un punto de acceso global a esa instancia.
+
+**Tres características obligatorias:**
+1. Constructor PRIVADO (nadie puede hacer `new`)
+2. Instancia estática PRIVADA (guardada dentro de la clase)
+3. Método público getInstance() estático (única forma de obtener la instancia)
+
+**Código de ejemplo - Lazy Initialization:**
+
+```java
+public class SistemaBancario {
+    // 1. Instancia estática privada
+    private static SistemaBancario instance = null;
+
+    // 2. Constructor PRIVADO
+    private SistemaBancario() {
+        System.out.println("Sistema inicializado");
+    }
+
+    // 3. Método público getInstance()
+    public static SistemaBancario getInstance() {
+        if (instance == null) {
+            instance = new SistemaBancario();
+        }
+        return instance;
+    }
+
+    // Métodos normales del sistema
+    public void procesar() {
+        System.out.println("Procesando...");
+    }
+}
+
+// Uso en Main
+SistemaBancario sistema1 = SistemaBancario.getInstance();
+SistemaBancario sistema2 = SistemaBancario.getInstance();
+
+System.out.println(sistema1 == sistema2);  // true - MISMA instancia
+```
+
+**Código de ejemplo - Eager Initialization:**
+
+```java
+public class ConfiguracionGlobal {
+    // Instancia se crea INMEDIATAMENTE al cargar la clase
+    private static ConfiguracionGlobal instance = new ConfiguracionGlobal();
+
+    private ConfiguracionGlobal() {
+        // Constructor privado
+    }
+
+    public static ConfiguracionGlobal getInstance() {
+        return instance;  // Ya existe, solo retorna
+    }
+}
+```
+
+**Errores comunes:**
+
+- ERROR FATAL: Constructor PÚBLICO (rompe completamente el patrón)
+- NO validar si instance es null en getInstance() (retorna null la primera vez)
+- Olvidar hacer getInstance() estático
+- Olvidar hacer la instancia estática
+- Usar `==` en lugar de equals() para comparar... ESPERA NO, en Singleton SÍ usas `==` para verificar que son la misma instancia
+- No inicializar atributos en el constructor privado
+
+**Cuándo usar Singleton:**
+
+USAR SINGLETON cuando:
+- Necesitas exactamente UNA instancia (configuración global, sistema central)
+- Quieres control centralizado sobre un recurso compartido
+- Necesitas acceso global a esa instancia
+
+NO USAR SINGLETON cuando:
+- Necesitas múltiples instancias independientes
+- Dificulta testing (estado global compartido)
+- Crea acoplamiento excesivo
+
+**Lazy vs Eager:**
+
+Lazy (crea cuando se necesita):
+```java
+private static Singleton instance = null;  // No existe aún
+public static Singleton getInstance() {
+    if (instance == null) {
+        instance = new Singleton();  // Crea cuando se pide
+    }
+    return instance;
+}
+```
+
+Eager (crea inmediatamente):
+```java
+private static Singleton instance = new Singleton();  // Ya existe
+public static Singleton getInstance() {
+    return instance;  // Solo retorna
+}
+```
 
 ### Conceptos Fundamentales
 - [ ] Puedo listar las 3 características de Singleton
@@ -83,7 +405,10 @@
 - [ ] Sé cómo hacer Singleton serializable (readResolve)
 - [ ] Conozco cómo usar enum para Singleton
 
-**Si marcaste menos de 7:** Repasa teoría de Singleton
+**Verificación práctica:**
+Escribe de memoria las 3 partes: (1) instancia estática privada, (2) constructor privado, (3) getInstance(). Si olvidas hacer el constructor privado, has FALLADO. Repasa antes del examen.
+
+**Si marcaste menos de 7:** Repasa GUIA_PATRON_SINGLETON.md
 
 ---
 
@@ -110,6 +435,138 @@
 
 ## PARTE 5: FILE I/O (12 items)
 
+### ¿Qué es File I/O?
+
+**Definición:**
+File I/O (Input/Output) es la capacidad de leer datos desde archivos y escribir datos a archivos. Es OBLIGATORIO en el examen para cargar la flota de vehículos.
+
+**Código de ejemplo - Lectura con try-with-resources:**
+
+```java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+public class LectorArchivo {
+    public void leerArchivo(String rutaArchivo) {
+        // try-with-resources - cierra automáticamente
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(rutaArchivo, StandardCharsets.UTF_8))) {
+
+            String linea;
+            // Patrón estándar de lectura
+            while ((linea = reader.readLine()) != null) {
+                System.out.println("Leí: " + linea);
+
+                // Parsear CSV
+                String[] datos = linea.split(",");
+                String codigo = datos[0];
+                String nombre = datos[1];
+                double precio = Double.parseDouble(datos[2]);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: Archivo no encontrado");
+        } catch (IOException e) {
+            System.out.println("ERROR: al leer archivo");
+        }
+    }
+}
+```
+
+**Ejemplo archivo fleet.txt (formato del examen):**
+```
+3
+VIN001,Toyota,Camry,Auto,14.5
+VIN002,Ford,Explorer,SUV,10.2
+VIN003,Chevrolet,Silverado,Camioneta,8.5
+VIN001,Normal,120,80,95
+VIN002,Sport,200,150
+VIN003,Eco,180,90,110,75
+```
+
+**Código de ejemplo - Escritura:**
+
+```java
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class EscritorArchivo {
+    public void escribirArchivo(String rutaArchivo) {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(rutaArchivo, StandardCharsets.UTF_8))) {
+
+            writer.write("Linea 1");
+            writer.newLine();  // IMPORTANTE: nueva línea
+            writer.write("Linea 2");
+            writer.newLine();
+
+        } catch (IOException e) {
+            System.out.println("ERROR: al escribir archivo");
+        }
+    }
+}
+```
+
+**Errores comunes:**
+
+- NO usar try-with-resources (olvidas cerrar el archivo → memory leak)
+- NO incluir newLine() después de escribir (todo queda en una línea)
+- Olvidar importar `java.io.*` y `java.nio.charset.StandardCharsets`
+- NO validar que la línea no sea null antes de parsear
+- NO manejar FileNotFoundException separado de IOException
+- Usar `new FileReader(archivo)` sin especificar charset
+- NO validar que el array tiene suficientes elementos después de split()
+- Parsear números sin try-catch (NumberFormatException)
+
+**Patrón de lectura estándar del examen:**
+
+```java
+try (BufferedReader reader = new BufferedReader(
+        new FileReader("fleet.txt", StandardCharsets.UTF_8))) {
+
+    // 1. Leer cantidad de vehículos
+    int n = Integer.parseInt(reader.readLine());
+
+    // 2. Leer N vehículos
+    for (int i = 0; i < n; i++) {
+        String linea = reader.readLine();
+        String[] datos = linea.split(",");
+
+        String vin = datos[0];
+        String marca = datos[1];
+        String modelo = datos[2];
+        String tipo = datos[3];
+        double eficiencia = Double.parseDouble(datos[4]);
+
+        // Crear vehículo con Factory
+        Vehiculo v = VehiculoFactory.crear(tipo, vin, marca, modelo, eficiencia);
+        flota.add(v);
+    }
+
+    // 3. Leer viajes (cantidad variable de líneas)
+    String linea;
+    while ((linea = reader.readLine()) != null) {
+        String[] datos = linea.split(",");
+        String vin = datos[0];
+        String modo = datos[1];
+
+        // Resto son distancias
+        for (int i = 2; i < datos.length; i++) {
+            double distancia = Double.parseDouble(datos[i]);
+            // Procesar viaje...
+        }
+    }
+
+} catch (FileNotFoundException e) {
+    System.out.println("ERROR: Archivo fleet.txt no encontrado");
+} catch (IOException e) {
+    System.out.println("ERROR: al leer archivo");
+}
+```
+
 ### Lectura de Archivos
 - [ ] Sé usar BufferedReader para leer archivos
 - [ ] Puedo leer línea por línea con readLine()
@@ -132,7 +589,10 @@
 - [ ] Puedo validar si un archivo existe antes de leer
 - [ ] Conozco Files.exists(), Files.createDirectories()
 
-**Si marcaste menos de 9:** Repasa ejercicios de File I/O
+**Verificación práctica:**
+Escribe de memoria el código para leer un archivo línea por línea con try-with-resources. Si olvidas cerrar el archivo automáticamente, REPASA. File I/O es el 20% del examen.
+
+**Si marcaste menos de 9:** Repasa GUIA_FILE_IO.md y Ejercicio 05
 
 ---
 

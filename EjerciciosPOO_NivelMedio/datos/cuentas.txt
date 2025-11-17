@@ -1,0 +1,4 @@
+3
+CTA001,Juan Perez,5000.00
+CTA002,Maria Lopez,3000.00
+CTA003,Carlos Ruiz,7500.00

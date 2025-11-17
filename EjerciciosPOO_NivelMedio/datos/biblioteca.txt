@@ -1,0 +1,5 @@
+4
+L001,Cien Años de Soledad,1967,Libro,Gabriel Garcia Marquez,417
+R001,National Geographic,2022,Revista,Marzo,245
+D001,Inception,2010,DVD,148,Christopher Nolan
+L002,El Quijote,1605,Libro,Miguel de Cervantes,863
