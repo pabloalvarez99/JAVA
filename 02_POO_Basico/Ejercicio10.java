@@ -37,7 +37,21 @@
 // - Constructor que reciba nombre, edad y altura
 // - Método presentarse() que imprima la información de la persona
 // - Método esMayorDeEdad() que retorne true si la edad >= 18
-
+class Persona {
+    private String nombre;
+    private int edad;
+    private double altura;
+    
+    public Persona(String nombre; int edad; double altura) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.altura = altura;
+    } 
+    public String presentarse() {
+        return "Hola, soy " + nombre +", tengo " + edad + "años y mido " + double + "m"; 
+    } 
+    
+}
 
 
 
