@@ -138,10 +138,11 @@ class Biblioteca {
         return cont;
     }
     public Libro libroMasAntiguo() {
-        Libro libroMasAntiguo;
+        Autor autor = null;
+        Libro libroMasAntiguo = null;
         int añoMenor = 3000;
         for (int i = 0; i < cantidadLibros; i++) {
-            if (libros[i].getAño() > añoMenor) {
+            if (libros[i].getAño() < añoMenor) {
                 añoMenor = libros[i].getAño();
                 libroMasAntiguo = libros[i]; 
             }   
@@ -150,35 +151,30 @@ class Biblioteca {
     }
 }
 
-
-
-
-
-
-
-
-
-// TODO: Crea la clase Biblioteca
-
-
-
-
-
-
-
-
-
 public class Ejercicio13 {
     public static void main(String[] args) {
         // TODO: Crea autores
         // Ejemplo: Autor autor1 = new Autor("Gabriel García Márquez", "Colombiana");
-
+        Autor autor1 = new Autor("Pablo", "Chileno");
+        Autor autor2 = new Autor("Pablo2", "Chileno2");
+        Autor autor3 = new Autor("Pablo3", "Chileno3");
 
 
 
         // TODO: Crea libros con sus autores
         // Ejemplo: Libro libro1 = new Libro("Cien años de soledad", autor1, 1967, 417);
-
+        Libro libro1 = new Libro("Cien años de soledad", autor1, 1967, 417);
+        Libro libro2 = new Libro("Cien años de soledad2", autor2, 1968, 418);
+        Libro libro3 = new Libro("Cien años de soledad3", autor3, 1969, 419);
+        Libro libro4 = new Libro("Cien años de soledad4", autor2, 1970, 420);
+        Libro libro5 = new Libro("Cien años de soledad5", autor3, 1971, 421);
+        Biblioteca biblioteca = new Biblioteca();
+        biblioteca.agregarLibro(libro1);
+        biblioteca.agregarLibro(libro2);
+        biblioteca.agregarLibro(libro3);
+        biblioteca.agregarLibro(libro4);
+        biblioteca.agregarLibro(libro5);
+        System.out.println(biblioteca.buscarPorAutor("Cien anos de soledad2"));
 
 
 

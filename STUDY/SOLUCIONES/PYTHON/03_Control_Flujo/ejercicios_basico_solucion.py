@@ -20,6 +20,18 @@ def multiples_of(n, limit):
     return [x for x in range(n, limit + 1, n)]
 
 
+
+def sum_to_n(n):
+    """Retorna suma de 1..n."""
+    if n <= 0:
+        return 0
+    return sum(range(1, n + 1))
+
+
+def all_positive(nums):
+    """Retorna True si todos son > 0."""
+    return all(n > 0 for n in nums)
+
 def main():
     print("countdown:", countdown(5))
     print("neg:", first_negative([1, 2, -1, 3]))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

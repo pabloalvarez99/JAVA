@@ -20,6 +20,18 @@ def reverse_list(items):
     return []
 
 
+
+def max_value(nums):
+    """Retorna maximo o None si lista vacia."""
+    # TODO: implementa la logica
+    return None
+
+
+def unique_count(items):
+    """Retorna cantidad de elementos unicos."""
+    # TODO: implementa la logica
+    return 0
+
 def main():
     print("pares:", sum_even([1, 2, 3, 4]))
     print("vocales:", count_vowels("banana"))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

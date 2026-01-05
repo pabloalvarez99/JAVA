@@ -26,6 +26,16 @@ def venv_message():
     return "venv activo" if sys.prefix != base else "venv no activo"
 
 
+
+def is_windows():
+    """Retorna True si el SO es Windows."""
+    return os.name == "nt"
+
+
+def path_separator():
+    """Retorna separador de rutas del sistema."""
+    return os.sep
+
 def main():
     print("ok:", check_version(3, 11))
     print("summary:", env_summary())
@@ -34,3 +44,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

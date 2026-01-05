@@ -14,7 +14,21 @@ impl Punto {
     }
 }
 
+
+struct Rect {
+    w: i32,
+    h: i32,
+}
+
+impl Rect {
+    fn area(&self) -> i32 {
+        // TODO: retorna area
+        0
+    }
+}
+
 fn main() {
     let p = Punto { x: 2, y: 3 };
     println!("norma: {}", p.norma());
 }
+

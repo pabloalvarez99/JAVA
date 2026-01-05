@@ -20,6 +20,18 @@ def call_n_times(fn, n, value):
     return value
 
 
+
+def compose_many(funcs):
+    """Compone varias funciones."""
+    # TODO: implementa la logica
+    return None
+
+
+def with_default(fn, default):
+    """Envuelve fn y retorna default si falla."""
+    # TODO: implementa la logica
+    return None
+
 def main():
     print("fib:", memo_fib(6))
     counter = make_counter()
@@ -29,3 +41,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

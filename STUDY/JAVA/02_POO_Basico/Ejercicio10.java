@@ -42,7 +42,7 @@ class Persona {
     private int edad;
     private double altura;
     
-    public void Persona(String nombre, int edad, double altura) {
+    public Persona(String nombre, int edad, double altura) {
         this.nombre = nombre;
         this.edad = edad;
         this.altura = altura;
@@ -60,5 +60,13 @@ class Persona {
 public class Ejercicio10 {
     public static void main() {
         Persona p1 = new Persona("Pablo", 26, 1.75);
-        Persona p2 = new Persona
+        Persona p2 = new Persona("Luis", 16, 1.70);
+        Persona p3 = new Persona("Maria", 30, 1.60);
+        System.out.println(p1.presentarse());
+        System.out.println("Es mayor de edad? " + p1.esMayorDeEDad());
+        System.out.println(p2.presentarse());
+        System.out.println("Es mayor de edad? " + p2.esMayorDeEDad());
+        System.out.println(p3.presentarse());
+        System.out.println("Es mayor de edad? " + p3.esMayorDeEDad());
     }
+}

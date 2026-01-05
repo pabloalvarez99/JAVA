@@ -31,6 +31,26 @@ def replace_in_file(path, mapping):
     Path(path).write_text(texto, encoding="utf-8")
 
 
+
+def csv_to_dict_by_key(path, key):
+    """Retorna dict key -> fila."""
+    out = {}
+    with Path(path).open(encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if key in row:
+                out[row[key]] = row
+    return out
+
+
+def safe_remove(path):
+    """Elimina archivo si existe."""
+    path = Path(path)
+    if not path.exists():
+        return False
+    path.unlink()
+    return True
+
 def main():
     base = Path(__file__).parent
     a = base / "a.csv"
@@ -47,3 +67,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

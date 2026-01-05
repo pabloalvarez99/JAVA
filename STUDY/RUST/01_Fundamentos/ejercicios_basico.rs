@@ -12,7 +12,19 @@ fn is_even(n: i32) -> bool {
     false
 }
 
+
+fn abs_val(n: i32) -> i32 {
+    // TODO: retorna valor absoluto
+    0
+}
+
+fn max_two(a: i32, b: i32) -> i32 {
+    // TODO: retorna el mayor
+    0
+}
+
 fn main() {
     println!("sum: {}", sum_range(5));
     println!("even: {}", is_even(4));
 }
+

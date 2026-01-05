@@ -27,6 +27,28 @@ def pairs_with_squares(n):
     return [(i, i ** 2) for i in range(1, n + 1)]
 
 
+
+def group_by_first_letter(words):
+    """Agrupa palabras por primera letra."""
+    res = {}
+    for word in words:
+        if not word:
+            continue
+        res.setdefault(word[0], []).append(word)
+    return res
+
+
+def split_by_parity(nums):
+    """Retorna (pares, impares)."""
+    pares = []
+    impares = []
+    for n in nums:
+        if n % 2 == 0:
+            pares.append(n)
+        else:
+            impares.append(n)
+    return (pares, impares)
+
 def main():
     print("merge:", merge_dicts_sum({"a": 1}, {"a": 2, "b": 3}))
     print("unique:", unique_preserve([1, 2, 2, 3]))
@@ -35,3 +57,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

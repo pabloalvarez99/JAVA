@@ -20,6 +20,18 @@ def repeat(texto, n):
     return ""
 
 
+
+def clamp(n, min_value, max_value):
+    """Limita n al rango."""
+    # TODO: implementa la logica
+    return n
+
+
+def mean(nums):
+    """Retorna promedio o 0 si vacio."""
+    # TODO: implementa la logica
+    return 0
+
 def main():
     print("area:", area_rect(2, 3))
     print("div:", safe_div(10, 0))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

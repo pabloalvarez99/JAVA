@@ -27,6 +27,30 @@ def write_json(path, data):
     Path(path).write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
+
+def filter_csv_rows(path, col, value):
+    """Filtra filas de CSV por valor."""
+    out = []
+    with Path(path).open(encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row.get(col) == str(value):
+                out.append(row)
+    return out
+
+
+def write_csv_dicts(path, rows):
+    """Escribe lista de dicts a CSV."""
+    path = Path(path)
+    if not rows:
+        path.write_text("", encoding="utf-8")
+        return
+    fieldnames = list(rows[0].keys())
+    with path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
 def main():
     base = Path(__file__).parent
     csv_path = base / "mini.csv"
@@ -41,3 +65,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

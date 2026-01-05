@@ -20,6 +20,18 @@ def fizzbuzz(n):
     return []
 
 
+
+def running_total(nums):
+    """Retorna lista de sumas acumuladas."""
+    # TODO: implementa la logica
+    return []
+
+
+def first_repeat(nums):
+    """Retorna el primer repetido o None."""
+    # TODO: implementa la logica
+    return None
+
 def main():
     print("menu:", menu_process(["a", "b", "salir", "c"]))
     print("first:", find_first_multiple(7, 10, 30))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -20,6 +20,18 @@ def top_k_dict(d, k):
     return []
 
 
+
+def histogram(nums):
+    """Retorna dict numero -> conteo."""
+    # TODO: implementa la logica
+    return {}
+
+
+def dict_diff(a, b):
+    """Retorna pares de a que no estan en b."""
+    # TODO: implementa la logica
+    return {}
+
 def main():
     print("rank:", rank_scores([("ana", 3), ("bob", 5), ("zoe", 4)]))
     print("comb:", comb2([1, 2, 3]))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

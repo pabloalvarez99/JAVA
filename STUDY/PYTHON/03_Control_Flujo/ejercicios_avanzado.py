@@ -20,6 +20,18 @@ def chunk_list(items, size):
     return []
 
 
+
+def binary_search(nums, target):
+    """Busca target en lista ordenada."""
+    # TODO: implementa la logica
+    return -1
+
+
+def merge_sorted(a, b):
+    """Merge de listas ordenadas."""
+    # TODO: implementa la logica
+    return []
+
 def main():
     print("orden:", bubble_sort([4, 3, 2, 1]))
     print("prime:", is_prime(11))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

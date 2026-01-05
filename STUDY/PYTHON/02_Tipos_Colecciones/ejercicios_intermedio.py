@@ -20,6 +20,18 @@ def pairs_with_squares(n):
     return []
 
 
+
+def group_by_first_letter(words):
+    """Agrupa palabras por primera letra."""
+    # TODO: implementa la logica
+    return {}
+
+
+def split_by_parity(nums):
+    """Retorna (pares, impares)."""
+    # TODO: implementa la logica
+    return ([], [])
+
 def main():
     print("merge:", merge_dicts_sum({"a": 1}, {"a": 2, "b": 3}))
     print("unique:", unique_preserve([1, 2, 2, 3]))
@@ -28,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

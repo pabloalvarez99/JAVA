@@ -17,6 +17,21 @@ def build_parser():
     return parser
 
 
+
+def build_remove_parser():
+    """Parser para comando remove."""
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest="cmd")
+    rm = sub.add_parser("remove")
+    rm.add_argument("id")
+    return parser
+
+
+def parse_cmd(argv=None):
+    """Retorna el subcomando."""
+    args = build_parser().parse_args(argv)
+    return args.cmd
+
 def main(argv=None):
     args = build_parser().parse_args(argv)
     print("cmd:", args.cmd)
@@ -24,3 +39,4 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main(["add", "--titulo", "leer"])
+

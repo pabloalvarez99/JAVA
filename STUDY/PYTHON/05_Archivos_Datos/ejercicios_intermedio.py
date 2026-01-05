@@ -24,6 +24,18 @@ def write_json(path, data):
     pass
 
 
+
+def filter_csv_rows(path, col, value):
+    """Filtra filas de CSV por valor."""
+    # TODO: implementa la logica
+    return []
+
+
+def write_csv_dicts(path, rows):
+    """Escribe lista de dicts a CSV."""
+    # TODO: implementa la logica
+    pass
+
 def main():
     base = Path(__file__).parent
     csv_path = base / "mini.csv"
@@ -38,3 +50,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

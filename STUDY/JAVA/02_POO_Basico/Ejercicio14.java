@@ -18,7 +18,7 @@
  *    - Getter para completada
  *    - Método "completar()" - marca la tarea como completada
  *    - Método "toString()" - retorna "[X] descripcion" si está completada, "[ ] descripcion" si no
- *
+*
  * 3. Crea una clase "ListaTareas" con:
  *    - Atributo privado: tareas (ArrayList<Tarea>)
  *    - Constructor sin parámetros (inicializa el ArrayList vacío)
@@ -46,54 +46,55 @@
  * - Recorrido inverso para eliminar durante iteración
  */
 
+
+
+
+
 import java.util.ArrayList;
-
-// TODO: Crea la clase Tarea
-
-
-
-
-
-
-
-
-// TODO: Crea la clase ListaTareas
-
-
-
-
-
-
-
-
-
-
-public class Ejercicio14 {
-    public static void main(String[] args) {
-        // TODO: Crea una lista de tareas
-
-
-        // TODO: Agrega 5 tareas
-
-
-
-
-
-
-        // TODO: Completa algunas tareas (índices 1 y 3)
-
-
-        // TODO: Muestra la lista
-
-
-        // TODO: Muestra estadísticas
-
-
-        // TODO: Limpia las completadas
-
-
-        // TODO: Muestra la lista actualizada
-
-
+class Tarea {
+    private String descripcion;
+    private boolean completada;
+    public Tarea(String descripcion) {
+        this.descripcion = descripcion;
+        this.completada = false;
+    }
+    public String getDescripcion() {return descripcion;}
+    public boolean getCompletada() {return completada;}
+    public void completar() {
+        completada = true;
+    }
+    public String toString() {
+        if (completada == true) {
+            return "[X] " + descripcion;
+        } else {
+            return "[ ] " + descripcion;
+        }
+    }
+}
+class ListaTareas {
+    private ArrayList<Tarea> tareas;
+    public ListaTareas() {
+        tareas = new ArrayList<>();
+    }
+    public void agregarTarea(String descripcion) {
+        Tarea tarea = new Tarea(descripcion);
+        tareas.add(tarea);
+    }
+    public void completarTarea(int indice) {
+        tareas.get(indice).completar();
+    }
+    public void eliminarTarea(int indice) {
+        tareas.remove(indice);
+    }
+    public void mostrarTareas() {
+        for (int i = 0; i < tareas.size(); i ++) {
+            System.out.println(tareas.get(i).toString());
+        }
+    }
+    public void cantidadPendientes() {
+        int cantidadPendientes = 0;
+        for (int i = 0; i < tareas.size(); i++) {
+            
+        }
     }
 }

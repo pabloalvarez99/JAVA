@@ -12,6 +12,24 @@ fn describe(e: Estado) -> String {
     String::new()
 }
 
+
+struct Usuario {
+    nombre: String,
+    activo: bool,
+}
+
+impl Usuario {
+    fn activar(&mut self) {
+        // TODO: marca activo
+    }
+
+    fn is_active(&self) -> bool {
+        // TODO: retorna estado
+        false
+    }
+}
+
 fn main() {
     println!("desc: {}", describe(Estado::Ok(3)));
 }
+

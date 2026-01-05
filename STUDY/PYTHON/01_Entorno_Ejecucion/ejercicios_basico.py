@@ -23,6 +23,18 @@ def script_dir():
     return Path(".")
 
 
+
+def executable_path():
+    """Retorna ruta del ejecutable actual."""
+    # TODO: usa sys.executable
+    return ""
+
+
+def home_dir():
+    """Retorna el directorio home."""
+    # TODO: usa Path.home()
+    return Path(".")
+
 def main():
     print("version:", python_version_tuple())
     print("venv:", is_venv_active())
@@ -31,3 +43,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

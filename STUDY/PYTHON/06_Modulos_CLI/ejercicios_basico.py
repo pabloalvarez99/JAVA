@@ -10,6 +10,18 @@ def build_parser():
     return parser
 
 
+
+def count_args(argv):
+    """Retorna cantidad de argumentos."""
+    # TODO: implementa la logica
+    return 0
+
+
+def has_flag(argv, flag):
+    """Retorna True si flag esta en argv."""
+    # TODO: implementa la logica
+    return False
+
 def main(argv=None):
     args = build_parser().parse_args(argv)
     print("archivo:", getattr(args, "archivo", None))
@@ -18,3 +30,4 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main(["--archivo", "a.txt", "--palabra", "hola"])
+

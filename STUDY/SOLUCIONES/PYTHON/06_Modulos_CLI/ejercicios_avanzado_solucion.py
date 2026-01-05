@@ -19,6 +19,23 @@ def save_config(path, data):
     path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
+
+def merge_config(base, override):
+    """Combina dos dicts."""
+    res = dict(base)
+    if override:
+        res.update(override)
+    return res
+
+
+def ensure_config(path, default):
+    """Asegura config en disco."""
+    path = Path(path)
+    if not path.exists():
+        save_config(path, default)
+        return default
+    return load_config(path)
+
 def main():
     path = Path(__file__).with_name("config.json")
     save_config(path, {"tema": "claro"})
@@ -27,3 +44,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

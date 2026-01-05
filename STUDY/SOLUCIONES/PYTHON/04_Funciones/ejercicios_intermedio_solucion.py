@@ -19,6 +19,19 @@ def filter_by(fn, items):
     return [x for x in items if fn(x)]
 
 
+
+def reduce_sum(nums):
+    """Suma manualmente."""
+    total = 0
+    for n in nums:
+        total += n
+    return total
+
+
+def map_dict(fn, d):
+    """Aplica fn a valores del dict."""
+    return {k: fn(v) for k, v in d.items()}
+
 def main():
     print("apply:", apply(lambda x: x + 1, [1, 2, 3]))
     doble_mas_1 = compose(lambda x: x + 1, lambda x: x * 2)
@@ -28,3 +41,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

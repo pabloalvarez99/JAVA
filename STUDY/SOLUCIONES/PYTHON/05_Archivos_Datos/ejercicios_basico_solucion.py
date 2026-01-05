@@ -20,6 +20,19 @@ def count_words(path):
     return len(texto.split())
 
 
+
+def file_exists(path):
+    """Retorna True si el archivo existe."""
+    return Path(path).exists()
+
+
+def read_text(path):
+    """Lee texto o retorna "" si no existe."""
+    path = Path(path)
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8")
+
 def main():
     base = Path(__file__).parent
     p = base / "demo.txt"
@@ -30,3 +43,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

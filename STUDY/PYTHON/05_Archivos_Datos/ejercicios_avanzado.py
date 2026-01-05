@@ -17,6 +17,18 @@ def replace_in_file(path, mapping):
     pass
 
 
+
+def csv_to_dict_by_key(path, key):
+    """Retorna dict key -> fila."""
+    # TODO: implementa la logica
+    return {}
+
+
+def safe_remove(path):
+    """Elimina archivo si existe."""
+    # TODO: implementa la logica
+    return False
+
 def main():
     base = Path(__file__).parent
     a = base / "a.csv"
@@ -33,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

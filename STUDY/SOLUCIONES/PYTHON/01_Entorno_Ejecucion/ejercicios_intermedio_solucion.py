@@ -27,6 +27,16 @@ def read_env_report(path):
     return Path(path).read_text(encoding="utf-8").splitlines()
 
 
+
+def env_to_dict(prefix):
+    """Retorna dict con variables que inician con prefix."""
+    return {k: v for k, v in os.environ.items() if k.startswith(prefix)}
+
+
+def resolve_relative(path):
+    """Retorna ruta absoluta resuelta."""
+    return str(Path(path).expanduser().resolve())
+
 def main():
     print("json existe:", module_exists("json"))
     report = Path(__file__).with_name("env_report.txt")
@@ -36,3 +46,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

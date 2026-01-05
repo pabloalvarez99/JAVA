@@ -23,6 +23,18 @@ def venv_message():
     return ""
 
 
+
+def is_windows():
+    """Retorna True si el SO es Windows."""
+    # TODO: usa sys.platform u os.name
+    return False
+
+
+def path_separator():
+    """Retorna separador de rutas del sistema."""
+    # TODO: usa os.sep
+    return ""
+
 def main():
     print("ok:", check_version(3, 11))
     print("summary:", env_summary())
@@ -31,3 +43,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
