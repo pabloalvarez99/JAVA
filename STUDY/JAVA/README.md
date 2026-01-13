@@ -1,175 +1,211 @@
-# Java Learning Project - Complete Progression
+****# Java Learning Project - Complete Progression
 
-A comprehensive Java learning system from basics to advanced OOP, design patterns, and exam preparation.
+Sistema completo de aprendizaje de Java desde fundamentos hasta POO avanzada, patrones de diseño y preparación de exámenes.
 
 ## Quick Start
 
 ```bash
-# Compile & run an exercise
-compilar.bat 01_Fundamentos 1
+# Compilar y ejecutar un ejercicio
+Utilidades\compilar.bat 01_Fundamentos 1
 
-# Or manually
+# O manualmente
 cd 01_Fundamentos && javac Ejercicio1.java && java Ejercicio1
 ```
 
-**First time?** Open the project in VS Code - recommended extensions will be suggested automatically.
+**¿Primera vez?** Abre el proyecto en VS Code - las extensiones recomendadas se sugerirán automáticamente.
 
-## Essential Resources
+## Recursos Esenciales
 
-| Resource | Purpose |
-|----------|---------|
-| `PROGRESO.md` | Track completed exercises with checkboxes |
-| `REFERENCIA_RAPIDA.md` | Complete Java syntax reference |
-| `MAPA_APRENDIZAJE.md` | Visual concept dependency map |
-| `ERRORES_COMUNES.md` | Common errors and solutions |
+| Recurso | Propósito |
+|---------|-----------|
+| `PROGRESO.md` | Seguimiento de ejercicios completados |
+| `00_Documentacion/REFERENCIA_RAPIDA.md` | Referencia completa de sintaxis Java |
+| `MAPA_APRENDIZAJE.md` | Mapa visual de dependencias de conceptos |
+| `00_Documentacion/ERRORES_COMUNES.md` | Errores comunes y soluciones |
 
-## Project Structure
+## Estructura del Proyecto
 
 ```
 JAVA/
-├── 01_Fundamentos/           # Exercises 1-9: Basics
-├── 02_POO_Basico/            # Exercises 10-15: OOP
-├── 03_Colecciones/           # Exercises 16-20: Collections
-├── 04_Avanzado/              # Exercises 21-36: Advanced
-├── 05_Patrones_Diseno/       # 22 pattern exercises + exam prep
-│   ├── ejercicios/           # Exercise files
-│   ├── guias/                # Pattern guides
-│   ├── preparacion_examen/   # Cheat sheets, flashcards
-│   └── datos/                # Data files
-├── 06_Proyectos_Complejos/   # 10 full-system projects
-├── Proyectos/
-│   ├── SistemaChat/          # Chat system implementation
-│   ├── SistemaMetro/         # Metro system
-│   └── RentaCar/             # Exam solution (patterns demo)
-├── Documentacion/            # Guides, PDFs, references
-├── Utilidades/               # Test runners, utilities
-├── .vscode/                  # VS Code configuration (auto-setup)
 │
-├── PROGRESO.md               # Progress tracker
-├── REFERENCIA_RAPIDA.md      # Complete syntax reference
-├── MAPA_APRENDIZAJE.md       # Concept dependency map
-├── ERRORES_COMUNES.md        # Troubleshooting guide
-├── compilar.bat              # Compile & run
-├── verificar.bat             # Validate exercises compile
-└── limpiar.bat               # Clean .class files
+├── 00_Documentacion/           # Referencias y guías
+│   ├── Guias/                  # Tutoriales y guías de estudio
+│   ├── CheatSheets/            # Referencias rápidas
+│   ├── Examenes_PDF/           # PDFs de exámenes
+│   ├── REFERENCIA_RAPIDA.md    # Sintaxis Java completa
+│   └── ERRORES_COMUNES.md      # Troubleshooting
+│
+├── 01_Fundamentos/             # Ejercicios 1-9: Básicos
+├── 02_POO_Basico/              # Ejercicios 10-15: POO
+├── 03_Colecciones/             # Ejercicios 16-20: Colecciones
+├── 04_POO_Avanzado/            # Ejercicios 21-36: Avanzado
+├── 05_Patrones_Diseno/         # 22 ejercicios + guías de patrones
+│
+├── 06_Practica_Por_Tema/       # Ejercicios estilo examen por tema
+│   ├── 01_Recursion/
+│   ├── 02_Herencia/
+│   ├── 03_Colecciones/
+│   ├── 04_POO_Relaciones/      # 20 ejercicios + CHEATSHEET
+│   ├── 05_File_IO/
+│   ├── 06_Generics/
+│   ├── 07_Excepciones/
+│   └── 08_Estructuras_Datos/
+│
+├── 07_Practica_Por_Tipo/       # Ejercicios por tipo de habilidad
+│   ├── Debug/                  # Encontrar y corregir bugs
+│   ├── Tracing/                # Predecir salida de código
+│   ├── Diseno/                 # Diseño de **sistemas**
+│   ├── Algoritmos/             # Algoritmos **varios**
+│   └── Strings/                # Manipulación de strings
+│
+├── 08_Examenes_Simulacro/      # 5 exámenes completos (3h cada uno)
+│
+├── 09_Proyectos/               # Proyectos completos
+│   ├── RentaCar/               # Sistema de arriendo (patrones)
+│   ├── SistemaChat/            # Sistema de chat
+│   ├── SistemaMetro/           # Sistema de metro
+│   ├── UCN_Ay4/                # Sistema UCN personas-unidades
+│   ├── Biblioteca/             # Sistema de biblioteca
+│   └── Descripciones/          # 10 proyectos complejos (guías)
+│
+├── Utilidades/                 # Scripts y herramientas
+│   ├── compilar.bat            # Compilar y ejecutar
+│   ├── verificar.bat           # Validar que todo compila
+│   ├── limpiar.bat             # Limpiar archivos .class
+│   └── helpers/                # Utilidades Java
+│
+├── README.md                   # Este archivo
+├── PROGRESO.md                 # Seguimiento de progreso
+└── MAPA_APRENDIZAJE.md         # Mapa de conceptos
 ```
 
-## Learning Path
+## Ruta de Aprendizaje
 
 ```
-01_Fundamentos (9 exercises)         WEEK 1-2
-    │ Variables, loops, arrays, methods
-    ▼
-02_POO_Basico (6 exercises)          WEEK 3-4
-    │ Classes, inheritance, polymorphism
-    ▼
-03_Colecciones (5 exercises)         WEEK 5
-    │ ArrayList, HashMap, exceptions
-    ▼
-04_Avanzado (16 exercises)           WEEK 6-8
-    │ Algorithms, Streams, Generics
-    ▼
-05_Patrones_Diseno (22 exercises)    WEEK 9-10
-    │ Strategy, Visitor, Singleton, Factory
-    ▼
-06_Proyectos_Complejos (10 projects) WEEK 11-12
-    │ Full system implementations
+FASE 1: FUNDAMENTOS (Semana 1-2)
+┌─────────────────────────────────────────┐
+│  01_Fundamentos (9 ejercicios)          │
+│  Variables, loops, arrays, métodos      │
+└─────────────────┬───────────────────────┘
+                  ▼
+FASE 2: POO BÁSICO (Semana 3-4)
+┌─────────────────────────────────────────┐
+│  02_POO_Basico (6 ejercicios)           │
+│  Clases, herencia, polimorfismo         │
+└─────────────────┬───────────────────────┘
+                  ▼
+FASE 3: COLECCIONES (Semana 5)
+┌─────────────────────────────────────────┐
+│  03_Colecciones (5 ejercicios)          │
+│  ArrayList, HashMap, excepciones        │
+└─────────────────┬───────────────────────┘
+                  ▼
+FASE 4: AVANZADO (Semana 6-8)
+┌─────────────────────────────────────────┐
+│  04_POO_Avanzado (16 ejercicios)        │
+│  Algoritmos, Streams, Generics          │
+└─────────────────┬───────────────────────┘
+                  ▼
+FASE 5: PATRONES (Semana 9-10)
+┌─────────────────────────────────────────┐
+│  05_Patrones_Diseno (22 ejercicios)     │
+│  Strategy, Visitor, Singleton, Factory  │
+└─────────────────┬───────────────────────┘
+                  ▼
+FASE 6: PRÁCTICA EXAMEN (Semana 11-12)
+┌─────────────────────────────────────────┐
+│  06_Practica_Por_Tema                   │
+│  07_Practica_Por_Tipo                   │
+│  08_Examenes_Simulacro                  │
+└─────────────────────────────────────────┘
 ```
 
-**Total: 68 exercises + 3 projects = ~80-100 hours**
+**Total: ~100 ejercicios + 5 proyectos + 5 exámenes = ~100-120 horas**
 
-## Utility Scripts
+## Scripts de Utilidad
 
-| Script | Purpose | Example |
-|--------|---------|---------|
-| `compilar.bat` | Compile & run | `compilar.bat 02_POO_Basico 10` |
-| `verificar.bat` | Check all compile | `verificar.bat all` |
-| `limpiar.bat` | Remove .class files | `limpiar.bat` |
+| Script | Propósito | Ejemplo |
+|--------|-----------|---------|
+| `compilar.bat` | Compilar y ejecutar | `Utilidades\compilar.bat 02_POO_Basico 10` |
+| `verificar.bat` | Verificar compilación | `Utilidades\verificar.bat all` |
+| `limpiar.bat` | Limpiar .class | `Utilidades\limpiar.bat` |
 
-## Exercise Overview
+## Resumen de Ejercicios
 
-### 01_Fundamentos (1-9)
-| # | Topic | | # | Topic |
-|---|-------|-|---|-------|
-| 1 | Variables | | 6 | Switch |
-| 2 | Scanner | | 7 | Arrays |
-| 3 | If-else | | 8 | Methods |
-| 4 | While | | 9 | 2D Arrays |
-| 5 | For | | | |
+### Aprendizaje Progresivo (01-05)
 
-### 02_POO_Basico (10-15)
-Classes, Constructors, Linked List, Inheritance, Polymorphism, Interfaces
+| Carpeta | Ejercicios | Temas |
+|---------|------------|-------|
+| 01_Fundamentos | 1-9 | Variables, tipos, loops, arrays, métodos |
+| 02_POO_Basico | 10-15 | Clases, herencia, polimorfismo, interfaces |
+| 03_Colecciones | 16-20 | ArrayList, HashMap, HashSet, Queue |
+| 04_POO_Avanzado | 21-36 | Algoritmos, Generics, Streams, Threads |
+| 05_Patrones_Diseno | 22 | Strategy, Visitor, Singleton, Factory, Builder |
 
-### 03_Colecciones (16-20)
-ArrayList, Exceptions, HashMap, Queue, HashSet/TreeSet
+### Práctica para Examen (06-08)
 
-### 04_Avanzado (21-36)
-Sorting, Recursion, Generics, Stack, Binary Search, MergeSort,
-Enum/Optional, Streams/Lambdas, Patterns, Comparator, QuickSort,
-BST, File I/O, Builder/Observer, Threads, Advanced Collections
+| Carpeta | Contenido | Propósito |
+|---------|-----------|-----------|
+| 06_Practica_Por_Tema | 8 temas, ~12 ejercicios c/u | Dominar conceptos específicos |
+| 07_Practica_Por_Tipo | 5 tipos de ejercicio | Practicar habilidades específicas |
+| 08_Examenes_Simulacro | 5 exámenes completos | Simular condiciones reales (3h) |
 
-### 05_Patrones_Diseno (22 exercises)
-- **Guided (1-10):** Complete tutorials
-- **Independent (11-22):** Self-practice
-- **Ejercicio10:** Exact exam replica!
+### Proyectos (09)
 
-### 06_Proyectos_Complejos
-10 full-system implementations for advanced practice
+| Proyecto | Descripción | Patrones |
+|----------|-------------|----------|
+| RentaCar | Sistema de arriendo de vehículos | Strategy, Visitor |
+| SistemaChat | Sistema de mensajería | Observer |
+| SistemaMetro | Sistema de transporte | - |
+| UCN_Ay4 | Gestión personas-unidades | Asociación |
+| Biblioteca | Sistema de préstamos | Asociación |
 
-## Key Concepts Covered
+## Conceptos Cubiertos
 
-| Category | Topics |
-|----------|--------|
-| **Basics** | Variables, types, operators, control flow |
-| **OOP** | Classes, encapsulation, inheritance, polymorphism |
-| **Collections** | ArrayList, HashMap, HashSet, TreeSet, Queue |
-| **Algorithms** | Sorting (Bubble, Merge, Quick), Binary Search |
-| **Structures** | Stack, Queue, Linked List, BST |
-| **Patterns** | Singleton, Factory, Strategy, Visitor, Builder, Observer |
-| **Modern Java** | Streams, Lambdas, Optional, Generics |
-| **Advanced** | Threads, File I/O, Serialization |
+| Categoría | Temas |
+|-----------|-------|
+| **Básicos** | Variables, tipos, operadores, control de flujo |
+| **POO** | Clases, encapsulamiento, herencia, polimorfismo |
+| **Colecciones** | ArrayList, HashMap, HashSet, TreeSet, Queue |
+| **Algoritmos** | Ordenamiento (Bubble, Merge, Quick), Búsqueda binaria |
+| **Estructuras** | Stack, Queue, Linked List, BST |
+| **Patrones** | Singleton, Factory, Strategy, Visitor, Builder, Observer |
+| **Java Moderno** | Streams, Lambdas, Optional, Generics |
+| **Avanzado** | Threads, File I/O, Serialización |
 
-## VS Code Setup
+## Configuración VS Code
 
-The project includes pre-configured VS Code settings:
-- Java extension recommendations
-- Debug configurations
-- Code formatting
-- Run configurations
+El proyecto incluye configuración preconfigurada de VS Code:
+- Recomendaciones de extensiones Java
+- Configuraciones de debug
+- Formato de código
+- Configuraciones de ejecución
 
-**Just open the folder in VS Code and accept the extension recommendations.**
+**Solo abre la carpeta en VS Code y acepta las recomendaciones de extensiones.**
 
 ## Troubleshooting
 
-Having issues? Check `ERRORES_COMUNES.md` for:
-- Compilation errors and fixes
-- Runtime exceptions explained
-- Logic error patterns
-- Debugging tips
+¿Tienes problemas? Revisa `00_Documentacion/ERRORES_COMUNES.md` para:
+- Errores de compilación y soluciones
+- Excepciones de runtime explicadas
+- Patrones de errores lógicos
+- Tips de debugging
 
-## Requirements
+## Requisitos
 
-- **Java:** JDK 17+ recommended
-- **Editor:** VS Code (with Java Extension Pack), IntelliJ, or Eclipse
-
-## Documentation
-
-| Folder | Content |
-|--------|---------|
-| `Documentacion/Guias/` | Study guides, tutorials |
-| `Documentacion/Examenes/` | PDF exam papers |
-| `Documentacion/CheatSheets/` | Quick references |
+- **Java:** JDK 17+ recomendado
+- **Editor:** VS Code (con Java Extension Pack), IntelliJ, o Eclipse
 
 ---
 
-**Start here:** `01_Fundamentos/Ejercicio1.java`
+**Empezar aquí:** `01_Fundamentos/Ejercicio1.java`
 
-**Track progress:** `PROGRESO.md`
+**Seguir progreso:** `PROGRESO.md`
 
-**Need syntax?** `REFERENCIA_RAPIDA.md`
+**¿Necesitas sintaxis?** `00_Documentacion/REFERENCIA_RAPIDA.md`
 
-**Stuck?** `ERRORES_COMUNES.md`
+**¿Atascado?** `00_Documentacion/ERRORES_COMUNES.md`
 
 ---
 
-**"The best way to learn programming is by programming"**
+**"La mejor forma de aprender a programar es programando"**
