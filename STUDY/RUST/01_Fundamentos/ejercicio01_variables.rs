@@ -35,27 +35,32 @@ Numero como string: 42
 fn main() {
     // TODO 1: Declara una variable inmutable con tu nombre
     // let nombre = ...;
-
+    let nombre = "Pablo";
     // TODO 2: Declara una variable mutable con tu edad
     // let mut edad = ...;
-
+    let mut edad = 26;
     // TODO 3: Incrementa edad en 1
     // edad = ...;
-
+    edad += 1;
     // TODO 4: Declara una constante para el anio actual
     // const ANIO_ACTUAL: i32 = ...;
-
+    const AÑO_ACTUAL: i32 = 21;
     // TODO 5: Shadowing - declara `numero` como i32, luego como String
     // let numero = 42;
     // let numero = numero.to_string();
-
+    let numero = 14;
+    let numero = numero.to_string();
     // Imprime los resultados
     // println!("Nombre: {}", nombre);
     // println!("Edad actual: {}", edad - 1);
     // println!("Edad siguiente: {}", edad);
     // println!("Anio: {}", ANIO_ACTUAL);
     // println!("Numero como string: {}", numero);
-
+    println!("Nombre: {}", nombre);
+    println!("Edad actual_ {}", edad - 1);
+    println!("Edad siguiente: {}", edad - 1);
+    println!("Año: {}", AÑO_ACTUAL);
+    println!("Numero como string: {}", numero);
     println!("Completa los TODOs y descomenta el codigo!");
 }
 
