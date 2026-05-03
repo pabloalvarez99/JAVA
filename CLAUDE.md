@@ -465,3 +465,104 @@ Si empiezas desde cero sin contexto previo:
 5. **Proyecto ejemplo**: `STUDY/JAVA/Proyectos/RentaCar/` como arquitectura modelo
 
 **Nivel actual del estudiante**: Intermedio-Avanzado en Java, preparando examen POO universitario.
+
+---
+
+## Prioridad del Proyecto
+
+- **Activo**: Java (examen POO próximo) → STUDY/JAVA/05_Patrones_Diseno y Proyectos/
+- **Secundario**: Python, Rust (módulos progresivos)
+- **Código nuevo por defecto**: STUDY/<lenguaje>/<modulo>/ siguiendo nomenclatura existente (`EjercicioN.java`, `ejercicios_*.py`, `ejercicioN.rs`)
+- **Sin deps externas**: stdlib only en los 3 lenguajes
+
+## Bitácora Obligatoria
+
+`bitacora.md` en root = único doc durable de contexto del proyecto. Se actualiza:
+- Final de sesión
+- Después de completar ejercicio/proyecto significativo
+- Después de cambio estructural (nuevo módulo, refactor, soluciones añadidas)
+
+Formato: fecha, qué se hizo, qué quedó pendiente, errores notables.
+
+## Ciclo de Cierre Obligatorio
+
+Orden fijo, sin pedir confirmación, para features/fixes/proyectos visibles. NO aplica a WIP/lectura/debug puro:
+
+1. Actualizar `bitacora.md`
+2. Verificar: compilar Java tocado (`javac`), `python -m py_compile`, `cargo check` o `rustc` según stack tocado
+3. Commit Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`) con `Co-Authored-By: Claude`
+4. Push a `origin/main`
+5. Segunda pasada bitácora con SHA del commit
+
+## Workflow
+
+- Plan mode para tareas de 3+ pasos o diseño de sistemas
+- Subagentes (Explore) para research paralelo en módulos grandes
+- Verificación antes de declarar done: compilar el archivo tocado
+- Fix root cause, no parches — si un ejercicio falla, entender por qué antes de cambiar
+
+## Core Principles
+
+- **Simplicity first**: el estudiante prefiere bucles simples sobre Streams complejos en ejercicios básicos
+- **No laziness**: no dar solución completa sin pista progresiva
+- **Minimal impact**: editar archivo existente sobre crear uno nuevo
+
+## Stack Overview
+
+| Lenguaje | Build | Test/Run | Convención |
+|----------|-------|----------|------------|
+| Java     | `javac EjercicioN.java` o `compilar.bat` | `java EjercicioN` | `EjercicioN.java`, español |
+| Python   | n/a (interpretado) | `python ejercicios.py` | `ejercicios_<nivel>.py` |
+| Rust     | `rustc ejercicioN.rs` o `cargo build` | `./ejercicioN` o `cargo run` | `ejercicioN.rs` |
+
+Scripts útiles en `STUDY/JAVA/`: `compilar.bat`, `verificar.bat`, `limpiar.bat`.
+
+---
+
+## Obsidian Mind Vault (Segundo Cerebro Compartido)
+
+**Path**: `C:\Users\Administrator\Documents\obsidian-mind\`
+
+**Mapa**:
+- `brain/Gotchas.md` — trampas y bugs frecuentes
+- `brain/Patterns.md` — patrones reutilizables (>2 usos)
+- `brain/Key Decisions.md` — decisiones irreversibles
+- `brain/North Star.md` — objetivos de largo plazo
+- `brain/Skills.md` — capacidades del usuario
+- `brain/Memories.md` — contexto personal
+- `reference/Grind Architecture.md` — snapshot estructural de este repo
+- `work/active/` — features en curso
+- `work/archive/` — features cerrados
+- `work/incidents/` — incidentes/bugs resueltos
+
+**Protocolo inicio sesión**:
+1. Leer `brain/Gotchas.md` filtrando `## Grind — *`
+2. Leer `brain/Key Decisions.md` si toca arquitectura/patrones
+3. Leer `work/active/<feature>.md` si feature continúa
+
+**Cierre sesión** (APPEND, no sobrescribir):
+- Trampas nuevas → `brain/Gotchas.md` bajo header `## Grind — <tema>`
+- Decisiones irreversibles → `brain/Key Decisions.md`
+- Patrones usados >2 veces → `brain/Patterns.md`
+- Features abiertos → `work/active/<feature>.md`
+- Cambios estructurales → `reference/Grind Architecture.md`
+
+**Formato caveman comprimido**: bullets/líneas, sin artículos, `X → Y` para causalidad, abreviaciones (DB/auth/cfg/fn/impl), errores exactos en backticks.
+
+**Reglas**:
+- APPEND no sobrescribir
+- Header `## Grind — <tema>` separa contextos de otros proyectos
+- Verificar antes de citar (vault puede estar stale)
+- No duplicar con `bitacora.md` (vault = transversal, bitácora = cronológica del proyecto)
+- Paths con espacios entre comillas
+
+---
+
+## Reglas CLI Globales
+
+- Leer archivos antes de editar; no re-leer salvo cambio
+- Skip archivos >100KB salvo necesario
+- Preferir CLI directo (`gh`, `git`, `javac`, `python`, `cargo`) sobre MCP equivalents
+- Errores: citar mensaje exacto, root cause, fix una vez — no retry ciego
+- Output: sin saludos/recaps/sign-offs, code blocks con language tag, edits solo líneas cambiadas
+- Accuracy: nunca adivinar APIs/versiones/flags/SHAs — leer código o docs primero
